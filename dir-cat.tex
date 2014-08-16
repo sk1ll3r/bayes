@@ -1,0 +1,31 @@
+\section{Dirichlet-categorical model}
+\subsection{Summary}
+\paragraph{The model}
+    \begin{align}
+        X_i         &\sim \Cat\left(\vec\theta = (\theta_1, \dotsc, \theta_K)^T\right), \text{for } i \in \{1, \dotsc, N\} \\
+        \mathcal D  &= \{x_1, \dotsc, x_N\} \\
+        N_k         &= \sum_{i = 1}^N \mathbb I (x_i = k)
+    \end{align}
+
+\paragraph{Likelihood}
+    \begin{equation}
+        p(\mathcal D | \theta) = \prod_{k = 1}^K \theta_k^{N_k}
+    \end{equation}
+
+\paragraph{Prior}
+    \begin{equation}
+        p(\theta)   = \Dir(\vec\theta; \vec\alpha)
+    \end{equation}
+
+\paragraph{Posterior}
+    \begin{equation}
+        p(\theta | \mathcal D) = \Dir(\vec\theta; \alpha_1 + N_1, \dotsc, \alpha_K + N_K)
+    \end{equation}
+
+\paragraph{Posterior predictive}
+    \begin{align}
+        p(X = j | \mathcal D) &= \frac{\alpha_j + N_j}{\alpha_0 + N} \\
+        \text{where } \alpha_0 &= \sum_{k = 1}^K \alpha_k
+    \end{align}
+
+\subsection{Derivations}

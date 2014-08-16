@@ -1,0 +1,34 @@
+\section{Dirichlet-multinomial model}
+\subsection{Summary}
+\paragraph{The model}
+    \begin{align}
+        N_1         &\sim \Bin(N, \theta) \\
+        \mathcal D  &= \{N_1, N\} \\
+        N_1         &= \text{number of successes} \\
+        N           &= \text{total number of trials} \\
+        \mathcal D' &= \{N_1', N'\} \\
+        N_1'        &= \text{number of successes in a new batch of data} \\
+        N'          &= \text{total number of trials in a new batch of data}
+    \end{align}
+
+\paragraph{Likelihood}
+    \begin{equation}
+        p(\mathcal D | \theta) = \Bin(N_1 | N, \theta)
+    \end{equation}
+
+\paragraph{Prior}
+    \begin{equation}
+        p(\theta)   = \Beta(\theta | a, b)
+    \end{equation}
+
+\paragraph{Posterior}
+    \begin{equation}
+        p(\theta | \mathcal D) = \Beta(\theta | N_1 + a, N_0 + b)
+    \end{equation}
+
+\paragraph{Posterior predictive}
+    \begin{equation}
+        p(\mathcal D' | \mathcal D) = \Bb(N_1'; a, b, N')
+    \end{equation}
+
+\subsection{Derivations}
