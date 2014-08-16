@@ -1,0 +1,34 @@
+\section{Poisson-gamma model}
+\subsection{Summary}
+\paragraph{The model}
+    \begin{align}
+        x           &\sim \Poi(\lambda) \\
+        \mathcal D  &= \{x_1, \dotsc, x_N\}
+    \end{align}
+
+\paragraph{Likelihood}
+    \begin{equation}
+        p(\mathcal D | \lambda) = \prod_{i = 1}^N \frac{\lambda^{x_i}}{x_i!} \exp(-\lambda)
+    \end{equation}
+
+\paragraph{Prior}
+    \begin{equation}
+        p(\lambda) = \Gammadist(\lambda; a, b)
+    \end{equation}
+
+\paragraph{Posterior}
+    \begin{equation}
+        p(\lambda | \mathcal D) = \Gammadist\left(\lambda; a' = a + \sum_{i = 1}^N x_i, b' = b + N\right)
+    \end{equation}
+
+\paragraph{Posterior predictive}
+    \begin{align}
+        p(\tilde x | \mathcal D) = \NB(\tilde x | a', \frac{1}{1 + b'})
+    \end{align}
+
+\paragraph{Evidence}
+    \begin{equation}
+        p(\mathcal D) = 
+    \end{equation}
+
+\subsection{Derivations}
