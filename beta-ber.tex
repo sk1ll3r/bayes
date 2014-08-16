@@ -1,0 +1,30 @@
+\section{Beta-Bernoulli model}
+\subsection{Summary}
+\paragraph{The model}
+    \begin{align}
+        X_i         &\sim \Ber(\theta), \text{for } i \in \{1, \dotsc, N\} \\
+        \mathcal D  &= \{x_1, \dotsc, x_N\} \\
+        N_1         &= \sum_{i = 1}^N \mathbb I (x_i = 1) \\
+        N_0         &= \sum_{i = 1}^N \mathbb I (x_i = 0)
+    \end{align}
+
+\paragraph{Likelihood}
+    \begin{equation}
+        p(\mathcal D|\theta)    &= \theta^{N_1} (1 - \theta)^{N_0}
+    \end{equation}
+
+\paragraph{Prior}
+    \begin{equation}
+        p(\theta)   = \Beta(\theta | a, b)
+    \end{equation}
+
+\paragraph{Posterior}
+    \begin{equation}
+        p(\theta | \mathcal D) = \Beta(\theta | N_1 + a, N_0 + b)
+    \end{equation}
+
+\paragraph{Posterior predictive}
+    \begin{equation}
+        p(x | \mathcal D) = \frac{a}{a + b}
+    \end{equation}
+\subsection{Derivations}
