@@ -1,1 +1,9 @@
 \chapter{Sampling algorithms}
+\section{Introduction}
+    Let $p$ be a probability distribution with pdf $p(\vec x)$, which we assume can be evaluated only up to a constant of proportionality (i.e. we can only evaluate $p^\ast(\vec x) = Z_p p(\vec x)$, where $Z_p = \int p^\ast(\vec x)\mathrm d\vec x$). We want to achieve the following:
+    \begin{description}
+        \item[Problem 1] Generate samples $\{\vec x^{(1)}, \dotsc, \vec x^{(R)}\}$ (shorthand notation $\{\vec x^{(r)}\}$) from the probability distribution $p$.
+        \item[Problem 2] Estimate the expectation of an arbitrary function $f(\vec X)$ given that $\vec X \sim p$, $\E [f(\vec X)]$. 
+    \end{description}
+
+\input{sampling/importance}
