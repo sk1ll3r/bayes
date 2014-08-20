@@ -25,3 +25,19 @@ Assume that we can sample from a proposal distribution $q$ with a pdf $q(\vec x)
     \end{align}
 
     Hence $\hat{\vec y}$ converges to $\E_p[f(\vec x)]$ as $R$ increases (but is not necessarily an unbiased estimator because $\E_q[\hat{\vec y}]$ is not necessarily $= \E_p[f(\vec x)]$).
+
+\subsection{Optimal proposal distribution}
+    Assuming we can evaluate $p(\vec x)$ and $q(\vec x)$, we want to find a proposal distribution $q$ to minimise the variance of the weighted samples
+    \begin{align}
+        \var_q\left[\frac{p(\vec x)}{q(\vec x)} f(\vec x)\right]    &= \E_q\left[\frac{p^2(\vec x)}{q^2(\vec x)} f^2(\vec x)\right] - \left( \E_q\left[\frac{p(\vec x)}{q(\vec x)} f(\vec x)\right] \right)^2 \\
+                                                                    &= \E_q\left[\frac{p^2(\vec x)}{q^2(\vec x)} f^2(\vec x)\right] - \left( \E_p\left[f(\vec x)\right] \right)^2
+    \end{align}
+
+    The second part is independent of $q$ so we can ignore it. By Jensen's inequality, we have $\E\left[g(u(\vec x))\right] \geq g\left(\E\left[u(\vec x\right)]\right)$ for $u(\vec x) \geq 0$ where $g: x \mapsto x^2$. Setting $u(\vec x) = p(\vec x)|f(\vec x)| / q(\vec x)$, we have the following lower bound:
+    \begin{equation}
+        \E_q\left[\frac{p^2(\vec x)}{q^2(\vec x)} f^2(\vec x)\right] \geq \left( \E_q\left[\frac{p(\vec x)}{q(\vec x)} |f(\vec x)|\right] \right)^2 = \left( \E_p[|f(\vec x)|] \right)^2
+    \end{equation}
+    with the equality when $u(\vec x) = \text{const.} \implies q_{\text{optimal}}(\vec x) \propto |f(\vec x)|p(\vec x)$. Taking care of normalisation, we get
+    \begin{equation}
+        q_{\text{optimal}}(\vec x) = \frac{|f(\vec x)|p(\vec x)}{\int |f(\vec x')|p(\vec x') \,\mathrm d \vec x'}
+    \end{equation}
