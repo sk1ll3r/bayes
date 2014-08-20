@@ -1,0 +1,62 @@
+\section{Rejection sampling}
+
+Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, which can be evaluated within a multiplicative factor (i.e. we can only evaluate $q^\ast(\vec x) = Z_q q(\vec x)$). Also assume we know the value of a constant $c$ such that
+\begin{align}
+    c q^\ast(\vec x) > p^\ast(\vec x) & \text{ for all } \vec x
+\end{align}
+
+The procedure that generates a sample $\vec x \sim p$ is
+\begin{enumerate}
+    \item Generate $\vec x \sim q$.
+    \item Generate $u \sim \Unif(0, c q^\ast(\vec x))$.
+    \item If $u > p^\ast(\vec x)$ it is rejected, otherwise it is accepted.
+\end{enumerate}
+
+\subsection{Why it works?}
+    Assume $\vec x \in \mathbb R^d$. Define sets $\mathcal X$ and $\mathcal X'$ to be
+    \begin{align}
+        \mathcal X &= \{\vec \alpha \in \mathbb R^{d + 1}: \alpha_{1:d} \in \mathbb R^d, \alpha_{d + 1} \in [0, c q^\ast(\vec \alpha)]\} \\
+        \mathcal X' &= \{\vec \alpha \in \mathbb R^{d + 1}: \alpha_{1:d} \in \mathbb R^d, \alpha_{d + 1} \in [0, p^\ast(\vec \alpha)]\}
+    \end{align}
+    Note that $\mathcal X' \subseteq \mathcal X$.
+
+    By definition, $\mathcal X$ is the support of $(\vec x, u)$. The probability of $(\vec x, u)$ can be expressed as
+    \begin{align}
+        \Pr(\vec x, u)  &= \Pr(\vec x) \Pr(u) \\
+                        &= q(\vec x) \frac{1}{c q^\ast(\vec x)} \\
+                        &= q(\vec x) \frac{1}{c Z_q q(\vec x)} \\
+                        &= \frac{1}{c Z_q}
+    \end{align}
+    which is constant w.r.t. $(\vec x, u)$, i.e.
+    \begin{equation}
+        (\vec x, u) \sim \Unif(\mathcal X)
+    \end{equation}
+
+    Let $(\vec x', u')$ be the value of $(\vec x, u)$ that gets accepted. By definition, $\mathcal X'$ is the support of $(\vec x', u')$:
+    \begin{equation}
+        (\vec x', u') =
+            \begin{cases}
+                (\vec x, u)     & \text{if } (\vec x, u) \in \mathcal X' \\
+                \text{nothing}  & \text{otherwise.}
+            \end{cases}
+    \end{equation}
+    The probability of $(\vec x', u')$ can be expressed as
+    \begin{equation}
+        \Pr(\vec x', u') =
+            \begin{cases}
+                \Pr(\vec x, u)  & \text{if } (\vec x, u) \in \mathcal X' \\
+                0               & \text{otherwise.}
+            \end{cases}
+    \end{equation}
+    which means
+    \begin{equation}
+        (\vec x', u') \sim \Unif(\mathcal X')
+    \end{equation}
+
+    Working backwards
+    \begin{align}
+        \Pr(\vec x')    &= \frac{\Pr(\vec x', u')}{\Pr(u')} \\
+                        &\propto \frac{1}{1 / p^\ast(\vec x')} \\
+                        &\propto p^\ast(\vec x')
+    \end{align}
+    We conclude that the accepted $\vec x$, $\vec x'$ is $\sim p$.

@@ -1,6 +1,6 @@
 \section{Importance sampling}
 
-Assume that we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, which can be evaluated only up to a constant of proportionality (i.e. we can only evaluate $q^\ast(\vec x) = Z_q q(\vec x)$). To solve problem 2, we follow
+Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, which can be evaluated within a multiplicative factor (i.e. we can only evaluate $q^\ast(\vec x) = Z_q q(\vec x)$). To solve problem 2, we follow
 \begin{enumerate}
     \item Generate samples from $q$, $\{\vec x^{(r)}\}$.
     \item Calculate importance weights $w_r = \frac{p^\ast(\vec x^{(r)})}{q^\ast(\vec x^{(r)})}$.
