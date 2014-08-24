@@ -1,0 +1,29 @@
+\section{Sampling importance resampling}
+In Sampling importance resampling (SIR), we approximate the pdf of $p$ as point masses and resample from them to get samples $\left\{\vec x^{(r)}\right\}$ which are approximately $\sim p$. The process is as follows:
+\begin{enumerate}
+    \item Generate samples $\left\{\vec z^{(r)}\right\}$ from $q$.
+    \item Calculate importance weights $\left\{w_r = \frac{p^\ast(\vec z^{(r)})}{q^\ast(\vec z^{(r)})}\right\}$.
+    \item Calculate the normalised importance weights $\left\{\hat w_r = \frac{w_r}{\sum_{r'} w_{r'}}\right\}$. Note that $\sum_r \hat w_r  = 1$.
+    \item Resample from a probability distribution with the pmf
+        \begin{equation}
+            f(\vec x) = \sum_r \hat w_r \delta_{\vec z^{(r)}}(\vec x)
+        \end{equation}
+    \item The resulting samples $\left\{\vec x^{(r)}\right\}$ are approximately $\sim p$.
+\end{enumerate}
+
+\subsection{Why it works?}
+We consider the univariate case (to do: general case) as the number of proposal samples (particles) $R \to \infty$. We can express the number of proposal samples that are in the interval $\lim_{\delta x \to 0}[x, x + \delta x]$, $N(x)$, to be
+\begin{equation}
+    N(x) = \lim_{\delta x \to 0} R q(x) \delta x
+\end{equation}
+We can express the probability of the one final sample, $x^{(x)}$ being in the interval $\lim_{\delta x \to 0}[x, x + \delta x]$ to be
+\begin{align}
+    \lim_{\delta x \to 0} \Pr(x \leq x^{(r)} \leq x + \delta x) &= N(x) \hat w_r \\
+                                                                &\propto \lim_{\delta x \to 0} R q(x) \delta x \frac{p(x)}{q(x)} \\
+                                                                &\propto \lim_{\delta x \to 0} p(x) \delta x
+\end{align}
+Hence (to do: why exactly does that result in an integral)
+\begin{align}
+    \Pr(a \leq x^{(r)} \leq b)  &\propto \int_a^b p(x) \,\mathrm d x \\
+    \implies x^{(r)}            &\sim p
+\end{align}

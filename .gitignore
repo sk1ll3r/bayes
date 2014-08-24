@@ -1,5 +1,7 @@
 *.log
 *.aux
 *.gz
+*.out
+*.toc
 *.sublime-project
 *.sublime-workspace

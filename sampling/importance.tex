@@ -4,11 +4,11 @@ Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, wh
 \begin{enumerate}
     \item Generate samples from $q$, $\{\vec x^{(r)}\}$.
     \item Calculate importance weights $w_r = \frac{p^\ast(\vec x^{(r)})}{q^\ast(\vec x^{(r)})}$.
-    \item $\hat{\vec y} = \frac{\sum_r w_r f(\vec x^{(r)})}{\sum_r w_r}$ is the estimator of $\E[f(\vec X)]$.
+    \item $\hat{\vec y} = \frac{\sum_r w_r f(\vec x^{(r)})}{\sum_r w_r}$ is the estimator of $\E[f]$.
 \end{enumerate}
 
 \subsection{Convergence of estimator as $R$ increases}
-    We want to prove that if $q(\vec x)$ is non-zero for all $\vec x$ where $p(\vec x)$ is non-zero, the estimator $\hat{\vec y}$ converges to $\E[f(\vec X)]$, as $R$ increases. We consider the the expectations of the numerator and denominator separately:
+    We want to prove that if $q(\vec x)$ is non-zero for all $\vec x$ where $p(\vec x)$ is non-zero, the estimator $\hat{\vec y}$ converges to $\E[f]$, as $R$ increases. We consider the the expectations of the numerator and denominator separately:
     \begin{align}
         \E_q[\text{numer}]  &= \E_q\left[\sum_r w_r f(\vec x^{(r)})\right] \\
                             &= \sum_r \E_q\left[w_r f(\vec x^{(r)})\right] \\
@@ -24,7 +24,7 @@ Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, wh
                             &= \frac{Z_p}{Z_q} R
     \end{align}
 
-    Hence $\hat{\vec y}$ converges to $\E_p[f(\vec x)]$ as $R$ increases (but is not necessarily an unbiased estimator because $\E_q[\hat{\vec y}]$ is not necessarily $= \E_p[f(\vec x)]$).
+    Hence $\hat{\vec y}$ converges to $\E_p[f]$ as $R$ increases (but is not necessarily an unbiased estimator because $\E_q[\hat{\vec y}]$ is not necessarily $= \E_p[f]$).
 
 \subsection{Optimal proposal distribution}
     Assuming we can evaluate $p(\vec x)$ and $q(\vec x)$, we want to find a proposal distribution $q$ to minimise the variance of the weighted samples
