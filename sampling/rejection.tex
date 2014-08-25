@@ -5,12 +5,16 @@ Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, wh
     c q^\ast(\vec x) > p^\ast(\vec x) & \text{ for all } \vec x
 \end{align}
 
-The procedure that generates a sample $\vec x \sim p$ is
-\begin{enumerate}
-    \item Generate $\vec x \sim q$.
-    \item Generate $u \sim \Unif(0, c q^\ast(\vec x))$.
-    \item If $u > p^\ast(\vec x)$ it is rejected, otherwise it is accepted.
-\end{enumerate}
+The procedure that generates a sample $\vec x \sim p$ is described in Algorithm~\ref{alg:rejection} below.
+\begin{algorithm}
+\caption{Rejection sampling}\label{alg:rejection}
+    \begin{algorithmic}[1]
+        \State Generate $\vec x \sim q$.
+        \State Generate $u \sim \Unif(0, c q^\ast(\vec x))$.
+        \State If $u > p^\ast(\vec x)$ it is rejected, otherwise it is accepted.
+    \end{algorithmic}
+\end{algorithm}
+
 
 \subsection{Why it works?}
     Assume $\vec x \in \mathbb R^d$. Define sets $\mathcal X$ and $\mathcal X'$ to be

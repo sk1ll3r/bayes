@@ -26,11 +26,15 @@
 \BOOKMARK [2][-]{subsection.2.5.2}{Derivations}{section.2.5}% 26
 \BOOKMARK [0][-]{chapter.3}{Sampling algorithms}{}% 27
 \BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.2}{Importance sampling}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.2.1}{Convergence of estimator as R increases}{section.3.2}% 30
-\BOOKMARK [2][-]{subsection.3.2.2}{Optimal proposal distribution}{section.3.2}% 31
-\BOOKMARK [1][-]{section.3.3}{Sampling importance resampling}{chapter.3}% 32
-\BOOKMARK [2][-]{subsection.3.3.1}{Why it works?}{section.3.3}% 33
-\BOOKMARK [1][-]{section.3.4}{Rejection sampling}{chapter.3}% 34
+\BOOKMARK [1][-]{section.3.2}{Rejection sampling}{chapter.3}% 29
+\BOOKMARK [2][-]{subsection.3.2.1}{Why it works?}{section.3.2}% 30
+\BOOKMARK [1][-]{section.3.3}{Importance sampling}{chapter.3}% 31
+\BOOKMARK [2][-]{subsection.3.3.1}{Convergence of estimator as R increases}{section.3.3}% 32
+\BOOKMARK [2][-]{subsection.3.3.2}{Optimal proposal distribution}{section.3.3}% 33
+\BOOKMARK [1][-]{section.3.4}{Sampling importance resampling}{chapter.3}% 34
 \BOOKMARK [2][-]{subsection.3.4.1}{Why it works?}{section.3.4}% 35
 \BOOKMARK [1][-]{section.3.5}{Particle filtering}{chapter.3}% 36
+\BOOKMARK [2][-]{subsection.3.5.1}{Sequential importance sampling \(SIS\)}{section.3.5}% 37
+\BOOKMARK [2][-]{subsection.3.5.2}{The degeneracy problem}{section.3.5}% 38
+\BOOKMARK [2][-]{subsection.3.5.3}{The resampling step}{section.3.5}% 39
+\BOOKMARK [2][-]{subsection.3.5.4}{The proposal distribution}{section.3.5}% 40

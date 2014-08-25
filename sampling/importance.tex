@@ -1,11 +1,14 @@
 \section{Importance sampling}
 
-Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, which can be evaluated within a multiplicative factor (i.e. we can only evaluate $q^\ast(\vec x) = Z_q q(\vec x)$). To solve problem 2, we follow
-\begin{enumerate}
-    \item Generate samples from $q$, $\{\vec x^{(r)}\}$.
-    \item Calculate importance weights $w_r = \frac{p^\ast(\vec x^{(r)})}{q^\ast(\vec x^{(r)})}$.
-    \item $\hat{\vec y} = \frac{\sum_r w_r f(\vec x^{(r)})}{\sum_r w_r}$ is the estimator of $\E[f]$.
-\end{enumerate}
+Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, which can be evaluated within a multiplicative factor (i.e. we can only evaluate $q^\ast(\vec x) = Z_q q(\vec x)$). To solve problem 2, we follow Algorithm~\ref{alg:importance} below.
+\begin{algorithm}
+\caption{Importance sampling}\label{alg:importance}
+    \begin{algorithmic}[1]
+        \State Generate samples from $q$, $\{\vec x^{(r)}\}$.
+        \State Calculate importance weights $w_r = \frac{p^\ast(\vec x^{(r)})}{q^\ast(\vec x^{(r)})}$.
+        \State $\hat{\vec y} = \frac{\sum_r w_r f(\vec x^{(r)})}{\sum_r w_r}$ is the estimator of $\E[f]$.
+    \end{algorithmic}
+\end{algorithm}
 
 \subsection{Convergence of estimator as $R$ increases}
     We want to prove that if $q(\vec x)$ is non-zero for all $\vec x$ where $p(\vec x)$ is non-zero, the estimator $\hat{\vec y}$ converges to $\E[f]$, as $R$ increases. We consider the the expectations of the numerator and denominator separately:
