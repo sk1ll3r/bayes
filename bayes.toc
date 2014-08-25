@@ -68,3 +68,4 @@
 \contentsline {subsection}{\numberline {3.5.2}The degeneracy problem}{14}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}The resampling step}{15}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}The proposal distribution}{15}{subsection.3.5.4}
+\contentsline {section}{\numberline {3.6}Sequential Monte Carlo}{16}{section.3.6}

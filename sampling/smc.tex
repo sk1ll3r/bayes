@@ -1,0 +1,41 @@
+\section{Sequential Monte Carlo}
+(to do: improve to be more rigorous)
+
+Assume that at time $t$, we can extend a particle's path using a Markov kernel $M_t$:
+\begin{equation}
+    p_t(x_t) = p_{t-1}(x_{t-1}) M_t(x_{t-1}, x_t)
+\end{equation}
+Also assume that
+\begin{equation}
+    \tilde p_t(x_{0:t}) = p_t(x_t) \sum_{k = 1}^t{L_k(x_k, x_{k-1})}
+\end{equation}
+where $\{L_k\}$ is a sequence of auxiliary Markov transition kernels.
+
+The generic algorithm for Sequential Monte Carlo (SMC) can be found in Algorithm~\ref{alg:smc}.
+    \begin{algorithm}
+    \caption{Generic Sequential Monte Carlo}\label{alg:smc}
+        \begin{algorithmic}[1]
+            \State Initialisation, $t = 0$:
+            \For{$r = 1, \dotsc, R$}
+                \Comment Sample.
+                \State Sample $\tilde x_0^{(r)} \sim q_0(\cdot)$.
+            \EndFor
+            \For{$r = 1, \dotsc, R$}
+                \State Calculate normalised weights $\hat w_0^{(r)} \propto \frac{p_0\left(\tilde x_0^{(r)}\right)}{q_0\left(\tilde x_0^{(r)}\right)}$, such that $\sum_r' \hat w_0^{(r')} = 1$.
+            \EndFor
+            \State Resample from the pmf $\sum_r \hat w_0^{(r)} \delta_{\tilde x_0^{(r)}}(\cdot)$ to get $R$ samples $\left\{x_0^{(r)}\right\}$. \Comment Resample.
+            \State
+            \State Iterate, $t = 1, \dotsc, T$:
+            \For{$t = 1, \dotsc, T$}
+                \For{$r = 1, \dotsc, R$}
+                    \Comment Sample.
+                    \State Set $\tilde x_{0:t-1}^{(r)} = x_{0:t-1}^{(r)}$.
+                    \State Sample $\tilde x_t^{(r)} \sim M_t\left(\tilde x_{0:t-1}^{(r)}, \cdot\right)$.
+                \EndFor
+                \For{$r = 1, \dotsc, R$}
+                    \State Calculate normalised weights $\hat w_t^{(r)} \propto \frac{p_t(x_t) L_t(x_t, x_{t-1})}{p_{t-1}(x_{t-1}) M_t(x_{t-1}, x_t)}$.
+                \EndFor
+                \State Resample from the pmf $\sum_r \hat w_t^{(r)} \delta_{\tilde x_t^{(r)}}(\cdot)$ to get $R$ samples $\left\{x_t^{(r)}\right\}$. Reset the weights to $1/R$.\Comment Resample.
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}
