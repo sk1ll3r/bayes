@@ -69,3 +69,7 @@
 \contentsline {subsection}{\numberline {3.5.3}The resampling step}{15}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}The proposal distribution}{15}{subsection.3.5.4}
 \contentsline {section}{\numberline {3.6}Sequential Monte Carlo}{16}{section.3.6}
+\contentsline {section}{\numberline {3.7}Markov chain Monte Carlo methods}{16}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Definitions}{16}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Metropolis Hastings algorithm}{20}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{20}{subsection.3.7.3}

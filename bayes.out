@@ -39,3 +39,7 @@
 \BOOKMARK [2][-]{subsection.3.5.3}{The resampling step}{section.3.5}% 39
 \BOOKMARK [2][-]{subsection.3.5.4}{The proposal distribution}{section.3.5}% 40
 \BOOKMARK [1][-]{section.3.6}{Sequential Monte Carlo}{chapter.3}% 41
+\BOOKMARK [1][-]{section.3.7}{Markov chain Monte Carlo methods}{chapter.3}% 42
+\BOOKMARK [2][-]{subsection.3.7.1}{Definitions}{section.3.7}% 43
+\BOOKMARK [2][-]{subsection.3.7.2}{Metropolis Hastings algorithm}{section.3.7}% 44
+\BOOKMARK [2][-]{subsection.3.7.3}{Gibbs sampling}{section.3.7}% 45

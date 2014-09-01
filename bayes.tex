@@ -6,6 +6,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
+\usepackage{amsthm}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -25,6 +26,11 @@
 \DeclareMathOperator{\cov}{\mathrm{cov}}
 
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+
+\bibliographystyle{plain}
 
 \allowdisplaybreaks
 \title{Personal notes -- Bayesian machine learning}
@@ -37,5 +43,8 @@
 \input{prob}
 \input{par-est}
 \input{sampling}
+
+
+\bibliography{bibliography}
 
 \end{document}

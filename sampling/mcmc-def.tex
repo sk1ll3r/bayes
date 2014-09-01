@@ -1,0 +1,126 @@
+\subsection{Definitions}
+\begin{definition}
+    \emph{Markov chain} (MC) is defined via a state space $\mathcal X$ and a model that defines, for every state $\vec x \in \mathcal X$ a next-state distribution over $\mathcal X$. More precisely, the transition model $\mathcal T$ specifies for each pair of state $\vec x, \vec x'$ the probability $\mathcal T(\vec x \to \vec x')$ of going from $\vec x$ to $\vec x'$, i.e. $\mathcal T(\vec x \to \vec x') = \Pr(\vec x' \mid \vec x)$. This transition probability applies whenever the chain is in state $\vec x$.
+\end{definition}
+
+If the MCMC generates a sequence of states $\vec x_0, \dotsc, \vec x_T$, the state at time $t$, $\vec x_t$ can be viewed as a random variable $\vec X_t$ for $t = 1, \dotsc, T$.
+
+\begin{theorem}[Ergodic Theorem for MC (simplified)]
+    If $(\vec X_0, \dotsc, \vec X_T)$ is an \emph{irreducible}, \emph{time-homogeneous} discrete space MC with \emph{stationary distribution} $\pi$, then
+    \begin{align}
+        \frac{1}{T} \sum_{t = 1}^T f(\vec X_t) \xrightarrow[n \to \infty]{\text{a.s.}} \E[f(\vec X)] && \text{where } \vec X \sim \pi
+    \end{align}
+    for any bounded function $f: \mathcal X \mapsto \mathbb R$.
+
+    If further, it is \emph{aperiodic}, then
+    \begin{align}
+        \Pr(\vec X_T = \vec x \mid \vec X_0 = \vec x_0) \xrightarrow[n \to \infty]{} \pi(\vec x) && \forall\,\vec x, \vec x_0 \in \mathcal X.
+    \end{align}
+
+    A MC following these conditions is \emph{ergodic}
+\end{theorem}
+
+\begin{definition}
+    A MC $(\vec X_t)$ is \emph{time-homogeneous} if $\Pr(\vec X_{t + 1} = b \mid \vec X_t = a) = \mathcal T(a \to b) \;\forall\, t \in \{1, \dotsc, T - 1\} \;\forall\, a, b \in \mathcal X$ for some kernel function $\mathcal T$.
+\end{definition}
+
+\begin{definition}
+    A pmf $\pi$ on $\mathcal X$ is a \emph{stationary (invariant) distribution} (w.r.t. $\mathcal T$) if
+    \begin{align}
+        \pi(\vec X = \vec x') = \sum_{\vec x \in \mathcal X} \pi(\vec X = \vec x)\mathcal T(\vec x \to \vec x') && \forall\,\vec x' \label{eqn:stationary}
+    \end{align}
+\end{definition}
+
+\begin{definition}
+    A MC $(\vec X_t)$ is \emph{irreducible} if $\;\forall\, a, b \in \mathcal X \;\exists\, t \geq 0$ s.t. $\Pr(\vec X_t = b \mid \vec X_0 = a) > 0$.
+\end{definition}
+
+\begin{definition}
+    An \emph{irreducible} MC $(\vec X_t)$ is \emph{aperiodic} if $\;\forall\, a \in \mathcal X$,
+    \begin{equation}
+        \gcd\{t: \Pr(\vec X_t = a \mid \vec X_0 = a) > 0\} = 1.
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    A MC is \emph{regular} if there exists some number $k$ such that, for every $\vec x, \vec x' \in \mathcal X$, the probability of getting from $\vec x$ to $\vec x'$ in exactly $k$ steps is $> 0$.
+\end{definition}
+
+\begin{theorem}
+    If a finite state MC described by $\mathcal T$ is \emph{regular}, then it has a unique \emph{stationary distribution}.
+\end{theorem}
+
+A MC being \emph{ergodic} is equivalent to it being \emph{regular} \cite[p.~510]{book:dknf}.
+
+\begin{definition}
+    A finite state MC described by $\mathcal T$ is \emph{reversible} if there exists a unique distribution $\pi$ such that, for all $\vec x, \vec x' \in \mathcal X$
+    \begin{equation}
+        \label{eqn:db}
+        \pi(\vec x)\mathcal T(\vec x \to \vec x') = \pi(\vec x')\mathcal T(\vec x' \to \vec x).
+    \end{equation}
+    This equation is called the \emph{detailed balance}.
+\end{definition}
+
+\begin{proposition}
+    If a finite state MC described by $\mathcal T$ is \emph{regular} and satisfies the \emph{detailed balance} equation relative to $\pi$, then $\pi$ is the \emph{unique stationary distribution} of $\mathcal T$.
+\end{proposition}
+
+\begin{proof}
+    Assuming equation~\eqref{eqn:db}, we want to prove equation~\eqref{eqn:stationary},
+    \begin{align}
+        \sum_{\vec x \in \mathcal X} \pi(\vec x)\mathcal T(\vec x \to \vec x')  &= \sum_{\vec x \in \mathcal X} \pi(\vec x')\mathcal T(\vec x' \to \vec x) \\
+                                                                                &= \sum_{\vec x \in \mathcal X} \pi(\vec x') \Pr(\vec x \mid \vec x') \\
+                                                                                &= \pi(\vec x') \sum_{\vec x \in \mathcal X} \Pr(\vec x \mid \vec x') \\
+                                                                                &= \pi(\vec x')
+    \end{align}
+    which proves the equation~\eqref{eqn:stationary}.
+\end{proof}
+
+\begin{proposition}
+    Let $\mathcal T_1, \dotsc, \mathcal T_K$ be a set of kernels each of which satisfies detailed balance w.r.t. $\pi$. Let $p_1, \dotsc, p_K$ be any distribution over $\{1, \dotsc, K\}$. The mixture MC $\mathcal T$, which at each step takes a step sampled from $\mathcal T_k$ with probability $p_k$ also satisfies the detailed balance equation relative to $\pi$.
+\end{proposition}
+
+\begin{proof}
+    The aggregate kernel can be written as
+    \begin{align}
+        \mathcal T(\vec x \to \vec x')  &= \Pr(\vec x' \mid \vec x) \\
+                                        &= \sum_k \Pr(\vec x', k \mid \vec x) \\
+                                        &= \sum_k \Pr(\vec x' \mid k, \vec x) \Pr(k \mid \vec x) \\
+                                        &= \sum_k \mathcal T_k(\vec x \to \vec x') p_k
+    \end{align}
+
+    Using this, we can prove the detailed balance as follows
+    \begin{align}
+        \pi(\vec x)\mathcal T(\vec x \to \vec x')   &= \pi(\vec x) \sum_k \mathcal T_k(\vec x \to \vec x') p_k \\
+                                                    &= \sum_k \pi(\vec x) \mathcal T_k(\vec x \to \vec x') p_k \\
+                                                    &= \sum_k \pi(\vec x') \mathcal T_k(\vec x' \to \vec x) p_k \\
+                                                    &= \pi(\vec x') \sum_k \mathcal T_k(\vec x' \to \vec x) p_k \\
+                                                    &= \pi(\vec x') \mathcal T(\vec x' \to \vec x)
+    \end{align}
+\end{proof}
+
+\begin{proposition}
+    Let $\mathcal T_1, \dotsc, \mathcal T_K$ be a set of kernels each of which satisfies detailed balance w.r.t. $\pi$. The aggregate MC, $\mathcal T$, where each step consists of a sequence of $K$ steps, with step $k$ being sampled from $\mathcal T_k$ has $\pi$ as its stationary distribution.
+\end{proposition}
+
+\begin{proof}
+    The aggregate kernel can be written as
+    \begin{align}
+        \mathcal T(\vec x \to \vec x')  &= \Pr(\vec x' \mid \vec x) \\
+                                        &= \sum_{\vec x_{1:K - 1}} \Pr(\vec x', \vec x_{K-1}, \dotsc, \vec x_1 \mid \vec x) \\
+                                        &= \sum_{\vec x_{1:K - 1}} \Pr(\vec x_K, \dotsc, \vec x_1 \mid \vec x_0) \\
+                                        &= \sum_{\vec x_{1:K - 1}} \Pr(\vec x_1 \mid \vec x_0) \dotsm \Pr(\vec x_K \mid \vec x_{K - 1})\\
+                                        &= \sum_{\vec x_{1:K - 1}} \mathcal T_1(\vec x_0 \to \vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K)
+    \end{align}
+    where we've used the substitution $\vec x = \vec x_0$ and $\vec x' = \vec x_K$. Using this, we can prove that $\pi$ is the stationary distribution as follows
+    \begin{align}
+        \sum_{\vec x \in \mathcal X} \pi(\vec x)\mathcal T(\vec x \to \vec x')  &= \sum_{\vec x_0} \pi(\vec x_0) \sum_{\vec x_{1:K - 1}} \mathcal T_1(\vec x_0 \to \vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K) \\
+                                                                                &= \sum_{\vec x_{0:K - 1}} \pi(\vec x_0)\mathcal T_1(\vec x_0 \to \vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K) \\
+                                                                                &= \sum_{\vec x_{0:K - 1}} \mathcal T_1(\vec x_1 \to \vec x_0) \pi(\vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K) \\
+                                                                                &\cdots \\
+                                                                                &= \sum_{\vec x_{0:K - 1}} \mathcal T_1(\vec x_1 \to \vec x_0) \dotsm \mathcal T_K(\vec x_K \to \vec x_{K-1})\pi(\vec x_K) \\
+                                                                                &= \pi(\vec x_K) \sum_{\vec x_{0:K - 1}} \mathcal T_K(\vec x_K \to \vec x_{K-1}) \dotsm \mathcal T_1(\vec x_1 \to \vec x_0) \\
+                                                                                &= \pi(\vec x_K) \sum_{\vec x_{0:K - 1}} \Pr(\vec x_{0:K - 1} \mid \vec x_K) \\
+                                                                                &= \pi(\vec x_K).
+    \end{align}
+\end{proof}
