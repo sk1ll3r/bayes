@@ -1,6 +1,6 @@
 \section{Particle filtering}
 \subsection{Sequential importance sampling (SIS)}
-    Assume the probabilistic graphical model similar to the one in HMMs, where $\vec x_t$ and $\vec y_t$ are the hidden and observed random variables at time $t$. We want to sample from the distribution $p(\vec x_{1:t} \mid \vec y_{1:t})$. Assume we can sample from the probability distribution with the pdf of the following form
+    Assume the probabilistic graphical model similar to the one in HMMs, where $\vec x_t$ and $\vec y_t$ are the hidden and observed random variables at time $t$ respectively. We want to sample from the distribution $p(\vec x_{1:t} \mid \vec y_{1:t})$. Assume we can sample from the probability distribution with the pdf of the following form
     \begin{align}
         q(\vec x_{1:t} \mid \vec y_{1:t})   &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}) q(\vec x_{1:t-1} \mid \vec y_{1:t}) \\
                                             &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}) q(\vec x_{1:t-1} \mid \vec y_{1:t - 1}) \\
@@ -60,7 +60,7 @@
                 \State Calculate normalised weights $\left\{\hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}\right\}$.
                 \State Calculate the effective sample size, $\hat S_\text{eff}$, according to \eqref{eq:Seff}.
                 \If{$\hat S_\text{eff} < S_\text{min}$}
-                    \State Resample $R$ particles, $\left\{\vec x_t^{(r)}\right\}$from the pmf $\sum_r \hat w_t^{(r)} \delta_{\vec x_t^{(r)}}(\vec x_t)$.
+                    \State Resample $R$ particles, $\left\{\vec x_t^{(r)}\right\}$ from the pmf $\sum_r \hat w_t^{(r)} \delta_{\vec x_t^{(r)}}(\vec x_t)$.
                     \State Reassign $w_t^{(r)} = \frac{1}{R}$ for $r = 1, \dotsc, R$.
                 \EndIf
             \EndFor

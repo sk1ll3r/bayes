@@ -47,6 +47,7 @@ If the MCMC generates a sequence of states $\vec x_0, \dotsc, \vec x_T$, the sta
 \end{definition}
 
 \begin{theorem}
+    \label{thm:reg}
     If a finite state MC described by $\mathcal T$ is \emph{regular}, then it has a unique \emph{stationary distribution}.
 \end{theorem}
 
@@ -58,7 +59,7 @@ A MC being \emph{ergodic} is equivalent to it being \emph{regular} \cite[p.~510]
         \label{eqn:db}
         \pi(\vec x)\mathcal T(\vec x \to \vec x') = \pi(\vec x')\mathcal T(\vec x' \to \vec x).
     \end{equation}
-    This equation is called the \emph{detailed balance}.
+    This equation is called the \emph{detailed balance} (DB).
 \end{definition}
 
 \begin{proposition}
@@ -66,14 +67,14 @@ A MC being \emph{ergodic} is equivalent to it being \emph{regular} \cite[p.~510]
 \end{proposition}
 
 \begin{proof}
-    Assuming equation~\eqref{eqn:db}, we want to prove equation~\eqref{eqn:stationary},
+    Assuming the DB equation~\eqref{eqn:db}, we want to prove the stationarity equation~\eqref{eqn:stationary} to ensure $\pi$ is a stationary distribution of $\mathcal T$. We have
     \begin{align}
         \sum_{\vec x \in \mathcal X} \pi(\vec x)\mathcal T(\vec x \to \vec x')  &= \sum_{\vec x \in \mathcal X} \pi(\vec x')\mathcal T(\vec x' \to \vec x) \\
                                                                                 &= \sum_{\vec x \in \mathcal X} \pi(\vec x') \Pr(\vec x \mid \vec x') \\
                                                                                 &= \pi(\vec x') \sum_{\vec x \in \mathcal X} \Pr(\vec x \mid \vec x') \\
                                                                                 &= \pi(\vec x')
     \end{align}
-    which proves the equation~\eqref{eqn:stationary}.
+    which proves the equation~\eqref{eqn:stationary}. $\pi$ is the unique stationary distribution of $\mathcal T$ because of Theorem \ref{thm:reg}.
 \end{proof}
 
 \begin{proposition}
@@ -100,6 +101,7 @@ A MC being \emph{ergodic} is equivalent to it being \emph{regular} \cite[p.~510]
 \end{proof}
 
 \begin{proposition}
+    \label{proposition:seq}
     Let $\mathcal T_1, \dotsc, \mathcal T_K$ be a set of kernels each of which satisfies detailed balance w.r.t. $\pi$. The aggregate MC, $\mathcal T$, where each step consists of a sequence of $K$ steps, with step $k$ being sampled from $\mathcal T_k$ has $\pi$ as its stationary distribution.
 \end{proposition}
 
@@ -117,7 +119,7 @@ A MC being \emph{ergodic} is equivalent to it being \emph{regular} \cite[p.~510]
         \sum_{\vec x \in \mathcal X} \pi(\vec x)\mathcal T(\vec x \to \vec x')  &= \sum_{\vec x_0} \pi(\vec x_0) \sum_{\vec x_{1:K - 1}} \mathcal T_1(\vec x_0 \to \vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K) \\
                                                                                 &= \sum_{\vec x_{0:K - 1}} \pi(\vec x_0)\mathcal T_1(\vec x_0 \to \vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K) \\
                                                                                 &= \sum_{\vec x_{0:K - 1}} \mathcal T_1(\vec x_1 \to \vec x_0) \pi(\vec x_1) \dotsm \mathcal T_K(\vec x_{K-1} \to \vec x_K) \\
-                                                                                &\cdots \\
+                                                                                &\cdots \nonumber \\
                                                                                 &= \sum_{\vec x_{0:K - 1}} \mathcal T_1(\vec x_1 \to \vec x_0) \dotsm \mathcal T_K(\vec x_K \to \vec x_{K-1})\pi(\vec x_K) \\
                                                                                 &= \pi(\vec x_K) \sum_{\vec x_{0:K - 1}} \mathcal T_K(\vec x_K \to \vec x_{K-1}) \dotsm \mathcal T_1(\vec x_1 \to \vec x_0) \\
                                                                                 &= \pi(\vec x_K) \sum_{\vec x_{0:K - 1}} \Pr(\vec x_{0:K - 1} \mid \vec x_K) \\

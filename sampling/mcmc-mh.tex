@@ -1,1 +1,42 @@
 \subsection{Metropolis Hastings algorithm}
+The Metropolis Hastings (MH) algorithm is a recipe to create a MCMC with a particular stationary distribution. Assume we can sample from a proposal distribution $q(\cdot \mid \vec x) \equiv q(\vec x \to \cdot)$. Let $p \equiv \pi$ be the required distribution (stationary distribution for this MCMC). Assume we can only evaluate $q$ and $\pi$ up to a multiplicative factor (i.e. we can only evaluate $q^\ast(\vec x \to \vec x') = Z_q q(\vec x \to \vec x')$ and $\pi^\ast(\vec x) = Z_p \pi(\vec x)$). The MH algorithm is outlined in Algorithm~\ref{alg:mh}.
+\begin{algorithm}
+\caption{Metropolis Hastings algorithm}\label{alg:mh}
+    \begin{algorithmic}[1]
+        \State Sample $\vec x^{(0)}$ from an arbitrary probability distribution over $\mathcal X$.
+        \For{$t = 1, \dotsc, T$}
+            \Repeat
+            \State Sample $\vec x^{(t)} \sim q(\vec x^{(t - 1)} \to \cdot)$.
+            \State Accept $\vec x^{(t)}$ with the acceptance probability
+                \begin{equation}
+                    \mathcal A(\vec x^{(t - 1)} \to \vec x^{(t)}) = \min\left(1, \frac{\pi^\ast(\vec x^{(t)}) q^\ast(\vec x^{(t)} \to \vec x^{(t - 1)})}{\pi^\ast(\vec x^{(t - 1)}) q^\ast(\vec x^{(t - 1)} \to \vec x^{(t)})} \right)
+                \end{equation}
+            \Until{$\vec x^{(t)}$ is accepted.}
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Why it works?}
+We need to prove that $\pi$ is the unique stationary distribution of this MCMC.
+
+We can express the aggregate transition model to be
+\begin{equation}
+    \mathcal T(\vec x \to \vec x') = 
+    \begin{dcases}
+        q(\vec x \to \vec x')\mathcal A(\vec x \to \vec x')                                                                     & \text{if } \vec x \neq \vec x' \\
+        q(\vec x \to \vec x) + \sum_{\vec x', \vec x' \neq \vec x} q(\vec x \to \vec x')(1 - \mathcal A(\vec x \to \vec x'))    & \text{if } \vec x = \vec x'
+    \end{dcases}
+\end{equation}
+To prove that $\pi$ is a stationary distribution of this MCMC, we make sure the DB equation holds.
+
+For $\vec x \neq \vec x'$, we have
+\begin{align}
+    \pi(\vec x)\mathcal T(\vec x \to \vec x')   &= \pi(\vec x) q(\vec x \to \vec x') \min\left(1, \frac{\pi(\vec x') q(\vec x' \to \vec x)}{\pi(\vec x) q(\vec x \to \vec x')} \right) \\
+                                                &= \min\left( \pi(\vec x) q(\vec x \to \vec x'), \pi(\vec x') q(\vec x' \to \vec x) \right) \\
+                                                &= \pi(\vec x') q(\vec x' \to \vec x) \min\left( 1, \frac{\pi(\vec x) q(\vec x \to \vec x')}{\pi(\vec x') q(\vec x' \to \vec x)} \right) \\
+                                                &= \pi(\vec x') \mathcal T(\vec x' \to \vec x)
+\end{align}
+
+For $\vec x = \vec x'$, the DB equation $\pi(\vec x)\mathcal T(\vec x \to \vec x') = \pi(\vec x') \mathcal T(\vec x' \to \vec x)$ obviously holds.
+
+Hence $\pi$ is a stationary distribution of the MCMC described via $\mathcal T$. Unfortunately, regularity doesn't hold in general. We need to make sure our created MCMC is regular before we can claim that $\pi$ is the unique stationary distribution of this MCMC.

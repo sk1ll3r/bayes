@@ -72,4 +72,6 @@
 \contentsline {section}{\numberline {3.7}Markov chain Monte Carlo methods}{16}{section.3.7}
 \contentsline {subsection}{\numberline {3.7.1}Definitions}{16}{subsection.3.7.1}
 \contentsline {subsection}{\numberline {3.7.2}Metropolis Hastings algorithm}{20}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{20}{subsection.3.7.3}
+\contentsline {subsubsection}{\nonumberline Why it works?}{20}{section*.32}
+\contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{21}{subsection.3.7.3}
+\contentsline {subsubsection}{\nonumberline Why it works?}{21}{section*.33}

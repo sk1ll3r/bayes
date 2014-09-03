@@ -1,1 +1,32 @@
 \subsection{Gibbs sampling}
+Assume we want to sample from $p(\vec x) = p(x_1, \dotsc, x_D)$. We can only sample from the conditionals $p(x_i \mid \vec x_{-i})$ where $\vec x_{-i}$ denotes $\vec x$ with the $i^{\text{th}}$ component ommited. The Gibbs sampling algorithm (\ref{alg:gibbs}) is given below.
+\begin{algorithm}
+\caption{Gibbs sampling algorithm}\label{alg:gibbs}
+    \begin{algorithmic}[1]
+        \State Sample $\vec x^{(0)}$ from an arbitrary probability distribution over $\mathcal X$.
+        \For{$t = 1, \dotsc, T$}
+            \State Sample $x_1^{(t)} \sim p\left(\cdot \mid x_2^{(t - 1)}, x_3^{(t - 1)}, \dotsc, x_D^{(t - 1)}\right)$
+            \State Sample $x_2^{(t)} \sim p\left(\cdot \mid x_1^{(t)}, x_3^{(t - 1)}, \dotsc, x_D^{(t - 1)}\right)$
+            \State $\vdots$
+            \State Sample $x_D^{(t)} \sim p\left(\cdot \mid x_1^{(t)}, x_2^{(t)}, \dotsc, x_{D - 1}^{(t)}\right)$
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Why it works?}
+Each of the sampling steps can be viewed to be governed by a different kernel with the whole process being governed by the aggregate kernel. We prove that the single kernels follow the DB equation with respect to $p$:
+\begin{align}
+    p(\vec x) \mathcal T_i(\vec x \to \vec x')  &= p(\vec x) p(\vec x_{-i}, x'_i \mid \vec x) \\
+                                                &= p(\vec x_{-i}, x'_i, \vec x) \\
+                                                &= p(\vec x, x'_i, \vec x_{-i}) \\
+                                                &= p(\vec x') p(\vec x \mid x'_i, \vec x_{-i}) \\
+                                                &= p(\vec x') \mathcal T_i (\vec x' \to \vec x)
+\end{align}
+This is the premise of Proposition~\ref{proposition:seq}, hence the aggregate kernel $\mathcal T$ has $p$ as its stationary distribution.
+
+We can also view Gibbs sampling as an instance of the MH algorithm. If the proposal of MH $q_i(\vec x \to \vec x')$ is set to be $p(\vec x' \mid \vec x) = p(x_i' \mid \vec x)$ the acceptance probability is one (shown below) and so it is equivalent to one sampling step in Gibbs sampling.
+\begin{align}
+    \mathcal A(\vec x \to \vec x')  &= \min\left(1, \frac{p(\vec x')p(\vec x \mid \vec x')}{p(\vec x)p(\vec x' \mid \vec x)}\right) \\
+                                    &= \min\left(1, \frac{p(\vec x', \vec x)}{p(\vec x', \vec x)}\right) \\
+                                    &= 1
+\end{align}
