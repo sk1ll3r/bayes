@@ -1,0 +1,34 @@
+$\mathbf x_1^{(k)} \sim q(\cdot \mid \mathbf y_1^{(k)}, \mathbf \theta)$
+
+$w_1^{(k)} \propto \frac{p\left(\mathbf x_1^{(k)} \mid \mathbf y_1, \mathbf \theta\right)}{q\left(\mathbf x_1^{(k)} \mid \mathbf y_1, \mathbf \theta \right)}$
+
+$W_1^{(k)} = \frac{w_1^{(k)}}{\sum_{k'} w_1^{(k')}}$
+
+$\hat p(\mathrm d \mathbf x_1 \mid \mathbf y_1, \mathbf \theta) = \sum_k W_1^{(k)} \delta_{\mathbf x_1^{(k)}}(\mathbf x_1)$
+
+$p(\mathbf x_1 \mid \mathbf y_1, \mathbf \theta)$
+
+$A_1^{(k)} \sim \mathrm{Cat}(W_1^{(1)}, \dotsc, W_1^{(5)})$
+
+$\mathbf x_2^{(k)} \sim q(\cdot \mid \mathbf y_2, \mathbf x_1^{(A_1^{(k)})}, \mathbf \theta)$
+
+$w_2^{(k)} \propto \frac{p\left(\mathbf x_{1:2}^{(k)} \mid \mathbf y_{1:2}, \mathbf \theta\right)}{q\left(\mathbf x_{1:2}^{(k)} \mid \mathbf y_{1:2}, \mathbf \theta \right)} = w_1^{(k)} \frac{p\left(\mathbf y_2 \mid \mathbf x_2^{(k)}\right) p\left(\mathbf x_2^{(k)} \mid \mathbf x_1^{(k)}\right)}{q\left(\mathbf x_2^{(k)} \mid \mathbf x_1^{(k)}, \mathbf y_2\right)}$
+
+$W_2^{(k)} = \frac{w_2^{(k)}}{\sum_{k'} w_2^{(k')}}$
+
+$\hat p(\mathrm d \mathbf x_{1:2} \mid \mathbf y_{1:2}, \mathbf \theta) = \sum_k W_2^{(k)} \delta_{\mathbf x_{1:2}^{(k)}}(\mathbf x_{1:2})$
+
+$p(\mathbf x_{1:2} \mid \mathbf y_{1:2}, \mathbf \theta)$
+
+$A_2^{(k)} \sim \mathrm{Cat}(W_2^{(1)}, \dots, W_2^{(5)})$
+
+$\mathbf x_3^{(k)} \sim q(\cdot \mid \mathbf y_2, \mathbf x_2^{(A_2^{(k)})}, \mathbf \theta)$
+
+$w_3^{(k)} \propto \frac{p\left(\mathbf x_{1:3}^{(k)} \mid \mathbf y_{1:3}, \mathbf \theta\right)}{q\left(\mathbf x_{1:3}^{(k)} \mid \mathbf y_{1:3}, \mathbf \theta \right)} = w_2^{(k)} \frac{p\left(\mathbf y_3 \mid \mathbf x_3^{(k)}\right) p\left(\mathbf x_3^{(k)} \mid \mathbf x_2^{(k)}\right)}{q\left(\mathbf x_3^{(k)} \mid \mathbf x_2^{(k)}, \mathbf y_3\right)}$
+
+$W_3^{(k)} = \frac{w_3^{(k)}}{\sum_{k'} w_3^{(k')}}$
+
+$\hat p(\mathrm d \mathbf x_{1:3} \mid \mathbf y_{1:3}, \mathbf \theta) = \sum_k W_3^{(k)} \delta_{\mathbf x_{1:3}^{(k)}}(\mathbf x_{1:3})$
+
+$p(\mathbf x_{1:3} \mid \mathbf y_{1:3}, \mathbf \theta)$
+

@@ -17,10 +17,10 @@ The procedure that generates a sample $\vec x \sim p$ is described in Algorithm~
 
 
 \subsection{Why it works?}
-    Assume $\vec x \in \mathbb R^d$. Define sets $\mathcal X$ and $\mathcal X'$ to be
+    Assume $\vec x \in \mathbb R^D$. Define sets $\mathcal X$ and $\mathcal X'$ to be
     \begin{align}
-        \mathcal X &= \{\vec \alpha \in \mathbb R^{d + 1}: \alpha_{1:d} \in \mathbb R^d, \alpha_{d + 1} \in [0, c q^\ast(\vec \alpha)]\} \\
-        \mathcal X' &= \{\vec \alpha \in \mathbb R^{d + 1}: \alpha_{1:d} \in \mathbb R^d, \alpha_{d + 1} \in [0, p^\ast(\vec \alpha)]\}
+        \mathcal X &= \left\{\vec \alpha \in \mathbb R^{d + 1}: \alpha_{1:d} \in \mathbb R^d, \alpha_{d + 1} \in [0, c q^\ast(\vec \alpha)]\right\} \\
+        \mathcal X' &= \left\{\vec \alpha \in \mathbb R^{d + 1}: \alpha_{1:d} \in \mathbb R^d, \alpha_{d + 1} \in [0, p^\ast(\vec \alpha)]\right\}
     \end{align}
     Note that $\mathcal X' \subseteq \mathcal X$.
 

@@ -15,7 +15,7 @@
                                             &= \frac{p(\vec y_t \mid \vec x_t) p(\vec x_t \mid \vec x_{t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1})}{p(\vec y_t \mid \vec y_{1:t - 1})} \\
                                             &\propto p(\vec y_t \mid \vec x_t) p(\vec x_t \mid \vec x_{t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1})
     \end{align}
-    we can write the weight of the sample $\vec x^{(r)}$ from the proposal $q$ to be
+    we can write the weight of the sample $\vec x_{1:t}^{(r)}$ from the proposal $q$ to be
     \begin{align}
         w_t^{(r)}   &\propto \frac{p\left(\vec x_{1:t}^{(r)} \mid \vec y_{1:t}\right)}{q\left(\vec x_{1:t}^{(r)} \mid \vec y_{1:t}\right)} \\
                     &\propto \frac{p\left(\vec y_t \mid \vec x_t^{(r)}\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right) p\left(\vec x_{1:t - 1}^{(r)} \mid \vec y_{1:t - 1}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t-1}^{(r)}, \vec y_t\right) q\left(\vec x_{1:t-1}^{(r)} \mid \vec y_{1:t - 1}\right)} \\
@@ -66,6 +66,9 @@
             \EndFor
         \end{algorithmic}
     \end{algorithm}
+
+\subsection{Particle filter animation}
+\animategraphics[controls, width=1\linewidth]{0.3}{animations/particle-filter/}{1}{36}
 
 \subsection{The proposal distribution}
     It is common to use the following proposal distribution

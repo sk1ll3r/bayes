@@ -59,19 +59,20 @@
 \contentsline {section}{\numberline {3.2}Rejection sampling}{9}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Why it works?}{9}{subsection.3.2.1}
 \contentsline {section}{\numberline {3.3}Importance sampling}{10}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Convergence of estimator as $R$ increases}{10}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Optimal proposal distribution}{11}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.1}Convergence of estimator as $R$ increases}{11}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Optimal proposal distribution}{12}{subsection.3.3.2}
 \contentsline {section}{\numberline {3.4}Sampling importance resampling}{12}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Why it works?}{12}{subsection.3.4.1}
 \contentsline {section}{\numberline {3.5}Particle filtering}{13}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Sequential importance sampling (SIS)}{13}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}The degeneracy problem}{14}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}The resampling step}{15}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}The proposal distribution}{15}{subsection.3.5.4}
-\contentsline {section}{\numberline {3.6}Sequential Monte Carlo}{16}{section.3.6}
-\contentsline {section}{\numberline {3.7}Markov chain Monte Carlo methods}{16}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Definitions}{16}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Metropolis Hastings algorithm}{20}{subsection.3.7.2}
-\contentsline {subsubsection}{\nonumberline Why it works?}{20}{section*.32}
-\contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{21}{subsection.3.7.3}
-\contentsline {subsubsection}{\nonumberline Why it works?}{21}{section*.33}
+\contentsline {subsection}{\numberline {3.5.4}Particle filter animation}{16}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}The proposal distribution}{17}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}Sequential Monte Carlo}{18}{section.3.6}
+\contentsline {section}{\numberline {3.7}Markov chain Monte Carlo methods}{18}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Definitions}{18}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Metropolis Hastings algorithm}{21}{subsection.3.7.2}
+\contentsline {subsubsection}{\nonumberline Why it works?}{22}{section*.32}
+\contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{22}{subsection.3.7.3}
+\contentsline {subsubsection}{\nonumberline Why it works?}{23}{section*.33}
