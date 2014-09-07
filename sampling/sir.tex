@@ -1,19 +1,33 @@
 \section{Sampling importance resampling}
 \label{section:sir}
-In Sampling importance resampling (SIR), we approximate the pdf of $p$ as point masses and resample from them to get samples $\left\{\vec x^{(r)}\right\}$ which are approximately $\sim p$. The process is described in Algorithm~\ref{alg:sir} below.
+In Sampling importance resampling (SIR), we approximate the pdf of $p$ as point masses and resample from them to get samples approximately $\sim p$. The process is described in Algorithm~\ref{alg:sir} below.
 \begin{algorithm}
 \caption{Sampling importance resampling}\label{alg:sir}
     \begin{algorithmic}[1]
-        \State Generate samples $\left\{\vec z^{(r)}\right\}$ from $q$.
+        \State Generate samples $\left\{\vec x^{(r)}\right\}$ from $q$.
         \State Calculate importance weights $\left\{w_r = \frac{p^\ast(\vec z^{(r)})}{q^\ast(\vec z^{(r)})}\right\}$.
         \State Calculate the normalised importance weights $\left\{\hat w_r = \frac{w_r}{\sum_{r'} w_{r'}}\right\}$. Note that $\sum_r \hat w_r  = 1$.
-        \State Resample from a probability distribution with the pmf
+        \State We can resample from
             \begin{equation}
-                f(\vec x) = \sum_r \hat w_r \delta_{\vec z^{(r)}}(\vec x)
+                \hat p(\mathrm d \vec x) = \sum_r \hat w_r \delta_{\vec x^{(r)}}(\mathrm d\vec x)
             \end{equation}
-        \State The resulting samples $\left\{\vec x^{(r)}\right\}$ are approximately $\sim p$.
+            to estimate sampling from $p(\vec x)$.
     \end{algorithmic}
 \end{algorithm}
+
+% \begin{algorithm}
+% \caption{Sampling importance resampling}\label{alg:sir}
+%     \begin{algorithmic}[1]
+%         \State Generate samples $\left\{\vec z^{(r)}\right\}$ from $q$.
+%         \State Calculate importance weights $\left\{w_r = \frac{p^\ast(\vec z^{(r)})}{q^\ast(\vec z^{(r)})}\right\}$.
+%         \State Calculate the normalised importance weights $\left\{\hat w_r = \frac{w_r}{\sum_{r'} w_{r'}}\right\}$. Note that $\sum_r \hat w_r  = 1$.
+%         \State Resample from a probability distribution with the pmf
+%             \begin{equation}
+%                 f(\vec x) = \sum_r \hat w_r \delta_{\vec z^{(r)}}(\vec x)
+%             \end{equation}
+%         \State The resulting samples $\left\{\vec x^{(r)}\right\}$ are approximately $\sim p$.
+%     \end{algorithmic}
+% \end{algorithm}
 
 \subsection{Why it works?}
 We consider the univariate case (to do: general case) as the number of proposal samples (particles) $R \to \infty$. We can express the number of proposal samples that are in the interval $\lim_{\delta x \to 0}[x, x + \delta x]$, $N(x)$, to be

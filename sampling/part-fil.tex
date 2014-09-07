@@ -1,37 +1,97 @@
 \section{Particle filtering}
 \subsection{Sequential importance sampling (SIS)}
-    Assume the probabilistic graphical model similar to the one in HMMs, where $\vec x_t$ and $\vec y_t$ are the hidden and observed random variables at time $t$ respectively. We want to sample from the distribution $p(\vec x_{1:t} \mid \vec y_{1:t})$. Assume we can sample from the probability distribution with the pdf of the following form
+    Assume the probabilistic graphical model similar to the one in HMMs, where
+    \begin{itemize}
+        \item $\vec x_t, \vec x_t \subset \mathcal X^D$ and $\vec y_t, \vec y_t \subset \mathcal Y^D$ are the hidden and observed random variables at time $t, t = 1, \dotsc, T$.
+        \item The initial state is characterised by $\vec x_1 \sim \mu(\cdot \mid \vec \theta)$ for some known parameter $\vec \theta \subset \Theta$.
+        \item The transitions are characterised by $\vec x_t \mid \vec x_{t - 1} \sim f(\cdot \mid \vec x_{t - 1}; \vec \theta )$.
+        \item The emmissions are characterised by $\vec y_t \mid \vec x_t \sim g(\cdot \mid \vec x_t; \vec \theta )$.
+    \end{itemize}
+    We want to sample from the distribution $p(\vec x_{1:t} \mid \vec y_{1:t}; \vec \theta)$. Assume we can sample from the probability distribution with the pdf of the following form
     \begin{align}
-        q(\vec x_{1:t} \mid \vec y_{1:t})   &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}) q(\vec x_{1:t-1} \mid \vec y_{1:t}) \\
-                                            &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}) q(\vec x_{1:t-1} \mid \vec y_{1:t - 1}) \\
-                                            &= q(\vec x_t \mid \vec x_{t - 1}, \vec y_t)
+        q(\vec x_{1:t} \mid \vec y_{1:t}; \vec \theta)  &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}; \vec \theta) q(\vec x_{1:t-1} \mid \vec y_{1:t}; \vec \theta) \\
+                                                        &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}; \vec \theta) q(\vec x_{1:t-1} \mid \vec y_{1:t - 1}; \vec \theta) \\
+                                                        &= q(\vec x_t \mid \vec x_{t - 1}, \vec y_t; \vec \theta)
     \end{align}
-    If we express the pdf of $p$ in the form of
+    If we express the pdf of $p$ for $t = 1, \dotsc, T$ in the form of (for convenience, we drop the conditional dependency on $\vec \theta$):
     \begin{align}
         p(\vec x_{1:t} \mid \vec y_{1:t})   &= \frac{p(\vec y_{1:t} \mid \vec x_{1:t}) p(\vec x_{1:t})}{p(\vec y_{1:t})} \\
                                             &= \frac{p(\vec y_t \mid \vec x_{1:t}, \vec y_{1:t - 1}) p(\vec y_{1:t - 1} \mid \vec x_{1:t}) p(\vec x_{1:t})}{p(\vec y_t \mid \vec y_{1:t - 1}) p(\vec y_{1:t - 1})} \\
                                             &= \frac{p(\vec y_t \mid \vec x_{1:t}, \vec y_{1:t - 1}) p(\vec x_{1:t} \mid \vec y_{1:t - 1})}{p(\vec y_t \mid \vec y_{1:t - 1})} \\
                                             &= \frac{p(\vec y_t \mid \vec x_{1:t}, \vec y_{1:t - 1}) p(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1})}{p(\vec y_t \mid \vec y_{1:t - 1})} \\
                                             &= \frac{p(\vec y_t \mid \vec x_t) p(\vec x_t \mid \vec x_{t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1})}{p(\vec y_t \mid \vec y_{1:t - 1})} \\
-                                            &\propto p(\vec y_t \mid \vec x_t) p(\vec x_t \mid \vec x_{t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1})
+                                            &\propto p(\vec y_t \mid \vec x_t) p(\vec x_t \mid \vec x_{t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1}) \\
+                                            &= g(\vec y_t \mid \vec x_t) f(\vec x_t \mid \vec x_{t - 1}) p(\vec x_{1:t - 1} \mid \vec y_{1:t - 1}) 
     \end{align}
     we can write the weight of the sample $\vec x_{1:t}^{(r)}$ from the proposal $q$ to be
     \begin{align}
         w_t^{(r)}   &\propto \frac{p\left(\vec x_{1:t}^{(r)} \mid \vec y_{1:t}\right)}{q\left(\vec x_{1:t}^{(r)} \mid \vec y_{1:t}\right)} \\
                     &\propto \frac{p\left(\vec y_t \mid \vec x_t^{(r)}\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right) p\left(\vec x_{1:t - 1}^{(r)} \mid \vec y_{1:t - 1}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t-1}^{(r)}, \vec y_t\right) q\left(\vec x_{1:t-1}^{(r)} \mid \vec y_{1:t - 1}\right)} \\
-                    &= w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right)} \label{eq:weights}
+                    &= w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right)} \\
+                    &= w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right)} \label{eq:weights}
     \end{align}
-    The algorithm for SIS is shown in Algorithm~\ref{alg:sis} below.
+    For $t = 1$
+    \begin{align}
+        w_1^{(r)}   &\propto \frac{p\left(\vec x_1^{(r)} \mid \vec y_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)} \\
+                    &\propto \frac{p\left(\vec x_1^{(r)}, \vec y_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)} \\
+                    &\propto \frac{p\left(\vec y_1 \mid \vec x^{(r)}_1\right) p\left(\vec x^{(r)}_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)} \\
+                    &= \frac{g\left(\vec y_1 \mid \vec x^{(r)}_1\right) \mu\left(\vec x^{(r)}_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)} 
+    \end{align}
+    Note that second line is proportional to the first line with respect to $p(\vec y_1)$ which is justifiable because the the constant of proportionality cancels out during the normalisation step. The algorithm for SIS is shown in Algorithm~\ref{alg:sis} below.
+    % \begin{algorithm}
+    % \caption{Sequential importance sampling}\label{alg:sis}
+    %     \begin{algorithmic}[1]
+    %         \State Initialise weights $\left\{w_0^{(r)} = \frac{1}{R}\right\}$.
+    %         \For{$t = 1, \dotsc, T$}
+    %             \State Observe $\vec y_t$.
+    %             \State Sample $\left\{\vec x_{1:t}^{(r)}\right\}$ from $q\left(\vec x_{1:t} \mid \vec y_{1:t}\right)$.
+    %             \State Calculate weights $\left\{w_t^{(r)}\right\}$ according to \eqref{eq:weights}.
+    %             \State Calculate normalised weights $\left\{\hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}\right\}$.
+    %             \State \Comment{The pmf $\sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\vec x_{1:t})$ approximates the pdf $p(\vec x_{1:t} \mid \vec y_{1:t})$. Hence we can approximate the pdf $p(\vec x_t \mid \vec y_{1:t})$ by $\sum_r \hat w_t^{(r)} \delta_{\vec x_t^{(r)}}(\vec x_t)$.}
+    %         \EndFor
+    %     \end{algorithmic}
+    % \end{algorithm}
+
     \begin{algorithm}
     \caption{Sequential importance sampling}\label{alg:sis}
         \begin{algorithmic}[1]
-            \State Initialise weights $\left\{w_0^{(r)} = \frac{1}{R}\right\}$.
-            \For{$t = 1, \dotsc, T$}
-                \State Observe $\vec y_t$.
-                \State Sample $\left\{\vec x_{1:t}^{(r)}\right\}$ from $q\left(\vec x_{1:t} \mid \vec y_{1:t}\right)$.
-                \State Calculate weights $\left\{w_t^{(r)}\right\}$ according to \eqref{eq:weights}.
-                \State Calculate normalised weights $\left\{\hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}\right\}$.
-                \State \Comment{The pmf $\sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\vec x_{1:t})$ approximates the pdf $p(\vec x_{1:t} \mid \vec y_{1:t})$. Hence we can approximate the pdf $p(\vec x_t \mid \vec y_{1:t})$ by $\sum_r \hat w_t^{(r)} \delta_{\vec x_t^{(r)}}(\vec x_t)$.}
+            \State Sample from proposal \Comment Initialisation
+                \begin{equation}
+                    \vec x_1^{(r)} \sim q\left(\cdot \mid \vec y_1^{(r)}, \vec \theta\right), r = 1, \dotsc, R
+                \end{equation}
+            \State Compute weights
+                \begin{equation}
+                    w_1^{(r)} \propto \frac{g\left(\vec y_1 \mid \vec x^{(r)}_1\right) \mu\left(\vec x^{(r)}_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)}, r = 1, \dotsc, R
+                \end{equation}
+            \State Normalise weights
+                \begin{equation}
+                    \hat w_1^{(r)} = \frac{w_1^{(r)}}{\sum_{r'} w_1^{(r')}}, r = 1, \dotsc, R
+                \end{equation}
+            \State We can resample from 
+                \begin{equation}
+                    \hat p(\mathrm d \vec x_1 \mid \vec y_1, \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)
+                \end{equation}
+                to estimate
+                \begin{equation}
+                    p(\vec x_1 \mid \vec y_1, \vec \theta)
+                \end{equation}
+            \For{$t = 2, \dotsc, T$} \Comment Main loop
+                \State Compute weights
+                    \begin{equation}
+                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
+                    \end{equation}
+                \State Normalise weights
+                    \begin{equation}
+                        \hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}, r = 1, \dotsc, R
+                    \end{equation}
+                \State We can resample from
+                    \begin{equation}
+                        \hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}, \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})
+                    \end{equation}
+                    to estimate
+                    \begin{equation}
+                        p(\vec x_{1:t} \mid \vec y_{1:t}, \vec \theta)
+                    \end{equation}
             \EndFor
         \end{algorithmic}
     \end{algorithm}
@@ -48,22 +108,57 @@
     There are (among others) two solutions to this problem -- introduce the resampling step, and using a good proposal distribution.
 
 \subsection{The resampling step}
-    Whenever the effective sample size drops below some threshold, resample to get new $R$ samples from the approximation of the pdf. This step is also called \textbf{rejuvenation}. The full algorithm for a generic particle filter is shown in Algorithm~\ref{alg:part-fil} below.
+    Whenever the effective sample size drops below some threshold, resample to get new $R$ samples from the approximation of the pdf. This step is also called \textbf{rejuvenation}. The full algorithm for a generic particle filter is shown in Algorithm~\ref{alg:part-fil} below in which we resample during every tie step.
     \begin{algorithm}
     \caption{Generic particle filter}\label{alg:part-fil}
         \begin{algorithmic}[1]
-            \State Initialise weights $\left\{w_0^{(r)} = \frac{1}{R}\right\}$.
-            \For{$t = 1, \dotsc, T$}
-                \State Observe $\vec y_t$.
-                \State Sample $\left\{\vec x_{1:t}^{(r)}\right\}$ from $q\left(\vec x_{1:t} \mid \vec y_{1:t}\right)$.
-                \State Calculate weights $\left\{w_t^{(r)}\right\}$ according to \eqref{eq:weights}.
-                \State Calculate normalised weights $\left\{\hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}\right\}$.
-                \State Calculate the effective sample size, $\hat S_\text{eff}$, according to \eqref{eq:Seff}.
-                \If{$\hat S_\text{eff} < S_\text{min}$}
-                    \State Resample $R$ particles, $\left\{\vec x_t^{(r)}\right\}$ from the pmf $\sum_r \hat w_t^{(r)} \delta_{\vec x_t^{(r)}}(\vec x_t)$.
-                    \State Reassign $w_t^{(r)} = \frac{1}{R}$ for $r = 1, \dotsc, R$.
-                \EndIf
+            \State Sample from proposal \Comment Initialisation
+                \begin{equation}
+                    \vec x_1^{(r)} \sim q\left(\cdot \mid \vec y_1^{(r)}, \vec \theta\right), r = 1, \dotsc, R
+                \end{equation}
+            \State Compute weights
+                \begin{equation}
+                    w_1^{(r)} \propto \frac{p\left(\vec x_1^{(r)} \mid \vec y_1, \vec \theta\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1, \vec \theta \right)}, r = 1, \dotsc, R
+                \end{equation}
+            \State Normalise weights
+                \begin{equation}
+                    \hat w_1^{(r)} = \frac{w_1^{(r)}}{\sum_{r'} w_1^{(r')}}, r = 1, \dotsc, R
+                \end{equation}
+            \State We can resample from 
+                \begin{equation}
+                    \hat p(\mathrm d \vec x_1 \mid \vec y_1, \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)
+                \end{equation}
+                to estimate
+                \begin{equation}
+                    p(\vec x_1 \mid \vec y_1, \vec \theta)
+                \end{equation}
+            \For{$t = 2, \dotsc, T$} \Comment Main loop
+                \State Sample parents' indices of $t^{\text{th}}$ generation
+                    \begin{equation}
+                        A_{t - 1}^{(r)} \sim \Cat\left(\hat w_{t - 1}\right), r = 1, \dotsc, R
+                    \end{equation}
+                \State Sample $t^{\text{th}}$ generation using corresponding parents
+                    \begin{equation}
+                        \vec x_t^{(r)} \sim q\left(\cdot \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t, \vec \theta\right), r = 1, \dotsc, R
+                    \end{equation}
+                \State Compute weights
+                    \begin{equation}
+                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
+                    \end{equation}
+                \State Normalise weights
+                    \begin{equation}
+                        \hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}, r = 1, \dotsc, R
+                    \end{equation}
+                \State We can resample from
+                    \begin{equation}
+                        \hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}, \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})
+                    \end{equation}
+                    to estimate
+                    \begin{equation}
+                        p(\vec x_{1:t} \mid \vec y_{1:t}, \vec \theta)
+                    \end{equation}
             \EndFor
+
         \end{algorithmic}
     \end{algorithm}
 
@@ -73,28 +168,31 @@
 \subsection{The proposal distribution}
     It is common to use the following proposal distribution
     \begin{align}
-        q(\vec x_{1:t}^{(r)} \mid \vec y_{1:t})     &= q(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t) \\
-                                                    &= p(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)})
+        q\left(\vec x_{1:t}^{(r)} \mid \vec y_{1:t}\right)  &= q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right) \\
+                                                            &= p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right) \\
+                                                            &= f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right)
     \end{align}
     Hence the weight equation in \eqref{eq:weights} becomes
     \begin{align}
-        w_t^{(r)}   &\propto w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right)} \\
-                    &= w_{t - 1}^{(r)} p\left(\vec y_t \mid \vec x_t^{(r)}\right)
+        w_t^{(r)}   &\propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}\right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right)} \\
+                    &= w_{t - 1}^{(r)}\, g\left(\vec y_t \mid \vec x_t^{(r)}\right)
     \end{align}
     This approach can be \textbf inefficient because the likelihood, $p\left(\vec y_t \mid \vec x_t^{(r)}\right)$, can be very small at many places meaning many of the particles will be very small.
 
     The optimal proposal distribution has the form
     \begin{align}
-        q(\vec x_{1:t}^{(r)} \mid \vec y_{1:t})     &= q(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t) \\
-                                                    &= p(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t) \\
-                                                    &= \frac{p(\vec y_t \mid \vec x_t, \vec x_{t-1}^{(r)}) p(\vec x_t, \vec x_{t-1}^{(r)})}{p(\vec x_{t-1}^{(r)}, \vec y_t)} \\
-                                                    &= \frac{p(\vec y_t \mid \vec x_t) p(\vec x_t \mid \vec x_{t-1}^{(r)})}{p(\vec y_t \mid \vec x_{t-1}^{(r)})}
+        q\left(\vec x_{1:t}^{(r)} \mid \vec y_{1:t}\right)  &= q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right) \\
+                                                            &= p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t\right) \\
+                                                            &= \frac{p\left(\vec y_t \mid \vec x_t, \vec x_{t-1}^{(r)}\right) p\left(\vec x_t, \vec x_{t-1}^{(r)}\right)}{p\left(\vec x_{t-1}^{(r)}, \vec y_t\right)} \\
+                                                            &= \frac{p\left(\vec y_t \mid \vec x_t\right) p\left(\vec x_t \mid \vec x_{t-1}^{(r)}\right)}{p\left(\vec y_t \mid \vec x_{t-1}^{(r)}\right)} \\
+                                                            &= \frac{g\left(\vec y_t \mid \vec x_t\right) f\left(\vec x_t \mid \vec x_{t-1}^{(r)}\right)}{p\left(\vec y_t \mid \vec x_{t-1}^{(r)}\right)}
     \end{align}
     The weight equation in \eqref{eq:weights} becomes
     \begin{align}
-        w_t^{(r)}   &\propto w_{t - 1}^{(r)} p\left(\vec y_t \mid \vec x_{t-1}^{(r)}\right) \\
-                    &= w_{t - 1}^{(r)} \int{p(\vec y_t, \vec x'_t \mid \vec x_{t-1}^{(r)}) \,\mathrm d\vec x'} \\
-                    &= w_{t - 1}^{(r)} \int{p(\vec y_t \mid \vec x'_t, \vec x_{t-1}^{(r)}) p(\vec x'_t \mid \vec x_{t-1}^{(r)}) \,\mathrm d\vec x'} \\
-                    &= w_{t - 1}^{(r)} \int{p(\vec y_t \mid \vec x'_t) p(\vec x'_t \mid \vec x_{t-1}^{(r)}) \,\mathrm d\vec x'}
+        w_t^{(r)}   &\propto w_{t - 1}^{(r)}\, p\left(\vec y_t \mid \vec x_{t-1}^{(r)}\right) \\
+                    &= w_{t - 1}^{(r)} \int{p\left(\vec y_t, \vec x'_t \mid \vec x_{t-1}^{(r)}\right) \,\mathrm d\vec x'} \\
+                    &= w_{t - 1}^{(r)} \int{p\left(\vec y_t \mid \vec x'_t, \vec x_{t-1}^{(r)}\right) p\left(\vec x'_t \mid \vec x_{t-1}^{(r)}\right) \,\mathrm d\vec x'} \\
+                    &= w_{t - 1}^{(r)} \int{p\left(\vec y_t \mid \vec x'_t\right) p\left(\vec x'_t \mid \vec x_{t-1}^{(r)}\right) \,\mathrm d\vec x'} \\
+                    &= w_{t - 1}^{(r)} \int{g\left(\vec y_t \mid \vec x'_t\right) f\left(\vec x'_t \mid \vec x_{t-1}^{(r)}\right) \,\mathrm d\vec x'}
     \end{align}
     The proposal distribution is optimal because for any fixed $\vec x_{t-1}^{(r)}$, the new weight $w_t^{(r)}$ takes the same value regardless of the value drawn for $\vec x_t^{(r)}$. Hence, conditional on the old values, the variance of true weights is zero.
