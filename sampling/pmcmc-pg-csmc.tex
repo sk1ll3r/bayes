@@ -1,0 +1,35 @@
+\subsubsection{Conditional SMC update}
+We want to smple from $p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta)$.
+    \begin{algorithm}
+    \caption{Conditional SMC update}\label{alg:csmc}
+        \begin{algorithmic}[1]
+            \State Choose a fixed ancestral lineage $B_{1:T}$ arbitrarily. \Comment Initialise fixed path
+            \State Let
+                $$\vec x_{1:T} = \left(\vec x_1^{(B_1)}, \dotsc, \vec x_T^{(B_T)}\right)$$
+                be a path associated with the ancestral lineage $B_{1:T}$.
+            \State For $r \neq B_1$, sample \Comment Time $t = 1$
+                $$\vec x_1^{(r)} \sim q(\cdot \mid \vec y_1, \vec \theta)$$
+            \State Compute weights
+                $$w_1^{(r)} \propto \frac{p\left(\vec x_1^{(r)}, \vec y_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)}$$
+            \State Normalise weights
+                $$\hat w_1^{(r)} = \frac{w_1^{(r)}}{\sum_{r'} w_1^{(r')}}$$
+            \State We can resample from 
+                $$\hat p(\mathrm d \vec x_1 \mid \vec y_1, \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)$$
+                to estimate
+                $$p(\vec x_1 \mid \vec y_1, \vec \theta)$$
+            \For{$t = 2, \dotsc, T$} \Comment Main loop
+                \State For $r \neq B_t$, sample
+                    $$A_{t - 1}^{(r)} \sim \Cat\left(\hat w_{t - 1}^{(1)}, \dotsc, \hat w_{t - 1}^{(R)}\right)$$
+                \State For $r \neq B_t$, sample
+                    $$\vec x_t^{(r)} \sim q\left(\cdot \mid \vec y_t, \vec x_{t - 1}^{(A_{t - 1}^{(r)})}\right)$$
+                \State Compute weights
+                    $$w_t^{(r)} = \frac{p\left(\vec x_{1:t}^{(r)}, \vec y_{1:t}; \vec \theta\right)}{p\left(\vec x_{1:t - 1}^{\left(A_{t - 1}^{(r)}\right)}, \vec y_{1:t-1}; \vec \theta\right) q\left(\vec x_n^{(r)} \mid \vec y_t, \vec x_{t - 1}^{\left(A_{t - 1}^{(r)}\right)}; \vec \theta\right)}$$
+                \State Normalise weights
+                    $$\hat w_t = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}$$
+                \State We can resample from
+                    $$\hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}, \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})$$
+                    to estimate
+                    $$p(\vec x_{1:t} \mid \vec y_{1:t}, \vec \theta)$$
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}

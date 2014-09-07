@@ -1,0 +1,38 @@
+\subsection{Particle independent Metropolis Hastings (PIMH) sampler}
+We want to sample from $p(\vec x_{1:T} \mid \vec y_{1:T}, \vec \theta)$.
+    \begin{algorithm}
+    \caption{Particle independent Metropolis Hastings sampler}\label{alg:pimh}
+        \begin{algorithmic}[1]
+            \State Run SMC targetting \Comment Initial sweep $s = 0$
+                $$p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta)$$
+            \State Sample
+                $$\vec x_{1:T}(0) \sim \hat p(\cdot \mid \vec y_{1:T}; \vec \theta)$$
+            \State Let
+                $$\hat p(\vec y_{1:T} \mid \vec \theta)$$
+                denote the corresponding marginal likelihood estimate.
+            \For{$s = 1, \dotsc, S$} \Comment Main loop
+                \State Run SMC targeting
+                    $$p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta)$$
+                \State Sample
+                    $$\vec x^\ast_{1:T} \sim \hat p(\cdot \mid \vec y_{1:T}; \vec \theta)$$
+                \State Let
+                    $$\hat p(\vec y_{1:T}; \vec \theta)^\ast$$
+                    denote the coresponding marginal likelihood estimate
+                \State Sample from $\Ber(\cdot)$ with the success probability
+                    $$\min\left(1, \frac{\hat p(\vec y_{1:T} \mid \vec \theta)^\ast}{\hat p(\vec y_{1:T}; \vec \theta)(s - 1)}\right)$$
+                \If{success}
+                    \State Set
+                        \begin{align*}
+                            \vec x_{1:T}(s)                             &= \vec x_{1:T}^\ast \\
+                            \hat p(\vec y_{1:T} \mid \vec \theta)(s)    &= \hat p(\vec y_{1:T} \mid \vec \theta)^\ast
+                        \end{align*}
+                \Else
+                    \State Set
+                        \begin{align*}
+                            \vec x_{1:T}(s)                             &= \vec x_{1:T}(s - 1) \\
+                            \hat p(\vec y_{1:T} \mid \vec \theta)(s)    &= \hat p(\vec y_{1:T} \mid \vec \theta)(s - 1)
+                        \end{align*}
+                \EndIf
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}

@@ -76,4 +76,9 @@
 \contentsline {subsubsection}{\nonumberline Why it works?}{24}{section*.32}
 \contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{25}{subsection.3.7.3}
 \contentsline {subsubsection}{\nonumberline Why it works?}{25}{section*.33}
-\contentsline {section}{\numberline {3.8}Particle Markov Chain Monte Carlo}{25}{section.3.8}
+\contentsline {section}{\numberline {3.8}Particle Markov Chain Monte Carlo}{26}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Particle independent Metropolis Hastings (PIMH) sampler}{26}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}Particle marginal Metropolis Hastings (PMMH) sampler}{26}{subsection.3.8.2}
+\contentsline {subsection}{\numberline {3.8.3}Particle Gibbs (PG) sampler}{26}{subsection.3.8.3}
+\contentsline {subsubsection}{\nonumberline Conditional SMC update}{26}{section*.34}
+\contentsline {subsubsection}{\nonumberline Particle Gibbs sampler}{26}{section*.35}

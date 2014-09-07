@@ -78,7 +78,7 @@
             \For{$t = 2, \dotsc, T$} \Comment Main loop
                 \State Compute weights
                     \begin{equation}
-                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
+                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
                     \end{equation}
                 \State Normalise weights
                     \begin{equation}
@@ -143,7 +143,7 @@
                     \end{equation}
                 \State Compute weights
                     \begin{equation}
-                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{p\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) p\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
+                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
                     \end{equation}
                 \State Normalise weights
                     \begin{equation}
@@ -158,7 +158,6 @@
                         p(\vec x_{1:t} \mid \vec y_{1:t}, \vec \theta)
                     \end{equation}
             \EndFor
-
         \end{algorithmic}
     \end{algorithm}
 

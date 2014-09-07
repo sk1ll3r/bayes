@@ -1,0 +1,21 @@
+\subsubsection{Particle Gibbs sampler}
+We wat to sample from $p(\vec \theta, \vec x_{1:T} \mid \vec y_{1:T})$.
+    \begin{algorithm}
+    \caption{Particle Gibbs sampler}\label{alg:pg}
+        \begin{algorithmic}[1]
+            \State Set $\theta(0)$, $\vec x_{1:T}(0)$, $B_{1:T}(0)$ arbitrarily. \Comment Initialisation, $s = 0$
+            \For{Sweep $s = 1, \dotsc, S$} \Comment Main loop
+                \State Sample parameter
+                    $$\vec \theta(s) \sim p\left(\cdot \mid \vec y_{1:T}, \vec x_{1:T}(s - 1)\right)$$
+                \State Run conditional SMC (Algorithm~\ref{alg:csmc}) targetting
+                    $$p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta(s))$$
+                    conditional on
+                    \begin{itemize}
+                        \item $\vec x_{1:T}(s - 1)$, and
+                        \item $B_{1:T}(s - 1)$.
+                    \end{itemize}
+                \State Sample
+                    $$\vec x_{1:T}(s) \sim \hat p(\cdot \mid \vec y_{1:T}; \vec \theta(s))$$
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}

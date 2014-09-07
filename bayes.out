@@ -45,3 +45,6 @@
 \BOOKMARK [2][-]{subsection.3.7.2}{Metropolis Hastings algorithm}{section.3.7}% 45
 \BOOKMARK [2][-]{subsection.3.7.3}{Gibbs sampling}{section.3.7}% 46
 \BOOKMARK [1][-]{section.3.8}{Particle Markov Chain Monte Carlo}{chapter.3}% 47
+\BOOKMARK [2][-]{subsection.3.8.1}{Particle independent Metropolis Hastings \(PIMH\) sampler}{section.3.8}% 48
+\BOOKMARK [2][-]{subsection.3.8.2}{Particle marginal Metropolis Hastings \(PMMH\) sampler}{section.3.8}% 49
+\BOOKMARK [2][-]{subsection.3.8.3}{Particle Gibbs \(PG\) sampler}{section.3.8}% 50

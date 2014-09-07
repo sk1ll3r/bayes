@@ -1,0 +1,43 @@
+\subsection{Particle marginal Metropolis Hastings (PMMH) sampler}
+We want to sample from $p(\vec \theta, \vec x_{1:T} \mid \vec y_{1:T}) \propto p(\vec x_{1:T} \mid \vec y_{1:T; \vec \theta}) p(\vec \theta)$.
+    \begin{algorithm}
+    \caption{Particle marginal Metropolis Hastings sampler}\label{alg:pmmh}
+        \begin{algorithmic}[1]
+            \State Set $\vec \theta(0)$ arbitrarily.
+            \State Run SMC targetting \Comment Initial sweep $s = 0$
+                $$p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta(0))$$
+            \State Sample
+                $$\vec x_{1:T}(0) \sim \hat p(\cdot \mid \vec y_{1:T}; \vec \theta(0))$$
+            \State Let
+                $$\hat p(\vec y_{1:T} \mid \vec \theta(0))$$
+                denote the corresponding marginal likelihood estimate.
+            \For{$s = 1, \dotsc, S$} \Comment Main loop
+                \State Sample
+                    $$\vec \theta^\ast \sim q(\cdot \mid \vec \theta(s - 1))$$
+                \State Run SMC targeting
+                    $$p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta^\ast)$$
+                \State Sample
+                    $$\vec x^\ast_{1:T} \sim \hat p(\cdot \mid \vec y_{1:T}; \vec \theta^\ast)$$
+                \State Let
+                    $$\hat p(\vec y_{1:T}; \vec \theta^\ast)$$
+                    denote the coresponding marginal likelihood estimate
+                \State Sample from $\Ber(\cdot)$ with the success probability
+                    $$\min\left(1, \frac{\hat p(\vec y_{1:T} \mid \vec \theta^\ast) p(\vec \theta^\ast) q(\vec \theta(s - 1) \mid \vec \theta^\ast)}{\hat p(\vec y_{1:T}; \vec \theta(s - 1)) p(\vec \theta(s - 1)) q(\vec \theta^\ast \mid \vec \theta(s - 1))}\right)$$
+                \If{success}
+                    \State Set
+                        \begin{align*}
+                            \vec \theta(s)                              &= \vec \theta^\ast \\
+                            \vec x_{1:T}(s)                             &= \vec x_{1:T}^\ast \\
+                            \hat p(\vec y_{1:T} \mid \vec \theta)(s)    &= \hat p(\vec y_{1:T} \mid \vec \theta^\ast)
+                        \end{align*}
+                \Else
+                    \State Set
+                        \begin{align*}
+                            \vec \theta(s)                              &= \vec \theta(s - 1) \\
+                            \vec x_{1:T}(s)                             &= \vec x_{1:T}(s - 1) \\
+                            \hat p(\vec y_{1:T} \mid \vec \theta)(s)    &= \hat p(\vec y_{1:T} \mid \vec \theta)(s - 1)
+                        \end{align*}
+                \EndIf
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}
