@@ -1,7 +1,6 @@
 \subsection{Particle marginal Metropolis Hastings (PMMH) sampler}
 We want to sample from $p(\vec \theta, \vec x_{1:T} \mid \vec y_{1:T}) \propto p(\vec x_{1:T} \mid \vec y_{1:T; \vec \theta}) p(\vec \theta)$.
-    \begin{algorithm}
-    \caption{Particle marginal Metropolis Hastings sampler}\label{alg:pmmh}
+    \begin{algorithmbis}[Particle marginal Metropolis Hastings sampler]\label{alg:pmmh}
         \begin{algorithmic}[1]
             \State Set $\vec \theta(0)$ arbitrarily.
             \State Run SMC targetting \Comment Initial sweep $s = 0$
@@ -40,4 +39,4 @@ We want to sample from $p(\vec \theta, \vec x_{1:T} \mid \vec y_{1:T}) \propto p
                 \EndIf
             \EndFor
         \end{algorithmic}
-    \end{algorithm}
+    \end{algorithmbis}

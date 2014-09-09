@@ -1,7 +1,6 @@
 \subsection{Metropolis Hastings algorithm}
 The Metropolis Hastings (MH) algorithm is a recipe to create a MCMC with a particular stationary distribution. Assume we can sample from a proposal distribution $q(\cdot \mid \vec x) \equiv q(\vec x \to \cdot)$. Let $p \equiv \pi$ be the required distribution (stationary distribution for this MCMC). Assume we can only evaluate $q$ and $\pi$ up to a multiplicative factor (i.e. we can only evaluate $q^\ast(\vec x \to \vec x') = Z_q q(\vec x \to \vec x')$ and $\pi^\ast(\vec x) = Z_p \pi(\vec x)$). The MH algorithm is outlined in Algorithm~\ref{alg:mh}.
-\begin{algorithm}
-\caption{Metropolis Hastings algorithm}\label{alg:mh}
+\begin{algorithmbis}[Metropolis Hastings algorithm]\label{alg:mh}
     \begin{algorithmic}[1]
         \State Sample $\vec x^{(0)}$ from an arbitrary probability distribution over $\mathcal X$.
         \For{$t = 1, \dotsc, T$}
@@ -14,7 +13,7 @@ The Metropolis Hastings (MH) algorithm is a recipe to create a MCMC with a parti
             \Until{$\vec x^{(t)}$ is accepted.}
         \EndFor
     \end{algorithmic}
-\end{algorithm}
+\end{algorithmbis}
 
 \subsubsection{Why it works?}
 We need to prove that $\pi$ is the unique stationary distribution of this MCMC.

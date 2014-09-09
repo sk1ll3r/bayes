@@ -1,7 +1,6 @@
 \subsection{Particle independent Metropolis Hastings (PIMH) sampler}
 We want to sample from $p(\vec x_{1:T} \mid \vec y_{1:T}, \vec \theta)$.
-    \begin{algorithm}
-    \caption{Particle independent Metropolis Hastings sampler}\label{alg:pimh}
+    \begin{algorithmbis}[Particle independent Metropolis Hastings sampler]\label{alg:pimh}
         \begin{algorithmic}[1]
             \State Run SMC targetting \Comment Initial sweep $s = 0$
                 $$p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta)$$
@@ -35,4 +34,4 @@ We want to sample from $p(\vec x_{1:T} \mid \vec y_{1:T}, \vec \theta)$.
                 \EndIf
             \EndFor
         \end{algorithmic}
-    \end{algorithm}
+    \end{algorithmbis}

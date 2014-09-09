@@ -12,8 +12,7 @@ Also assume that
 where $\{L_k\}$ is a sequence of auxiliary Markov transition kernels.
 
 The generic algorithm for Sequential Monte Carlo (SMC) can be found in Algorithm~\ref{alg:smc}.
-    \begin{algorithm}
-    \caption{Generic Sequential Monte Carlo}\label{alg:smc}
+    \begin{algorithmbis}[Generic Sequential Monte Carlo]\label{alg:smc}
         \begin{algorithmic}[1]
             \State Initialisation, $t = 0$:
             \For{$r = 1, \dotsc, R$}
@@ -38,5 +37,5 @@ The generic algorithm for Sequential Monte Carlo (SMC) can be found in Algorithm
                 \State Resample from the pmf $\sum_r \hat w_t^{(r)} \delta_{\tilde x_t^{(r)}}(\cdot)$ to get $R$ samples $\left\{x_t^{(r)}\right\}$. Reset the weights to $1/R$.\Comment Resample.
             \EndFor
         \end{algorithmic}
-    \end{algorithm}
+    \end{algorithmbis}
 

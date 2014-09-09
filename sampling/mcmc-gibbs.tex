@@ -1,7 +1,6 @@
 \subsection{Gibbs sampling}
 Assume we want to sample from $p(\vec x) = p(x_1, \dotsc, x_D)$. We can only sample from the conditionals $p(x_i \mid \vec x_{-i})$ where $\vec x_{-i}$ denotes $\vec x$ with the $i^{\text{th}}$ component ommited. The Gibbs sampling algorithm (\ref{alg:gibbs}) is given below.
-\begin{algorithm}
-\caption{Gibbs sampling algorithm}\label{alg:gibbs}
+\begin{algorithmbis}[Gibbs sampling algorithm]\label{alg:gibbs}
     \begin{algorithmic}[1]
         \State Sample $\vec x^{(0)}$ from an arbitrary probability distribution over $\mathcal X$.
         \For{$t = 1, \dotsc, T$}
@@ -11,7 +10,7 @@ Assume we want to sample from $p(\vec x) = p(x_1, \dotsc, x_D)$. We can only sam
             \State Sample $x_D^{(t)} \sim p\left(\cdot \mid x_1^{(t)}, x_2^{(t)}, \dotsc, x_{D - 1}^{(t)}\right)$
         \EndFor
     \end{algorithmic}
-\end{algorithm}
+\end{algorithmbis}
 
 \subsubsection{Why it works?}
 Each of the sampling steps can be viewed to be governed by a different kernel with the whole process being governed by the aggregate kernel. We prove that the single kernels follow the DB equation with respect to $p$:

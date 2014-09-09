@@ -38,7 +38,7 @@
                     &= \frac{g\left(\vec y_1 \mid \vec x^{(r)}_1\right) \mu\left(\vec x^{(r)}_1\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1\right)} 
     \end{align}
     Note that second line is proportional to the first line with respect to $p(\vec y_1)$ which is justifiable because the the constant of proportionality cancels out during the normalisation step. The algorithm for SIS is shown in Algorithm~\ref{alg:sis} below.
-    % \begin{algorithm}
+    % \begin{algorithmbis}
     % \caption{Sequential importance sampling}\label{alg:sis}
     %     \begin{algorithmic}[1]
     %         \State Initialise weights $\left\{w_0^{(r)} = \frac{1}{R}\right\}$.
@@ -50,10 +50,9 @@
     %             \State \Comment{The pmf $\sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\vec x_{1:t})$ approximates the pdf $p(\vec x_{1:t} \mid \vec y_{1:t})$. Hence we can approximate the pdf $p(\vec x_t \mid \vec y_{1:t})$ by $\sum_r \hat w_t^{(r)} \delta_{\vec x_t^{(r)}}(\vec x_t)$.}
     %         \EndFor
     %     \end{algorithmic}
-    % \end{algorithm}
+    % \end{algorithmbis}
 
-    \begin{algorithm}
-    \caption{Sequential importance sampling}\label{alg:sis}
+    \begin{algorithmbis}[Sequential importance sampling]\label{alg:sis}
         \begin{algorithmic}[1]
             \State Sample from proposal \Comment Initialisation
                 \begin{equation}
@@ -94,7 +93,7 @@
                     \end{equation}
             \EndFor
         \end{algorithmic}
-    \end{algorithm}
+    \end{algorithmbis}
     The reason why it works is the same as in the case of Sampling importance resampling described in section \ref{section:sir}.
 
 \subsection{The degeneracy problem}
@@ -109,8 +108,7 @@
 
 \subsection{The resampling step}
     Whenever the effective sample size drops below some threshold, resample to get new $R$ samples from the approximation of the pdf. This step is also called \textbf{rejuvenation}. The full algorithm for a generic particle filter is shown in Algorithm~\ref{alg:part-fil} below in which we resample during every tie step.
-    \begin{algorithm}
-    \caption{Generic particle filter}\label{alg:part-fil}
+    \begin{algorithmbis}[Generic particle filter]\label{alg:part-fil}
         \begin{algorithmic}[1]
             \State Sample from proposal \Comment Initialisation
                 \begin{equation}
@@ -159,7 +157,7 @@
                     \end{equation}
             \EndFor
         \end{algorithmic}
-    \end{algorithm}
+    \end{algorithmbis}
 
 \subsection{Particle filter animation}
 \animategraphics[controls, width=1\linewidth]{0.3}{animations/particle-filter/}{1}{36}

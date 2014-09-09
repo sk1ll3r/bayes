@@ -6,14 +6,13 @@ Assume we can sample from a proposal distribution $q$ with a pdf $q(\vec x)$, wh
 \end{align}
 
 The procedure that generates a sample $\vec x \sim p$ is described in Algorithm~\ref{alg:rejection} below.
-\begin{algorithm}
-\caption{Rejection sampling}\label{alg:rejection}
+\begin{algorithmbis}[Rejection sampling]\label{alg:rejection}
     \begin{algorithmic}[1]
         \State Generate $\vec x \sim q$.
         \State Generate $u \sim \Unif(0, c q^\ast(\vec x))$.
         \State If $u > p^\ast(\vec x)$ it is rejected, otherwise it is accepted.
     \end{algorithmic}
-\end{algorithm}
+\end{algorithmbis}
 
 
 \subsection{Why it works?}

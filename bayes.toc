@@ -60,12 +60,12 @@
 \contentsline {subsection}{\numberline {3.2.1}Why it works?}{9}{subsection.3.2.1}
 \contentsline {section}{\numberline {3.3}Importance sampling}{10}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Convergence of estimator as $R$ increases}{11}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Optimal proposal distribution}{12}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Optimal proposal distribution}{11}{subsection.3.3.2}
 \contentsline {section}{\numberline {3.4}Sampling importance resampling}{12}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Why it works?}{12}{subsection.3.4.1}
 \contentsline {section}{\numberline {3.5}Particle filtering}{13}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Sequential importance sampling (SIS)}{13}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}The degeneracy problem}{16}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}The degeneracy problem}{15}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}The resampling step}{16}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}Particle filter animation}{18}{subsection.3.5.4}
 \contentsline {subsection}{\numberline {3.5.5}The proposal distribution}{19}{subsection.3.5.5}
@@ -76,9 +76,9 @@
 \contentsline {subsubsection}{\nonumberline Why it works?}{24}{section*.32}
 \contentsline {subsection}{\numberline {3.7.3}Gibbs sampling}{25}{subsection.3.7.3}
 \contentsline {subsubsection}{\nonumberline Why it works?}{25}{section*.33}
-\contentsline {section}{\numberline {3.8}Particle Markov Chain Monte Carlo}{26}{section.3.8}
-\contentsline {subsection}{\numberline {3.8.1}Particle independent Metropolis Hastings (PIMH) sampler}{26}{subsection.3.8.1}
+\contentsline {section}{\numberline {3.8}Particle Markov Chain Monte Carlo}{25}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Particle independent Metropolis Hastings (PIMH) sampler}{25}{subsection.3.8.1}
 \contentsline {subsection}{\numberline {3.8.2}Particle marginal Metropolis Hastings (PMMH) sampler}{26}{subsection.3.8.2}
-\contentsline {subsection}{\numberline {3.8.3}Particle Gibbs (PG) sampler}{26}{subsection.3.8.3}
-\contentsline {subsubsection}{\nonumberline Conditional SMC update}{26}{section*.34}
-\contentsline {subsubsection}{\nonumberline Particle Gibbs sampler}{26}{section*.35}
+\contentsline {subsection}{\numberline {3.8.3}Particle Gibbs (PG) sampler}{28}{subsection.3.8.3}
+\contentsline {subsubsection}{\nonumberline Conditional SMC update}{28}{section*.34}
+\contentsline {subsubsection}{\nonumberline Particle Gibbs sampler}{29}{section*.35}

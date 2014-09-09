@@ -1,8 +1,7 @@
 \section{Sampling importance resampling}
 \label{section:sir}
 In Sampling importance resampling (SIR), we approximate the pdf of $p$ as point masses and resample from them to get samples approximately $\sim p$. The process is described in Algorithm~\ref{alg:sir} below.
-\begin{algorithm}
-\caption{Sampling importance resampling}\label{alg:sir}
+\begin{algorithmbis}[Sampling importance resampling]\label{alg:sir}
     \begin{algorithmic}[1]
         \State Generate samples $\left\{\vec x^{(r)}\right\}$ from $q$.
         \State Calculate importance weights $\left\{w_r = \frac{p^\ast(\vec z^{(r)})}{q^\ast(\vec z^{(r)})}\right\}$.
@@ -13,9 +12,9 @@ In Sampling importance resampling (SIR), we approximate the pdf of $p$ as point 
             \end{equation}
             to estimate sampling from $p(\vec x)$.
     \end{algorithmic}
-\end{algorithm}
+\end{algorithmbis}
 
-% \begin{algorithm}
+% \begin{algorithmbis}
 % \caption{Sampling importance resampling}\label{alg:sir}
 %     \begin{algorithmic}[1]
 %         \State Generate samples $\left\{\vec z^{(r)}\right\}$ from $q$.
@@ -27,7 +26,7 @@ In Sampling importance resampling (SIR), we approximate the pdf of $p$ as point 
 %             \end{equation}
 %         \State The resulting samples $\left\{\vec x^{(r)}\right\}$ are approximately $\sim p$.
 %     \end{algorithmic}
-% \end{algorithm}
+% \end{algorithmbis}
 
 \subsection{Why it works?}
 We consider the univariate case (to do: general case) as the number of proposal samples (particles) $R \to \infty$. We can express the number of proposal samples that are in the interval $\lim_{\delta x \to 0}[x, x + \delta x]$, $N(x)$, to be
