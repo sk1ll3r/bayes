@@ -24,27 +24,29 @@
 \BOOKMARK [1][-]{section.2.5}{Poisson-gamma model}{chapter.2}% 24
 \BOOKMARK [2][-]{subsection.2.5.1}{Summary}{section.2.5}% 25
 \BOOKMARK [2][-]{subsection.2.5.2}{Derivations}{section.2.5}% 26
-\BOOKMARK [0][-]{chapter.3}{Sampling algorithms}{}% 27
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.2}{Rejection sampling}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.2.1}{Why it works?}{section.3.2}% 30
-\BOOKMARK [1][-]{section.3.3}{Importance sampling}{chapter.3}% 31
-\BOOKMARK [2][-]{subsection.3.3.1}{Convergence of estimator as R increases}{section.3.3}% 32
-\BOOKMARK [2][-]{subsection.3.3.2}{Optimal proposal distribution}{section.3.3}% 33
-\BOOKMARK [1][-]{section.3.4}{Sampling importance resampling}{chapter.3}% 34
-\BOOKMARK [2][-]{subsection.3.4.1}{Why it works?}{section.3.4}% 35
-\BOOKMARK [1][-]{section.3.5}{Particle filtering}{chapter.3}% 36
-\BOOKMARK [2][-]{subsection.3.5.1}{Sequential importance sampling \(SIS\)}{section.3.5}% 37
-\BOOKMARK [2][-]{subsection.3.5.2}{The degeneracy problem}{section.3.5}% 38
-\BOOKMARK [2][-]{subsection.3.5.3}{The resampling step}{section.3.5}% 39
-\BOOKMARK [2][-]{subsection.3.5.4}{Particle filter animation}{section.3.5}% 40
-\BOOKMARK [2][-]{subsection.3.5.5}{The proposal distribution}{section.3.5}% 41
-\BOOKMARK [1][-]{section.3.6}{Sequential Monte Carlo}{chapter.3}% 42
-\BOOKMARK [1][-]{section.3.7}{Markov chain Monte Carlo methods}{chapter.3}% 43
-\BOOKMARK [2][-]{subsection.3.7.1}{Definitions}{section.3.7}% 44
-\BOOKMARK [2][-]{subsection.3.7.2}{Metropolis Hastings algorithm}{section.3.7}% 45
-\BOOKMARK [2][-]{subsection.3.7.3}{Gibbs sampling}{section.3.7}% 46
-\BOOKMARK [1][-]{section.3.8}{Particle Markov Chain Monte Carlo}{chapter.3}% 47
-\BOOKMARK [2][-]{subsection.3.8.1}{Particle independent Metropolis Hastings \(PIMH\) sampler}{section.3.8}% 48
-\BOOKMARK [2][-]{subsection.3.8.2}{Particle marginal Metropolis Hastings \(PMMH\) sampler}{section.3.8}% 49
-\BOOKMARK [2][-]{subsection.3.8.3}{Particle Gibbs \(PG\) sampler}{section.3.8}% 50
+\BOOKMARK [0][-]{chapter.3}{Generative models}{}% 27
+\BOOKMARK [0][-]{chapter.4}{Sampling algorithms}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.2}{Rejection sampling}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.2.1}{Why it works?}{section.4.2}% 31
+\BOOKMARK [1][-]{section.4.3}{Importance sampling}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.3.1}{Convergence of estimator as R increases}{section.4.3}% 33
+\BOOKMARK [2][-]{subsection.4.3.2}{Optimal proposal distribution}{section.4.3}% 34
+\BOOKMARK [1][-]{section.4.4}{Sampling importance resampling}{chapter.4}% 35
+\BOOKMARK [2][-]{subsection.4.4.1}{Why it works?}{section.4.4}% 36
+\BOOKMARK [1][-]{section.4.5}{Particle filtering}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.5.1}{Sequential importance sampling \(SIS\)}{section.4.5}% 38
+\BOOKMARK [2][-]{subsection.4.5.2}{The degeneracy problem}{section.4.5}% 39
+\BOOKMARK [2][-]{subsection.4.5.3}{The resampling step}{section.4.5}% 40
+\BOOKMARK [2][-]{subsection.4.5.4}{Particle filter animation}{section.4.5}% 41
+\BOOKMARK [2][-]{subsection.4.5.5}{The proposal distribution}{section.4.5}% 42
+\BOOKMARK [1][-]{section.4.6}{Sequential Monte Carlo}{chapter.4}% 43
+\BOOKMARK [1][-]{section.4.7}{Markov chain Monte Carlo methods}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.7.1}{Definitions}{section.4.7}% 45
+\BOOKMARK [2][-]{subsection.4.7.2}{Metropolis Hastings algorithm}{section.4.7}% 46
+\BOOKMARK [2][-]{subsection.4.7.3}{Gibbs sampling}{section.4.7}% 47
+\BOOKMARK [1][-]{section.4.8}{Particle Markov Chain Monte Carlo}{chapter.4}% 48
+\BOOKMARK [2][-]{subsection.4.8.1}{Particle independent Metropolis Hastings \(PIMH\) sampler}{section.4.8}% 49
+\BOOKMARK [2][-]{subsection.4.8.2}{Particle marginal Metropolis Hastings \(PMMH\) sampler}{section.4.8}% 50
+\BOOKMARK [2][-]{subsection.4.8.3}{Particle Gibbs \(PG\) sampler}{section.4.8}% 51
+\BOOKMARK [0][-]{chapter.5}{Nonparametric Bayesian models}{}% 52
