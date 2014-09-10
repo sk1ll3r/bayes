@@ -54,7 +54,16 @@
 \contentsline {paragraph}{\nonumberline Posterior predictive}{8}{section*.30}
 \contentsline {paragraph}{\nonumberline Evidence}{8}{section*.31}
 \contentsline {subsection}{\numberline {2.5.2}Derivations}{8}{subsection.2.5.2}
-\contentsline {chapter}{\numberline {3}Generative models}{9}{chapter.3}
+\contentsline {chapter}{\numberline {3}Advanced models}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Gaussian mixture model}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}Factor analysis}{9}{section.3.2}
+\contentsline {section}{\numberline {3.3}Hidden Markov model}{9}{section.3.3}
+\contentsline {section}{\numberline {3.4}Linear regression}{9}{section.3.4}
+\contentsline {section}{\numberline {3.5}Logistic regression}{9}{section.3.5}
+\contentsline {section}{\numberline {3.6}Latent Dirichlet allocation}{9}{section.3.6}
+\contentsline {section}{\numberline {3.7}Linear dynamical systems}{9}{section.3.7}
+\contentsline {section}{\numberline {3.8}Principal components analysis}{9}{section.3.8}
+\contentsline {section}{\numberline {3.9}Independent components analysis}{9}{section.3.9}
 \contentsline {chapter}{\numberline {4}Sampling algorithms}{10}{chapter.4}
 \contentsline {section}{\numberline {4.1}Introduction}{10}{section.4.1}
 \contentsline {section}{\numberline {4.2}Rejection sampling}{10}{section.4.2}
@@ -84,3 +93,11 @@
 \contentsline {subsubsection}{\nonumberline Conditional SMC update}{29}{section*.34}
 \contentsline {subsubsection}{\nonumberline Particle Gibbs sampler}{30}{section*.35}
 \contentsline {chapter}{\numberline {5}Nonparametric Bayesian models}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Gaussian process}{31}{section.5.1}
+\contentsline {section}{\numberline {5.2}Dirichlet process}{31}{section.5.2}
+\contentsline {section}{\numberline {5.3}Chinese restaurant process}{31}{section.5.3}
+\contentsline {section}{\numberline {5.4}Hierarchical Dirichlet process}{31}{section.5.4}
+\contentsline {section}{\numberline {5.5}Hierarchical Dirichlet process}{31}{section.5.5}
+\contentsline {section}{\numberline {5.6}Indian buffet process}{31}{section.5.6}
+\contentsline {section}{\numberline {5.7}Dirichlet diffusion trees}{31}{section.5.7}
+\contentsline {section}{\numberline {5.8}Pitman-Yor process}{31}{section.5.8}
