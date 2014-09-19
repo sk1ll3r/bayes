@@ -33,37 +33,39 @@
 \BOOKMARK [1][-]{section.3.6}{Latent Dirichlet allocation}{chapter.3}% 33
 \BOOKMARK [1][-]{section.3.7}{Linear dynamical systems}{chapter.3}% 34
 \BOOKMARK [1][-]{section.3.8}{Principal components analysis}{chapter.3}% 35
-\BOOKMARK [1][-]{section.3.9}{Independent components analysis}{chapter.3}% 36
-\BOOKMARK [0][-]{chapter.4}{Sampling algorithms}{}% 37
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 38
-\BOOKMARK [1][-]{section.4.2}{Rejection sampling}{chapter.4}% 39
-\BOOKMARK [2][-]{subsection.4.2.1}{Why it works?}{section.4.2}% 40
-\BOOKMARK [1][-]{section.4.3}{Importance sampling}{chapter.4}% 41
-\BOOKMARK [2][-]{subsection.4.3.1}{Convergence of estimator as R increases}{section.4.3}% 42
-\BOOKMARK [2][-]{subsection.4.3.2}{Optimal proposal distribution}{section.4.3}% 43
-\BOOKMARK [1][-]{section.4.4}{Sampling importance resampling}{chapter.4}% 44
-\BOOKMARK [2][-]{subsection.4.4.1}{Why it works?}{section.4.4}% 45
-\BOOKMARK [1][-]{section.4.5}{Particle filtering}{chapter.4}% 46
-\BOOKMARK [2][-]{subsection.4.5.1}{Sequential importance sampling \(SIS\)}{section.4.5}% 47
-\BOOKMARK [2][-]{subsection.4.5.2}{The degeneracy problem}{section.4.5}% 48
-\BOOKMARK [2][-]{subsection.4.5.3}{The resampling step}{section.4.5}% 49
-\BOOKMARK [2][-]{subsection.4.5.4}{Particle filter animation}{section.4.5}% 50
-\BOOKMARK [2][-]{subsection.4.5.5}{The proposal distribution}{section.4.5}% 51
-\BOOKMARK [1][-]{section.4.6}{Sequential Monte Carlo}{chapter.4}% 52
-\BOOKMARK [1][-]{section.4.7}{Markov chain Monte Carlo methods}{chapter.4}% 53
-\BOOKMARK [2][-]{subsection.4.7.1}{Definitions}{section.4.7}% 54
-\BOOKMARK [2][-]{subsection.4.7.2}{Metropolis Hastings algorithm}{section.4.7}% 55
-\BOOKMARK [2][-]{subsection.4.7.3}{Gibbs sampling}{section.4.7}% 56
-\BOOKMARK [1][-]{section.4.8}{Particle Markov Chain Monte Carlo}{chapter.4}% 57
-\BOOKMARK [2][-]{subsection.4.8.1}{Particle independent Metropolis Hastings \(PIMH\) sampler}{section.4.8}% 58
-\BOOKMARK [2][-]{subsection.4.8.2}{Particle marginal Metropolis Hastings \(PMMH\) sampler}{section.4.8}% 59
-\BOOKMARK [2][-]{subsection.4.8.3}{Particle Gibbs \(PG\) sampler}{section.4.8}% 60
-\BOOKMARK [0][-]{chapter.5}{Nonparametric Bayesian models}{}% 61
-\BOOKMARK [1][-]{section.5.1}{Gaussian process}{chapter.5}% 62
-\BOOKMARK [1][-]{section.5.2}{Dirichlet process}{chapter.5}% 63
-\BOOKMARK [1][-]{section.5.3}{Chinese restaurant process}{chapter.5}% 64
-\BOOKMARK [1][-]{section.5.4}{Hierarchical Dirichlet process}{chapter.5}% 65
-\BOOKMARK [1][-]{section.5.5}{Hierarchical Dirichlet process}{chapter.5}% 66
-\BOOKMARK [1][-]{section.5.6}{Indian buffet process}{chapter.5}% 67
-\BOOKMARK [1][-]{section.5.7}{Dirichlet diffusion trees}{chapter.5}% 68
-\BOOKMARK [1][-]{section.5.8}{Pitman-Yor process}{chapter.5}% 69
+\BOOKMARK [2][-]{subsection.3.8.1}{Classical PCA}{section.3.8}% 36
+\BOOKMARK [2][-]{subsection.3.8.2}{Probabilistic PCA}{section.3.8}% 37
+\BOOKMARK [1][-]{section.3.9}{Independent components analysis}{chapter.3}% 38
+\BOOKMARK [0][-]{chapter.4}{Sampling algorithms}{}% 39
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.2}{Rejection sampling}{chapter.4}% 41
+\BOOKMARK [2][-]{subsection.4.2.1}{Why it works?}{section.4.2}% 42
+\BOOKMARK [1][-]{section.4.3}{Importance sampling}{chapter.4}% 43
+\BOOKMARK [2][-]{subsection.4.3.1}{Convergence of estimator as R increases}{section.4.3}% 44
+\BOOKMARK [2][-]{subsection.4.3.2}{Optimal proposal distribution}{section.4.3}% 45
+\BOOKMARK [1][-]{section.4.4}{Sampling importance resampling}{chapter.4}% 46
+\BOOKMARK [2][-]{subsection.4.4.1}{Why it works?}{section.4.4}% 47
+\BOOKMARK [1][-]{section.4.5}{Particle filtering}{chapter.4}% 48
+\BOOKMARK [2][-]{subsection.4.5.1}{Sequential importance sampling \(SIS\)}{section.4.5}% 49
+\BOOKMARK [2][-]{subsection.4.5.2}{The degeneracy problem}{section.4.5}% 50
+\BOOKMARK [2][-]{subsection.4.5.3}{The resampling step}{section.4.5}% 51
+\BOOKMARK [2][-]{subsection.4.5.4}{Particle filter animation}{section.4.5}% 52
+\BOOKMARK [2][-]{subsection.4.5.5}{The proposal distribution}{section.4.5}% 53
+\BOOKMARK [1][-]{section.4.6}{Sequential Monte Carlo}{chapter.4}% 54
+\BOOKMARK [1][-]{section.4.7}{Markov chain Monte Carlo methods}{chapter.4}% 55
+\BOOKMARK [2][-]{subsection.4.7.1}{Definitions}{section.4.7}% 56
+\BOOKMARK [2][-]{subsection.4.7.2}{Metropolis Hastings algorithm}{section.4.7}% 57
+\BOOKMARK [2][-]{subsection.4.7.3}{Gibbs sampling}{section.4.7}% 58
+\BOOKMARK [1][-]{section.4.8}{Particle Markov Chain Monte Carlo}{chapter.4}% 59
+\BOOKMARK [2][-]{subsection.4.8.1}{Particle independent Metropolis Hastings \(PIMH\) sampler}{section.4.8}% 60
+\BOOKMARK [2][-]{subsection.4.8.2}{Particle marginal Metropolis Hastings \(PMMH\) sampler}{section.4.8}% 61
+\BOOKMARK [2][-]{subsection.4.8.3}{Particle Gibbs \(PG\) sampler}{section.4.8}% 62
+\BOOKMARK [0][-]{chapter.5}{Nonparametric Bayesian models}{}% 63
+\BOOKMARK [1][-]{section.5.1}{Gaussian process}{chapter.5}% 64
+\BOOKMARK [1][-]{section.5.2}{Dirichlet process}{chapter.5}% 65
+\BOOKMARK [1][-]{section.5.3}{Chinese restaurant process}{chapter.5}% 66
+\BOOKMARK [1][-]{section.5.4}{Hierarchical Dirichlet process}{chapter.5}% 67
+\BOOKMARK [1][-]{section.5.5}{Hierarchical Dirichlet process}{chapter.5}% 68
+\BOOKMARK [1][-]{section.5.6}{Indian buffet process}{chapter.5}% 69
+\BOOKMARK [1][-]{section.5.7}{Dirichlet diffusion trees}{chapter.5}% 70
+\BOOKMARK [1][-]{section.5.8}{Pitman-Yor process}{chapter.5}% 71

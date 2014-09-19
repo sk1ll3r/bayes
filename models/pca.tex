@@ -1,1 +1,52 @@
 \section{Principal components analysis}
+\subsection{Classical PCA}
+We have data points $\left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \dotsc, N$. The goal is to project to a lower dimensional space with dimension $M, M < D$, while maximising the variance to get data points in the \emph{principal space}, $\left\{\vec z_n, \vec z_n \in \mathbb R^M\right\}, n = 1, \dotsc, N$. Let the \emph{principal components} be $\left\{\vec u_m, \vec u_m \in \mathbb R^D, \| \vec u_m \| = 1\right\}, m = 1, \dotsc, M$. The projected data can be expressed as
+\begin{align*}
+    \vec z_n    &= 
+        \begin{bmatrix}
+            \vec u_1^T \vec x_n \\
+            \vdots \\
+            \vec u_M^T \vec x_n
+        \end{bmatrix} \\
+                &= \vec U^T \vec x_n
+\end{align*}
+for $n = 1, \dotsc, N$ where $\vec U = [\vec u_1, \dotsc, \vec u_M]$.
+
+The total variance we are trying to maximise, i.e. the sum of variances along the dimensions $\left\{\vec u_m\right\}$ is
+\begin{align*}
+    V   &= \sum_{m = 1}^M \var(\text{dimension } m) \\
+        &= \sum_{m = 1}^M \frac{1}{N} \sum_{n = 1}^N \left( z_{nm} - \mean z_m \right)^2, \text{where } \mean z_m = \frac{1}{N} \sum_{n = 1}^N z_{nm} \\
+        &= \frac{1}{N} \sum_{m = 1}^M \sum_{n = 1}^N \left( z_{nm}^2 - 2 z_{nm} \bar z_m + \bar z_m^2 \right) \\
+        &= \frac{1}{N} \sum_{m = 1}^M \sum_{n = 1}^N \left( \left(\vec u_m^T \vec x_n \right)^2 - 2 \left(\vec u_m^T \vec x_n\right) \left(\vec u_m^T \bar{\vec x}\right) + \left( \vec u_m^T \bar{\vec x} \right)^2 \right), \text{where } \bar{\vec x} = \frac{1}{N} \sum_{n = 1}^N \vec x_n \\
+        &= \sum_{m = 1}^M \vec u_m^T \left( \frac{1}{N} \sum_{n = 1}^N \vec x_n \vec x_n^T - 2 \vec x_n \bar{\vec x}^T + \bar{\vec x} \bar{\vec x}^T \right) \vec u_m \\
+        &= \sum_{m = 1}^M \vec u_m^T \left( \frac{1}{N} \sum_{n = 1}^N (\vec x_n - \bar{\vec x})(\vec x_n - \bar{\vec x})^T \right) \vec u_m \\
+        &= \sum_{m = 1}^M \vec u_m^T \vec S \vec u_m, \text{where } \vec S = \frac{1}{N} \sum_{n = 1}^N (\vec x_n - \bar{\vec x})(\vec x_n - \bar{\vec x})^T
+\end{align*}
+We want to maximise this with the constraint $\|\vec u_m\| = 1, m = 1, \dotsc, M$ which is equivalent to $\vec u_m^T \vec u_m = 1, m = 1, \dotsc, M$. We use Lagrange multipliers $\vec \lambda = (\lambda_1, \dotsc, \lambda_M)$. Hence we need to maximise the following Lagrangian
+\begin{equation*}
+    \mathcal L(\vec \lambda, \vec u_1, \dotsc, \vec u_M) = \sum_{m = 1}^M \vec u_m^T \vec S \vec u_m + \vec \lambda^T
+        \begin{bmatrix}
+            1 - \vec u_1^T \vec u_1 \\
+            \vdots \\
+            1 - \vec u_M^T \vec u_M
+        \end{bmatrix}
+\end{equation*}
+
+We know that $\vec S$ is positive semi-definite because it is a covariance matrix for $\{\vec x_n\}$. The term $\vec u_m^T \vec S \vec u_m$ is convex w.r.t. $\vec u_m$ because the Hessian $2 \vec S$ is positive semi-definite. Hence $\sum_{m = 1}^M \vec u_m^T \vec S \vec u_m$ must be convex w.r.t. $(\vec u_1, \dotsc, \vec u_M)$. Also, the second term in the Lagrangian is convex w.r.t. the principal components. Hence, we can maximise the Lagrangian by setting the gradients to zero:
+\begin{align}
+    \grad_{\vec \lambda}{\mathcal L}    &= \vec 0 \label{eqn:gradLambda}\\
+    \grad_{\vec u_m}{\mathcal L}        &= \vec 0, m = 1, \dotsc, M \label{eqn:gradU}
+\end{align}
+
+From \eqref{eqn:gradLambda}, we obtain $\vec u_m^T \vec u-m = 1, m = 1, \dotsc, M$. From \eqref{eqn:gradU}, we obtain
+\begin{align}
+    \grad_{\vec u_m}{\mathcal L}    &= 2 \vec S \vec u_m - 2 \lambda_m \vec u_m \\
+                                    &= 0 \\
+    \implies \vec S \vec u_m        &= \lambda_m \vec u_m \label{eqn:pcaEig}
+\end{align}
+Thus we can see that $\{\vec u_m\}$ should be selected to be the eigenvectors corresponding to the eigenvalues $\{\lambda_m\}$ of $\vec S$. If we premultiply \eqref{eqn:pcaEig} by $\vec u_m^T$, we get $\lambda_m = \vec u_m^T \vec S \vec u_m$ which can be substituted back to total variance
+\begin{equation*}
+    V = \sum_{m = 1}^M \lambda_m
+\end{equation*}
+from which we can see that to maximise, we set $\{\lambda_m\}$ to be the largest $M$ eigenvalues of $\vec S$. The principal components $\{\vec u_m\}$ are the corresponding eigenvectors.
+\subsection{Probabilistic PCA}
