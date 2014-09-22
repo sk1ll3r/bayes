@@ -13,15 +13,18 @@ We have data points $\left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \
 for $n = 1, \dotsc, N$ where $\vec U = [\vec u_1, \dotsc, \vec u_M]$.
 
 The total variance we are trying to maximise, i.e. the sum of variances along the dimensions $\left\{\vec u_m\right\}$ is
-\begin{align*}
-    V   &= \sum_{m = 1}^M \var(\text{dimension } m) \\
-        &= \sum_{m = 1}^M \frac{1}{N} \sum_{n = 1}^N \left( z_{nm} - \mean z_m \right)^2, \text{where } \mean z_m = \frac{1}{N} \sum_{n = 1}^N z_{nm} \\
-        &= \frac{1}{N} \sum_{m = 1}^M \sum_{n = 1}^N \left( z_{nm}^2 - 2 z_{nm} \bar z_m + \bar z_m^2 \right) \\
-        &= \frac{1}{N} \sum_{m = 1}^M \sum_{n = 1}^N \left( \left(\vec u_m^T \vec x_n \right)^2 - 2 \left(\vec u_m^T \vec x_n\right) \left(\vec u_m^T \bar{\vec x}\right) + \left( \vec u_m^T \bar{\vec x} \right)^2 \right), \text{where } \bar{\vec x} = \frac{1}{N} \sum_{n = 1}^N \vec x_n \\
-        &= \sum_{m = 1}^M \vec u_m^T \left( \frac{1}{N} \sum_{n = 1}^N \vec x_n \vec x_n^T - 2 \vec x_n \bar{\vec x}^T + \bar{\vec x} \bar{\vec x}^T \right) \vec u_m \\
-        &= \sum_{m = 1}^M \vec u_m^T \left( \frac{1}{N} \sum_{n = 1}^N (\vec x_n - \bar{\vec x})(\vec x_n - \bar{\vec x})^T \right) \vec u_m \\
-        &= \sum_{m = 1}^M \vec u_m^T \vec S \vec u_m, \text{where } \vec S = \frac{1}{N} \sum_{n = 1}^N (\vec x_n - \bar{\vec x})(\vec x_n - \bar{\vec x})^T
-\end{align*}
+\begin{align}
+    V   &= \sum_{m = 1}^M \var(\text{dimension } m) \nonumber\\
+        &= \sum_{m = 1}^M \frac{1}{N} \sum_{n = 1}^N \left( z_{nm} - \mean z_m \right)^2 \nonumber\\
+        & \left(\text{where } \mean z_m = \frac{1}{N} \sum_{n = 1}^N z_{nm} \right) \label{eqn:models-pca-dataMean} \\
+        &= \frac{1}{N} \sum_{m = 1}^M \sum_{n = 1}^N \left( z_{nm}^2 - 2 z_{nm} \bar z_m + \bar z_m^2 \right) \nonumber\\
+        &= \frac{1}{N} \sum_{m = 1}^M \sum_{n = 1}^N \left( \left(\vec u_m^T \vec x_n \right)^2 - 2 \left(\vec u_m^T \vec x_n\right) \left(\vec u_m^T \bar{\vec x}\right) + \left( \vec u_m^T \bar{\vec x} \right)^2 \right), \text{where } \bar{\vec x} = \frac{1}{N} \sum_{n = 1}^N \vec x_n \nonumber\\
+        &= \sum_{m = 1}^M \vec u_m^T \left( \frac{1}{N} \sum_{n = 1}^N \vec x_n \vec x_n^T - 2 \vec x_n \bar{\vec x}^T + \bar{\vec x} \bar{\vec x}^T \right) \vec u_m \nonumber\\
+        &= \sum_{m = 1}^M \vec u_m^T \left( \frac{1}{N} \sum_{n = 1}^N (\vec x_n - \bar{\vec x})(\vec x_n - \bar{\vec x})^T \right) \vec u_m \nonumber\\
+        &= \sum_{m = 1}^M \vec u_m^T \vec S \vec u_m \label{eqn:models-pca-totalVariance}\\
+        &\left( \text{where } \vec S = \frac{1}{N} \sum_{n = 1}^N (\vec x_n - \bar{\vec x})(\vec x_n - \bar{\vec x})^T \right) \label{eqn:models-pca-dataCov}
+\end{align}
+
 We want to maximise this with the constraint $\|\vec u_m\| = 1, m = 1, \dotsc, M$ which is equivalent to $\vec u_m^T \vec u_m = 1, m = 1, \dotsc, M$. We use Lagrange multipliers $\vec \lambda = (\lambda_1, \dotsc, \lambda_M)$. Hence we need to maximise the following Lagrangian
 \begin{equation*}
     \mathcal L(\vec \lambda, \vec u_1, \dotsc, \vec u_M) = \sum_{m = 1}^M \vec u_m^T \vec S \vec u_m + \vec \lambda^T
@@ -38,7 +41,7 @@ We know that $\vec S$ is positive semi-definite because it is a covariance matri
     \grad_{\vec u_m}{\mathcal L}        &= \vec 0, m = 1, \dotsc, M \label{eqn:gradU}
 \end{align}
 
-From \eqref{eqn:gradLambda}, we obtain $\vec u_m^T \vec u-m = 1, m = 1, \dotsc, M$. From \eqref{eqn:gradU}, we obtain
+From \eqref{eqn:gradLambda}, we obtain $\vec u_m^T \vec u_m = 1, m = 1, \dotsc, M$. From \eqref{eqn:gradU}, we obtain
 \begin{align}
     \grad_{\vec u_m}{\mathcal L}    &= 2 \vec S \vec u_m - 2 \lambda_m \vec u_m \\
                                     &= 0 \\
@@ -49,4 +52,48 @@ Thus we can see that $\{\vec u_m\}$ should be selected to be the eigenvectors co
     V = \sum_{m = 1}^M \lambda_m
 \end{equation*}
 from which we can see that to maximise, we set $\{\lambda_m\}$ to be the largest $M$ eigenvalues of $\vec S$. The principal components $\{\vec u_m\}$ are the corresponding eigenvectors.
+
 \subsection{Probabilistic PCA}
+Following the mixture model, where $\vec Z = \left\{\vec z_n, \vec z_n \in \mathbb R^M\right\}$, $n = 1, \dotsc, N$ are the latent variables and $\vec X = \left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}$, $n = 1, \dotsc, N$ are the observed variables, probabilistic PCA assumes $\mathbb R^M$ is the lower-dimensional space we want to project our data in $\mathbb R^D$ to. We have the following assumtions:
+\begin{align*}
+    p(\vec z)               &= \Gauss(\vec z; \vec 0, \vec I) \\
+    p(\vec x \mid \vec z)   &= \Gauss(\vec x; \vec W \vec z + \vec \mu, \sigma^2 \vec I)
+\end{align*}
+where $\vec 0, \vec I, \vec W, \vec \mu, \vec I$ all have the appropriate dimensions. Following Subsection~\ref{ssec:prob-gaussian-lingauss}, we can express the remaining marginal and conditional as
+\begin{align*}
+    p(\vec x)               &= \Gauss(\vec x; \vec \mu, \vec C) \\
+    p(\vec z \mid \vec x)   &= \Gauss(\vec z; \vec M^{-1} \vec W^T (\vec x - \vec \mu), \sigma^2 \vec M^{-1})
+\end{align*}
+where
+\begin{align*}
+    \vec C      &= \vec W \vec W^T + \sigma^2 \vec I \\
+    \vec M      &= \vec W^T \vec W + \sigma^2 \vec I
+\end{align*}
+
+\subsubsection{MLE for probabilistic PCA}
+To find ML estimates for our model, we want to maximise the following likelihood function:
+\begin{align*}
+    p(\mathcal D \mid \vec \theta)  &= \prod_{n = 1}^N p(\vec x_n \mid \vec \theta) \\
+                                    &= \prod_{n = 1}^N \Gauss(\vec x_n ; \vec \mu, \vec C)
+\end{align*}
+
+Maximising this w.r.t. the parameters $\vec W$ and $\sigma^2$, we get the following MLEs:
+\begin{align*}
+    \vec W_{ML}     &= \vec U_M \left(\vec L_M - \sigma^2 \vec I \right)^{1 / 2} \vec R \\
+    \sigma^2_{ML}   &= \frac{1}{D - M} \sum_{i = M + 1}^D \lambda_i
+\end{align*}
+where $\vec R, \vec R \in \mathbb R^{M \times M}, \vec R \vec R^T = \vec I$ is an arbitrary orthogonal matrix and
+\begin{align*}
+    \vec U_M    &= \left[\vec u_1, \dotsc, \vec u_M \right] \\
+    \vec L_M    &= \diag(\lambda_1, \dotsc, \lambda_M)
+\end{align*}
+where $\vec u_1, \dotsc, \vec u_D$ and $\lambda_1, \dotsc, \lambda_D$ are eigenvectors and eigenvalues of the data covariance matrix $\vec S$ (defined below in \eqref{eqn:models-pca-dataCov}), sorted in descending order.
+
+\subsubsection{Other stuff to note}
+\paragraph{Alternative view.} fdsaf a
+\paragraph{Intuitive view.} fsda 
+\paragraph{Redundancy in parameterisation.} f ds
+\paragraph{Computational complexity.}  fsdaf 
+
+\subsubsection{EM algorithm for probabilistic PCA} 
+\subsubsection{Bayesian PCA}

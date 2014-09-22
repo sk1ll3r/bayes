@@ -1,0 +1,19 @@
+\section{Gaussian distribution}
+\subsection{Linear Gaussian model}
+\label{ssec:prob-gaussian-lingauss}
+Given the marginal and conditional distributions to be
+\begin{align}
+    p(\vec x)               &= \Gauss(\vec x; \vec \mu, \vec \Lambda^{-1}) \label{eqn:prob-gaussian-lingauss1} \\
+    p(\vec y \mid \vec x)   &= \Gauss(\vec y; \vec A \vec x + \vec b, \vec L^{-1}) \label{eqn:prob-gaussian-lingauss2}
+\end{align}
+the marginal distribution of $\vec y$ and the conditional distribution of $\vec x$ given $\vec y$ are given by
+\begin{align}
+    p(\vec y)               &= \Gauss\left(\vec y; \vec A \vec \mu + \vec b, \vec L^{-1} + \vec A \vec \Lambda^{-1} \vec A^T\right) \label{eqn:prob-gaussian-lingauss3}\\
+    p(\vec x \mid \vec y)   &= \Gauss\left(\vec x; \vec \Sigma\left\{\vec A^T \vec L(\vec y - \vec b) + \vec \Lambda \vec \mu\right\}, \vec \Sigma\right) \label{eqn:prob-gaussian-lingauss4}
+\end{align}
+where
+\begin{equation}
+    \vec \Sigma = \left(\vec \Lambda + \vec A^T \vec L \vec A \right)^{-1} \label{eqn:prob-gaussian-lingauss5}
+\end{equation}
+
+\subsubsection{Why it works}

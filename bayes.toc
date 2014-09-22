@@ -1,105 +1,117 @@
-\contentsline {chapter}{\numberline {1}Probability distributions}{4}{chapter.1}
-\contentsline {section}{\numberline {1.1}Uniform distribution}{4}{section.1.1}
-\contentsline {section}{\numberline {1.2}Beta distribution}{4}{section.1.2}
-\contentsline {section}{\numberline {1.3}Bernoulli distribution}{4}{section.1.3}
-\contentsline {section}{\numberline {1.4}Binomial distribution}{4}{section.1.4}
-\contentsline {section}{\numberline {1.5}Beta-binomial distribution}{4}{section.1.5}
-\contentsline {section}{\numberline {1.6}Categorical distribution}{4}{section.1.6}
-\contentsline {section}{\numberline {1.7}Dirichlet distribution}{4}{section.1.7}
-\contentsline {section}{\numberline {1.8}Multinomial distribution}{4}{section.1.8}
-\contentsline {section}{\numberline {1.9}Pareto distribution}{4}{section.1.9}
-\contentsline {chapter}{\numberline {2}Bayesian parameter estimation}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}Beta-Bernoulli model}{5}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Summary}{5}{subsection.2.1.1}
-\contentsline {paragraph}{\nonumberline The model}{5}{section*.2}
-\contentsline {paragraph}{\nonumberline Likelihood}{5}{section*.3}
-\contentsline {paragraph}{\nonumberline Prior}{5}{section*.4}
-\contentsline {paragraph}{\nonumberline Posterior}{5}{section*.5}
-\contentsline {paragraph}{\nonumberline Posterior predictive}{5}{section*.6}
-\contentsline {paragraph}{\nonumberline Evidence}{5}{section*.7}
-\contentsline {subsection}{\numberline {2.1.2}Derivations}{5}{subsection.2.1.2}
-\contentsline {section}{\numberline {2.2}Beta-binomial model}{5}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Summary}{5}{subsection.2.2.1}
-\contentsline {paragraph}{\nonumberline The model}{5}{section*.8}
-\contentsline {paragraph}{\nonumberline Likelihood}{6}{section*.9}
-\contentsline {paragraph}{\nonumberline Prior}{6}{section*.10}
-\contentsline {paragraph}{\nonumberline Posterior}{6}{section*.11}
-\contentsline {paragraph}{\nonumberline Posterior predictive}{6}{section*.12}
-\contentsline {paragraph}{\nonumberline Evidence}{6}{section*.13}
-\contentsline {subsection}{\numberline {2.2.2}Derivations}{6}{subsection.2.2.2}
-\contentsline {section}{\numberline {2.3}Dirichlet-categorical model}{6}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Summary}{6}{subsection.2.3.1}
-\contentsline {paragraph}{\nonumberline The model}{6}{section*.14}
-\contentsline {paragraph}{\nonumberline Likelihood}{6}{section*.15}
-\contentsline {paragraph}{\nonumberline Prior}{6}{section*.16}
-\contentsline {paragraph}{\nonumberline Posterior}{7}{section*.17}
-\contentsline {paragraph}{\nonumberline Posterior predictive}{7}{section*.18}
-\contentsline {paragraph}{\nonumberline Evidence}{7}{section*.19}
-\contentsline {subsection}{\numberline {2.3.2}Derivations}{7}{subsection.2.3.2}
-\contentsline {section}{\numberline {2.4}Dirichlet-multinomial model}{7}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Summary}{7}{subsection.2.4.1}
-\contentsline {paragraph}{\nonumberline The model}{7}{section*.20}
-\contentsline {paragraph}{\nonumberline Likelihood}{7}{section*.21}
-\contentsline {paragraph}{\nonumberline Prior}{7}{section*.22}
-\contentsline {paragraph}{\nonumberline Posterior}{7}{section*.23}
-\contentsline {paragraph}{\nonumberline Posterior predictive}{8}{section*.24}
-\contentsline {paragraph}{\nonumberline Evidence}{8}{section*.25}
-\contentsline {subsection}{\numberline {2.4.2}Derivations}{8}{subsection.2.4.2}
-\contentsline {section}{\numberline {2.5}Poisson-gamma model}{8}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Summary}{8}{subsection.2.5.1}
-\contentsline {paragraph}{\nonumberline The model}{8}{section*.26}
-\contentsline {paragraph}{\nonumberline Likelihood}{8}{section*.27}
-\contentsline {paragraph}{\nonumberline Prior}{8}{section*.28}
-\contentsline {paragraph}{\nonumberline Posterior}{8}{section*.29}
-\contentsline {paragraph}{\nonumberline Posterior predictive}{8}{section*.30}
-\contentsline {paragraph}{\nonumberline Evidence}{8}{section*.31}
-\contentsline {subsection}{\numberline {2.5.2}Derivations}{8}{subsection.2.5.2}
-\contentsline {chapter}{\numberline {3}Advanced models}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Gaussian mixture model}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Factor analysis}{9}{section.3.2}
-\contentsline {section}{\numberline {3.3}Hidden Markov model}{9}{section.3.3}
-\contentsline {section}{\numberline {3.4}Linear regression}{9}{section.3.4}
-\contentsline {section}{\numberline {3.5}Logistic regression}{9}{section.3.5}
-\contentsline {section}{\numberline {3.6}Latent Dirichlet allocation}{9}{section.3.6}
-\contentsline {section}{\numberline {3.7}Linear dynamical systems}{9}{section.3.7}
-\contentsline {section}{\numberline {3.8}Principal components analysis}{9}{section.3.8}
-\contentsline {subsection}{\numberline {3.8.1}Classical PCA}{9}{subsection.3.8.1}
-\contentsline {subsection}{\numberline {3.8.2}Probabilistic PCA}{11}{subsection.3.8.2}
-\contentsline {section}{\numberline {3.9}Independent components analysis}{11}{section.3.9}
-\contentsline {chapter}{\numberline {4}Sampling algorithms}{12}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introduction}{12}{section.4.1}
-\contentsline {section}{\numberline {4.2}Rejection sampling}{12}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Why it works?}{12}{subsection.4.2.1}
-\contentsline {section}{\numberline {4.3}Importance sampling}{13}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Convergence of estimator as $R$ increases}{14}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Optimal proposal distribution}{14}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Sampling importance resampling}{15}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Why it works?}{15}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Particle filtering}{16}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Sequential importance sampling (SIS)}{16}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}The degeneracy problem}{18}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}The resampling step}{19}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}Particle filter animation}{21}{subsection.4.5.4}
-\contentsline {subsection}{\numberline {4.5.5}The proposal distribution}{22}{subsection.4.5.5}
-\contentsline {section}{\numberline {4.6}Sequential Monte Carlo}{23}{section.4.6}
-\contentsline {section}{\numberline {4.7}Markov chain Monte Carlo methods}{24}{section.4.7}
-\contentsline {subsection}{\numberline {4.7.1}Definitions}{24}{subsection.4.7.1}
-\contentsline {subsection}{\numberline {4.7.2}Metropolis Hastings algorithm}{27}{subsection.4.7.2}
-\contentsline {subsubsection}{\nonumberline Why it works?}{27}{section*.32}
-\contentsline {subsection}{\numberline {4.7.3}Gibbs sampling}{28}{subsection.4.7.3}
-\contentsline {subsubsection}{\nonumberline Why it works?}{28}{section*.33}
-\contentsline {section}{\numberline {4.8}Particle Markov Chain Monte Carlo}{28}{section.4.8}
-\contentsline {subsection}{\numberline {4.8.1}Particle independent Metropolis Hastings (PIMH) sampler}{28}{subsection.4.8.1}
-\contentsline {subsection}{\numberline {4.8.2}Particle marginal Metropolis Hastings (PMMH) sampler}{29}{subsection.4.8.2}
-\contentsline {subsection}{\numberline {4.8.3}Particle Gibbs (PG) sampler}{31}{subsection.4.8.3}
-\contentsline {subsubsection}{\nonumberline Conditional SMC update}{31}{section*.34}
-\contentsline {subsubsection}{\nonumberline Particle Gibbs sampler}{32}{section*.35}
-\contentsline {chapter}{\numberline {5}Nonparametric Bayesian models}{33}{chapter.5}
-\contentsline {section}{\numberline {5.1}Gaussian process}{33}{section.5.1}
-\contentsline {section}{\numberline {5.2}Dirichlet process}{33}{section.5.2}
-\contentsline {section}{\numberline {5.3}Chinese restaurant process}{33}{section.5.3}
-\contentsline {section}{\numberline {5.4}Hierarchical Dirichlet process}{33}{section.5.4}
-\contentsline {section}{\numberline {5.5}Hierarchical Dirichlet process}{33}{section.5.5}
-\contentsline {section}{\numberline {5.6}Indian buffet process}{33}{section.5.6}
-\contentsline {section}{\numberline {5.7}Dirichlet diffusion trees}{33}{section.5.7}
-\contentsline {section}{\numberline {5.8}Pitman-Yor process}{33}{section.5.8}
+\contentsline {chapter}{\numberline {1}Notation}{4}{chapter.1}
+\contentsline {chapter}{\numberline {2}Probability distributions}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Uniform distribution}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Beta distribution}{5}{section.2.2}
+\contentsline {section}{\numberline {2.3}Bernoulli distribution}{5}{section.2.3}
+\contentsline {section}{\numberline {2.4}Binomial distribution}{5}{section.2.4}
+\contentsline {section}{\numberline {2.5}Beta-binomial distribution}{5}{section.2.5}
+\contentsline {section}{\numberline {2.6}Categorical distribution}{5}{section.2.6}
+\contentsline {section}{\numberline {2.7}Dirichlet distribution}{5}{section.2.7}
+\contentsline {section}{\numberline {2.8}Multinomial distribution}{5}{section.2.8}
+\contentsline {section}{\numberline {2.9}Pareto distribution}{5}{section.2.9}
+\contentsline {section}{\numberline {2.10}Gaussian distribution}{5}{section.2.10}
+\contentsline {subsection}{\numberline {2.10.1}Linear Gaussian model}{5}{subsection.2.10.1}
+\contentsline {subsubsection}{\nonumberline Why it works}{5}{section*.2}
+\contentsline {chapter}{\numberline {3}Bayesian parameter estimation}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Beta-Bernoulli model}{6}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Summary}{6}{subsection.3.1.1}
+\contentsline {paragraph}{\nonumberline The model}{6}{section*.3}
+\contentsline {paragraph}{\nonumberline Likelihood}{6}{section*.4}
+\contentsline {paragraph}{\nonumberline Prior}{6}{section*.5}
+\contentsline {paragraph}{\nonumberline Posterior}{6}{section*.6}
+\contentsline {paragraph}{\nonumberline Posterior predictive}{6}{section*.7}
+\contentsline {paragraph}{\nonumberline Evidence}{6}{section*.8}
+\contentsline {subsection}{\numberline {3.1.2}Derivations}{6}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Beta-binomial model}{6}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Summary}{6}{subsection.3.2.1}
+\contentsline {paragraph}{\nonumberline The model}{6}{section*.9}
+\contentsline {paragraph}{\nonumberline Likelihood}{7}{section*.10}
+\contentsline {paragraph}{\nonumberline Prior}{7}{section*.11}
+\contentsline {paragraph}{\nonumberline Posterior}{7}{section*.12}
+\contentsline {paragraph}{\nonumberline Posterior predictive}{7}{section*.13}
+\contentsline {paragraph}{\nonumberline Evidence}{7}{section*.14}
+\contentsline {subsection}{\numberline {3.2.2}Derivations}{7}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Dirichlet-categorical model}{7}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Summary}{7}{subsection.3.3.1}
+\contentsline {paragraph}{\nonumberline The model}{7}{section*.15}
+\contentsline {paragraph}{\nonumberline Likelihood}{7}{section*.16}
+\contentsline {paragraph}{\nonumberline Prior}{7}{section*.17}
+\contentsline {paragraph}{\nonumberline Posterior}{8}{section*.18}
+\contentsline {paragraph}{\nonumberline Posterior predictive}{8}{section*.19}
+\contentsline {paragraph}{\nonumberline Evidence}{8}{section*.20}
+\contentsline {subsection}{\numberline {3.3.2}Derivations}{8}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Dirichlet-multinomial model}{8}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Summary}{8}{subsection.3.4.1}
+\contentsline {paragraph}{\nonumberline The model}{8}{section*.21}
+\contentsline {paragraph}{\nonumberline Likelihood}{8}{section*.22}
+\contentsline {paragraph}{\nonumberline Prior}{8}{section*.23}
+\contentsline {paragraph}{\nonumberline Posterior}{8}{section*.24}
+\contentsline {paragraph}{\nonumberline Posterior predictive}{9}{section*.25}
+\contentsline {paragraph}{\nonumberline Evidence}{9}{section*.26}
+\contentsline {subsection}{\numberline {3.4.2}Derivations}{9}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Poisson-gamma model}{9}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Summary}{9}{subsection.3.5.1}
+\contentsline {paragraph}{\nonumberline The model}{9}{section*.27}
+\contentsline {paragraph}{\nonumberline Likelihood}{9}{section*.28}
+\contentsline {paragraph}{\nonumberline Prior}{9}{section*.29}
+\contentsline {paragraph}{\nonumberline Posterior}{9}{section*.30}
+\contentsline {paragraph}{\nonumberline Posterior predictive}{9}{section*.31}
+\contentsline {paragraph}{\nonumberline Evidence}{9}{section*.32}
+\contentsline {subsection}{\numberline {3.5.2}Derivations}{9}{subsection.3.5.2}
+\contentsline {chapter}{\numberline {4}Advanced models}{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}Gaussian mixture model}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}Hidden Markov model}{10}{section.4.2}
+\contentsline {section}{\numberline {4.3}Linear regression}{10}{section.4.3}
+\contentsline {section}{\numberline {4.4}Logistic regression}{10}{section.4.4}
+\contentsline {section}{\numberline {4.5}Latent Dirichlet allocation}{10}{section.4.5}
+\contentsline {section}{\numberline {4.6}Linear dynamical systems}{10}{section.4.6}
+\contentsline {section}{\numberline {4.7}Principal components analysis}{10}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}Classical PCA}{10}{subsection.4.7.1}
+\contentsline {subsection}{\numberline {4.7.2}Probabilistic PCA}{12}{subsection.4.7.2}
+\contentsline {subsubsection}{\nonumberline MLE for probabilistic PCA}{12}{section*.33}
+\contentsline {subsubsection}{\nonumberline Other stuff to note}{13}{section*.34}
+\contentsline {paragraph}{\nonumberline Alternative view.}{13}{section*.35}
+\contentsline {paragraph}{\nonumberline Intuitive view.}{13}{section*.36}
+\contentsline {paragraph}{\nonumberline Redundancy in parameterisation.}{13}{section*.37}
+\contentsline {paragraph}{\nonumberline Computational complexity.}{13}{section*.38}
+\contentsline {subsubsection}{\nonumberline EM algorithm for probabilistic PCA}{13}{section*.39}
+\contentsline {subsubsection}{\nonumberline Bayesian PCA}{13}{section*.40}
+\contentsline {section}{\numberline {4.8}Factor analysis}{13}{section.4.8}
+\contentsline {section}{\numberline {4.9}Independent components analysis}{13}{section.4.9}
+\contentsline {chapter}{\numberline {5}Sampling algorithms}{14}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introduction}{14}{section.5.1}
+\contentsline {section}{\numberline {5.2}Rejection sampling}{14}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Why it works?}{14}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}Importance sampling}{15}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Convergence of estimator as $R$ increases}{16}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Optimal proposal distribution}{16}{subsection.5.3.2}
+\contentsline {section}{\numberline {5.4}Sampling importance resampling}{17}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Why it works?}{17}{subsection.5.4.1}
+\contentsline {section}{\numberline {5.5}Particle filtering}{18}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Sequential importance sampling (SIS)}{18}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}The degeneracy problem}{20}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}The resampling step}{21}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}Particle filter animation}{23}{subsection.5.5.4}
+\contentsline {subsection}{\numberline {5.5.5}The proposal distribution}{24}{subsection.5.5.5}
+\contentsline {section}{\numberline {5.6}Sequential Monte Carlo}{25}{section.5.6}
+\contentsline {section}{\numberline {5.7}Markov chain Monte Carlo methods}{26}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Definitions}{26}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Metropolis Hastings algorithm}{29}{subsection.5.7.2}
+\contentsline {subsubsection}{\nonumberline Why it works?}{29}{section*.41}
+\contentsline {subsection}{\numberline {5.7.3}Gibbs sampling}{30}{subsection.5.7.3}
+\contentsline {subsubsection}{\nonumberline Why it works?}{30}{section*.42}
+\contentsline {section}{\numberline {5.8}Particle Markov Chain Monte Carlo}{30}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Particle independent Metropolis Hastings (PIMH) sampler}{30}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Particle marginal Metropolis Hastings (PMMH) sampler}{31}{subsection.5.8.2}
+\contentsline {subsection}{\numberline {5.8.3}Particle Gibbs (PG) sampler}{33}{subsection.5.8.3}
+\contentsline {subsubsection}{\nonumberline Conditional SMC update}{33}{section*.43}
+\contentsline {subsubsection}{\nonumberline Particle Gibbs sampler}{34}{section*.44}
+\contentsline {chapter}{\numberline {6}Nonparametric Bayesian models}{35}{chapter.6}
+\contentsline {section}{\numberline {6.1}Gaussian process}{35}{section.6.1}
+\contentsline {section}{\numberline {6.2}Dirichlet process}{35}{section.6.2}
+\contentsline {section}{\numberline {6.3}Chinese restaurant process}{35}{section.6.3}
+\contentsline {section}{\numberline {6.4}Hierarchical Dirichlet process}{35}{section.6.4}
+\contentsline {section}{\numberline {6.5}Hierarchical Dirichlet process}{35}{section.6.5}
+\contentsline {section}{\numberline {6.6}Indian buffet process}{35}{section.6.6}
+\contentsline {section}{\numberline {6.7}Dirichlet diffusion trees}{35}{section.6.7}
+\contentsline {section}{\numberline {6.8}Pitman-Yor process}{35}{section.6.8}
