@@ -1,0 +1,35 @@
+\section{Mixture models}
+In mixture models, we have discrete latent states $\left\{z_n, z_n \in \{1, \dotsc, K\}\right\}, n = 1, \dotsc, N$ and observed states $\left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \dotsc, N$. We set the priors and the class conditional likelihoods to be $p(z_n) = \Cat(\vec \pi), \vec \pi = (\pi_1, \dotsc, \pi_K)$ and $p(\vec x_n \mid z_n; \vec \theta) = p_k(\vec x_n \mid \vec \theta)$. We can thus express the likelihood of the observed variables to be:
+\begin{align}
+    p(\vec x_n \mid \vec \theta)    &= \sum_{k = 1}^K p(\vec x_n, z_n; \vec \theta) \nonumber\\
+                                    &= \sum_{k = 1}^K p(\vec x_n \mid z_n = k; \vec \theta) p(z_n = k \mid \vec \theta) \nonumber\\
+                                    &= \sum_{k = 1}^K \pi_k p_k(\vec x_n \mid \vec \theta) \label{eqn:models-mm-lik}
+\end{align}
+
+We can also express the posterior probability that point $n$ belongs to cluster $k$, or the \emph{responsibility} $r_{nk}$ of cluster $k$ for point $n$ to be:
+\begin{align}
+    r_{nk}  &\triangleq p(z_n = k \mid \vec x_n; \vec \theta) \nonumber\\
+            &= \frac{p(\vec x_n \mid z_n = k; \vec \theta) p(z_n = k \mid \vec \theta)}{\sum_{k' = 1}^K p(\vec x_n \mid z_n = k'; \vec \theta) p(z_n = k' \mid \vec \theta)}
+\end{align}
+
+Evaluating the above is called \emph{soft clustering}. \emph{Hard clustering} finds the MAP estimate as follows:
+\begin{align}
+    z_n^\ast    &= \argmax_k r_{nk} \nonumber\\
+                &= \argmax_k \left\{\log p(\vec x_n \mid z_n = k; \vec \theta) + \log(z_n = k \mid \vec \theta)\right\}
+\end{align}
+
+\emph{Unidentifiability} refers to the fact that the posterior distribution for the parameter $p(\vec \theta \mid \mathcal D)$ can be multimodal (with equal peaks) and hence cant find a unique ML/MAP estimate.
+
+We distinguish between two log likelihoods -- log likelihood for the observed data, denoted by $\ell(\vec \theta)$ and log likelihood for complete data, denoted by $\ell_c(\vec \theta)$. These two quantities can be expressed as:
+\begin{align}
+    \ell(\vec \theta)   &\triangleq \log p(\mathcal D \mid \vec \theta) \nonumber\\
+                        &= \log \prod_{n = 1}^N p(\vec x_n \mid \vec \theta)\nonumber\\
+                        &= \log \left\{\prod_{n = 1}^N \sum_{k = 1}^K p(\vec x_n, z_n = k \mid \vec \theta)\right\} \nonumber\\
+                        &= \sum_{n = 1}^N \log \sum_{k = 1}^K p(\vec x_n, z_n = k \mid \vec \theta)\\
+    \ell_c(\vec \theta) &\triangleq \log p\left(\{\vec x_n, z_n\} \mid \vec \theta\right) \nonumber\\
+                        &= \log \prod_n p(\vec x_n, z_n \mid \vec \theta) \nonumber\\
+                        &= \sum_n \log p(\vec x_n, z_n \mid \vec \theta)
+\end{align}
+The log likelihood for observed data, $\ell(\vec \theta)$ can't be guaranteed to be convex so it's hard to find ML/MAP estimates.
+\subsection{Gaussian mixture model}
+\subsection{EM algorithm}
