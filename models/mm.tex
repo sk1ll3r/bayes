@@ -1,5 +1,5 @@
 \section{Mixture models}
-In mixture models, we have discrete latent states $\vec Z = \left\{z_n, z_n \in \{1, \dotsc, K\}\right\}, n = 1, \dotsc, N$ and observed states $\vec X = \left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \dotsc, N$. We set the priors and the class conditional likelihoods to be $p(z_n) = \Cat(\vec \pi), \vec \pi = (\pi_1, \dotsc, \pi_K)$ and $p(\vec x_n \mid z_n; \vec \theta) = p_k(\vec x_n \mid \vec \theta)$. We can thus express the likelihood of the observed variables to be:
+In mixture models, we have discrete latent states $\vec Z = \left\{z_n, z_n \in \{1, \dotsc, K\}\right\}, n = 1, \dotsc, N$ and observed states $\vec X = \left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \dotsc, N$. We set the priors and the class conditional likelihoods to be $p(z_n) = \Cat(\vec \pi), \vec \pi = (\pi_1, \dotsc, \pi_K)$ and $p(\vec x_n \mid z_n = k; \vec \theta) = p_k(\vec x_n \mid \vec \theta)$. We can thus express the likelihood of the observed variables to be:
 \begin{align}
     p(\vec x_n \mid \vec \theta)    &= \sum_{k = 1}^K p(\vec x_n, z_n = k; \vec \theta) \nonumber\\
                                     &= \sum_{k = 1}^K p(\vec x_n \mid z_n = k; \vec \theta) p(z_n = k \mid \vec \theta) \nonumber\\
@@ -33,6 +33,7 @@ We distinguish between two log likelihoods -- log likelihood for the observed da
 The log likelihood for observed data, $\ell(\vec \theta)$ can't be guaranteed to be convex so it might be intractable to find ML/MAP estimates. Alternatively, we just express these terms as $\ell(\vec \theta) = \log p(\vec X \mid \vec \theta)$ and $\ell_c(\vec \theta) = \log p (\vec X, \vec Z \mid \vec \theta)$.
 
 \subsection{EM algorithm}
+\subsubsection{Maximise the likelihood}
 Goal is to maximise 
 $$p(\vec X \mid \vec \theta)$$
 Assume it's easy to maximise
@@ -61,7 +62,7 @@ because
 \end{align*}
 
 The actual algorithm is as follows
-\begin{algorithmbis}[EM algorithm]\label{alg:em}
+\begin{algorithmbis}[EM algorithm for maximising the likelihood]\label{alg:em}
     \begin{algorithmic}[1]
         \State Initialise $\vec \theta^{\text{new}}$.
         \Repeat
@@ -81,5 +82,47 @@ The actual algorithm is as follows
                                             &= \sum_{\vec Z} p\left(\vec Z \mid \vec X; \vec \theta^{\text{old}}\right) \ln p\left(\vec X, \vec Z \mid \vec \theta\right) - \sum_{\vec Z} p\left(\vec Z \mid \vec X; \vec \theta^{\text{old}}\right) \ln p\left(\vec Z \mid \vec X; \vec \theta^{\text{old}}\right) \\
                                             &= \mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) + \text{constant w.r.t. } \vec \theta
 \end{align*}
-from which we can see that we should maximise $\mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right)$.
+from which we can see that we should maximise $\mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right)$. In both steps, the value of $\mathcal L(q, \vec \theta)$ increases.
+
+\subsubsection{Maximising the posterior}
+Goal is to maximise
+\begin{equation*}
+    p(\vec \theta \mid \vec X)
+\end{equation*}
+Assume it's easy to maximise
+\begin{equation}
+    \mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) + \ln p(\vec \theta)
+\end{equation}
+w.r.t. $\vec \theta$.
+
+We can express $\ln p(\vec \theta \mid \vec X)$ as
+\begin{align}
+    \ln p(\vec \theta \mid \vec X)  &= \ln p(\vec X \mid \vec \theta) + \ln p(\vec \theta) - \ln p(\vec X) \nonumber\\
+                                    &= \mathcal L(q, \vec \theta) + \KL(q \parallel p) + \ln p(\vec \theta) - \ln p(\vec X)
+\end{align}
+
+\paragraph{E step.} Here, we perform the same thing as in maximising the likelihood, with the same reasons.
+\paragraph{M step.} Hold $q(\vec Z) = p(\vec Z \mid \vec X; \vec \theta^{\text{old}})$ fixed, maximise $\mathcal L\left(q, \vec \theta\right) + \ln p(\vec \theta)$ w.r.t. $\vec \theta$ to get $\vec \theta^{\text{new}}$. We can rewrite $\mathcal L\left(q, \vec \theta\right) + \ln p(\vec \theta)$ as
+\begin{align*}
+    \mathcal L\left(q, \vec \theta\right) + \ln p(\vec \theta)  &= \mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) + \ln p(\vec \theta) + \text{constant w.r.t. } \vec \theta
+\end{align*}
+from which we can see that we should maximise $\mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) + \ln p(\vec \theta)$. In both steps, the value of $\mathcal L(q, \vec \theta) + \ln p(\vec \theta)$ increases.
+
+The actual algorithm is as follows
+\begin{algorithmbis}[EM algorithm for maximising the posterior]\label{alg:em-post}
+    \begin{algorithmic}[1]
+        \State Initialise $\vec \theta^{\text{new}}$.
+        \Repeat
+            \State $\vec \theta^{\text{old}} \gets \vec \theta^{\text{new}}$
+            \State E step: Set $q(\vec Z) = p\left(\vec Z \mid \vec X, \vec \theta^{\text{old}}\right)$.
+            \State M step: Hold $q(\vec Z)$ fixed and maximise $\mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) + \ln p(\vec \theta)$ w.r.t. $\vec \theta$ to get $\vec \theta^{\text{new}}$.
+        \Until{convergence.}
+    \end{algorithmic}
+\end{algorithmbis}
+
 \subsection{Gaussian mixture model}
+Gaussian mixture model, a.k.a. GMM, or mixture of Gaussians is a mixture model where
+\begin{equation}
+    p_k(\vec x_n \mid \vec \theta) = \Gauss(\vec x_n \mid \vec \mu_k, \vec \Sigma_k)
+\end{equation}
+where $\vec \theta = \left(\left\{\vec \mu_k, \vec \Sigma_k\right\}, k = 1, \dotsc, K\right)$.
