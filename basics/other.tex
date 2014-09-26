@@ -1,0 +1,17 @@
+\section{Other}
+\subsection{Kullback-Leibler divergence}
+A.k.a. \emph{KL divergence}, or \emph{relative enropy}. KL divergence between the distributions $p(\vec x)$ and $q(\vec x)$ for $\vec x \in \mathcal X$, denoted $\KL(p \parallel q)$ or $\KL(p, q)$, is a measure of similarity between $p$ and $q$ and is given by
+\begin{align}
+    \KL(p \parallel q)  &= -\int_{\mathcal X} p(\vec x) \ln q(\vec x) \,\mathrm d\vec x - \left(-\int_{\mathcal X} p(\vec x) \ln p(\vec x) \,\mathrm d\vec x\right) \nonumber\\
+                        &= -\int_{\mathcal X} p(\vec x) \ln \frac{q(\vec x)}{p(\vec x)} \,\mathrm d\vec x
+\end{align}
+
+Note that $\KL(p \parallel q) \not\equiv \KL(q \parallel p)$.
+
+\begin{claim}
+    $\KL(p \parallel q) \geq 0$ with equality if and only if $p(\vec x) = q(\vec x)$.
+\end{claim}
+
+\begin{proof}
+    asdf
+\end{proof}

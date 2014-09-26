@@ -1,7 +1,7 @@
 \section{Mixture models}
-In mixture models, we have discrete latent states $\left\{z_n, z_n \in \{1, \dotsc, K\}\right\}, n = 1, \dotsc, N$ and observed states $\left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \dotsc, N$. We set the priors and the class conditional likelihoods to be $p(z_n) = \Cat(\vec \pi), \vec \pi = (\pi_1, \dotsc, \pi_K)$ and $p(\vec x_n \mid z_n; \vec \theta) = p_k(\vec x_n \mid \vec \theta)$. We can thus express the likelihood of the observed variables to be:
+In mixture models, we have discrete latent states $\vec Z = \left\{z_n, z_n \in \{1, \dotsc, K\}\right\}, n = 1, \dotsc, N$ and observed states $\vec X = \left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}, n = 1, \dotsc, N$. We set the priors and the class conditional likelihoods to be $p(z_n) = \Cat(\vec \pi), \vec \pi = (\pi_1, \dotsc, \pi_K)$ and $p(\vec x_n \mid z_n; \vec \theta) = p_k(\vec x_n \mid \vec \theta)$. We can thus express the likelihood of the observed variables to be:
 \begin{align}
-    p(\vec x_n \mid \vec \theta)    &= \sum_{k = 1}^K p(\vec x_n, z_n; \vec \theta) \nonumber\\
+    p(\vec x_n \mid \vec \theta)    &= \sum_{k = 1}^K p(\vec x_n, z_n = k; \vec \theta) \nonumber\\
                                     &= \sum_{k = 1}^K p(\vec x_n \mid z_n = k; \vec \theta) p(z_n = k \mid \vec \theta) \nonumber\\
                                     &= \sum_{k = 1}^K \pi_k p_k(\vec x_n \mid \vec \theta) \label{eqn:models-mm-lik}
 \end{align}
@@ -30,6 +30,56 @@ We distinguish between two log likelihoods -- log likelihood for the observed da
                         &= \log \prod_n p(\vec x_n, z_n \mid \vec \theta) \nonumber\\
                         &= \sum_n \log p(\vec x_n, z_n \mid \vec \theta)
 \end{align}
-The log likelihood for observed data, $\ell(\vec \theta)$ can't be guaranteed to be convex so it's hard to find ML/MAP estimates.
-\subsection{Gaussian mixture model}
+The log likelihood for observed data, $\ell(\vec \theta)$ can't be guaranteed to be convex so it might be intractable to find ML/MAP estimates. Alternatively, we just express these terms as $\ell(\vec \theta) = \log p(\vec X \mid \vec \theta)$ and $\ell_c(\vec \theta) = \log p (\vec X, \vec Z \mid \vec \theta)$.
+
 \subsection{EM algorithm}
+Goal is to maximise 
+$$p(\vec X \mid \vec \theta)$$
+Assume it's easy to maximise
+\begin{equation}
+    \mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) = \sum_{\vec Z} p\left(\vec Z \mid \vec X, \theta^{\text{old}}\right) \ln p\left(\vec X, \vec Z \mid \vec \theta\right)
+\end{equation}
+w.r.t. $\vec \theta$.
+
+We can express $\ln p(\vec X \mid \vec \theta)$ as
+\begin{equation}
+    \ln p(\vec X \mid \vec \theta) = \mathcal L(q, \vec \theta) + \KL(q \parallel p) \label{eqn:models-mm-lik}
+\end{equation}
+where
+\begin{align}
+    \mathcal L(q, \vec \theta)  &= \sum_{\vec Z} q(\vec Z) \ln \frac{p(\vec X, \vec Z \mid \vec \theta)}{q(\vec Z)} \\
+    \KL(q \parallel p)          &= -\sum_{\vec Z} q(\vec Z) \ln \frac{p(\vec Z \mid \vec X, \vec \theta)}{q(\vec Z)}
+\end{align}
+because
+\begin{align*}
+    \text{RHS}  &= \mathcal L(q, \vec \theta) + \KL(q \parallel p)\\
+                &= \sum_{\vec Z} q(\vec Z) \ln \frac{p(\vec X, \vec Z \mid \vec \theta)}{q(\vec Z)} - \sum_{\vec Z} q(\vec Z) \ln \frac{p(\vec Z \mid \vec X, \vec \theta)}{q(\vec Z)} \\
+                &= \sum_{\vec Z} q(\vec Z) \ln \frac{p(\vec X, \vec Z \mid \vec \theta)}{p(\vec Z \mid \vec X; \vec \theta)} \\
+                &= \sum_{\vec Z} q(\vec Z) \ln p(\vec X \mid \vec \theta) \\
+                &= \ln p(\vec X \mid \vec \theta) \\
+                &= \text{LHS}
+\end{align*}
+
+The actual algorithm is as follows
+\begin{algorithmbis}[EM algorithm]\label{alg:em}
+    \begin{algorithmic}[1]
+        \State Initialise $\vec \theta^{\text{new}}$.
+        \Repeat
+            \State $\vec \theta^{\text{old}} \gets \vec \theta^{\text{new}}$
+            \State E step: Set $q(\vec Z) = p\left(\vec Z \mid \vec X, \vec \theta^{\text{old}}\right)$.
+            \State M step: Hold $q(\vec Z)$ fixed and maximise $\mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right)$ w.r.t. $\vec \theta$ to get $\vec \theta^{\text{new}}$.
+        \Until{convergence.}
+    \end{algorithmic}
+\end{algorithmbis}
+
+\paragraph{E step.} Hold $\vec \theta^{\text{old}}$, maximise $\mathcal L\left(q, \vec \theta^{\text{old}}\right)$ w.r.t. $q$. Since the quantity $\ln p(\vec X \mid \vec \theta)$ in \eqref{eqn:models-mm-lik} is constant w.r.t. $q$, we can maximise $\mathcal L\left(q, \vec \theta^{\text{old}}\right)$ by minimising $\KL(q \parallel p)$. This can be done by setting the $\KL$ to $0$ by setting $q(\vec Z) = p(\vec Z \mid \vec X; \vec \theta^{\text{old}})$.
+
+\paragraph{M step.} Hold $q(\vec Z) = p(\vec Z \mid \vec X; \vec \theta^{\text{old}})$ fixed, maximise $\mathcal L\left(q, \vec \theta\right)$ w.r.t. $\vec \theta$ to get $\vec \theta^{\text{new}}$. We can rewrite $\mathcal L\left(q, \vec \theta\right)$ as
+\begin{align*}
+    \mathcal L\left(q, \vec \theta\right)   &= \sum_{\vec Z} q(\vec Z) \ln \frac{p(\vec X, \vec Z \mid \vec \theta)}{q(\vec Z)} \\
+                                            &= \sum_{\vec Z} q(\vec Z) \ln p\left(\vec X, \vec Z \mid \vec \theta\right) - \sum_{\vec Z} q(\vec Z) \ln q(\vec Z) \\
+                                            &= \sum_{\vec Z} p\left(\vec Z \mid \vec X; \vec \theta^{\text{old}}\right) \ln p\left(\vec X, \vec Z \mid \vec \theta\right) - \sum_{\vec Z} p\left(\vec Z \mid \vec X; \vec \theta^{\text{old}}\right) \ln p\left(\vec Z \mid \vec X; \vec \theta^{\text{old}}\right) \\
+                                            &= \mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right) + \text{constant w.r.t. } \vec \theta
+\end{align*}
+from which we can see that we should maximise $\mathcal Q\left(\vec \theta, \vec \theta^{\text{old}}\right)$.
+\subsection{Gaussian mixture model}

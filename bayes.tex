@@ -53,11 +53,13 @@
 \DeclareMathOperator{\grad}{\mathrm{grad}}
 \newcommand*\mean[1]{\bar{#1}}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\KL}{KL}
 
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}{Proposition}[section]
+\newtheorem{claim}{Claim}[section]
 
 \bibliographystyle{plain}
 
@@ -70,12 +72,11 @@
 \tableofcontents
 
 \input{notation}
-\input{prob}
+\input{basics}
 \input{par-est}
 \input{models}
 \input{sampling}
 \input{np}
-
 
 \bibliography{bibliography}
 
