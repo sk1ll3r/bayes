@@ -54,12 +54,12 @@ Thus we can see that $\{\vec u_m\}$ should be selected to be the eigenvectors co
 from which we can see that to maximise, we set $\{\lambda_m\}$ to be the largest $M$ eigenvalues of $\vec S$. The principal components $\{\vec u_m\}$ are the corresponding eigenvectors.
 
 \subsection{Probabilistic PCA}
-Following the mixture model, where $\vec Z = \left\{\vec z_n, \vec z_n \in \mathbb R^M\right\}$, $n = 1, \dotsc, N$ are the latent variables and $\vec X = \left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}$, $n = 1, \dotsc, N$ are the observed variables, probabilistic PCA assumes $\mathbb R^M$ is the lower-dimensional space we want to project our data in $\mathbb R^D$ to. We have the following assumtions:
+Following the mixture model, where $\vec Z = \left\{\vec z_n, \vec z_n \in \mathbb R^M\right\}$, $n = 1, \dotsc, N$ are the latent variables and $\vec X = \left\{\vec x_n, \vec x_n \in \mathbb R^D\right\}$, $n = 1, \dotsc, N$ are the observed variables, probabilistic PCA assumes $\mathbb R^M$ is the lower-dimensional space we want to project our data in $\mathbb R^D$ to. We have the following assumptions:
 \begin{align*}
     p(\vec z)               &= \Gauss(\vec z; \vec 0, \vec I) \\
     p(\vec x \mid \vec z)   &= \Gauss(\vec x; \vec W \vec z + \vec \mu, \sigma^2 \vec I)
 \end{align*}
-where $\vec 0, \vec I, \vec W, \vec \mu, \vec I$ all have the appropriate dimensions. Following Subsection~\ref{ssec:prob-gaussian-lingauss}, we can express the remaining marginal and conditional as
+where $\vec 0, \vec I, \vec W, \vec \mu, \vec I$ all have the appropriate dimensions. Note that the model is parameterised by $\vec \theta = \left(\vec W, \vec \mu, \sigma^2\right)$. Following Subsection~\ref{ssec:prob-gaussian-lingauss}, we can express the remaining marginal and conditional as
 \begin{align*}
     p(\vec x)               &= \Gauss(\vec x; \vec \mu, \vec C) \\
     p(\vec z \mid \vec x)   &= \Gauss(\vec z; \vec M^{-1} \vec W^T (\vec x - \vec \mu), \sigma^2 \vec M^{-1})
@@ -96,5 +96,28 @@ where $\vec u_1, \dotsc, \vec u_D$ and $\lambda_1, \dotsc, \lambda_D$ are eigenv
 \paragraph{Computational complexity.}  fsdaf 
 
 \subsubsection{EM algorithm for probabilistic PCA}
+The EM algorithm to find MLE for probabilistic PCA is as follows
+\begin{algorithmbis}[EM algorithm for probabilistic PCA]\label{alg:models-pca-em}
+    \begin{algorithmic}[1]
+    \State Initialise $\vec \theta^{\text{new}} = \left(\vec W^{\text{new}}, (\sigma^{\text{new}})^2\right)$. Set $\vec \mu_{MLE} = \bar{\vec x}$.
+        \Repeat
+            \State $\vec \theta^{\text{old}} \gets \vec \theta^{\text{new}}$
+            \State Set \Comment E step
+                \begin{align*}
+                    \E[\vec z_n]                        &= \left(\vec M^{\text{old}}\right)^{-1} \left(\vec W^{\text{old}}\right)^T (\vec x_n - \bar{\vec x}) \\
+                    \E\left[\vec z_n \vec z_n^T\right]  &= \left(\sigma^{\text{old}}\right)^2 \left(\vec M^{\text{old}}\right)^{-1} + \E[\vec z_n]\E[\vec z_n]^T
+                \end{align*}
+                where $\vec M = \vec W^T \vec W + \sigma^2 \vec I$.
+            \State Set \Comment M step
+                \begin{equation}
+                \begin{split}
+                    \vec W^{\text{new}}     =   & \left[\sum_n (\vec x_n - \bar{\vec x})\E[\vec z_n]^T\right]\left[\sum_n \E\left[\vec z_n \vec z_n^T\right]\right]^{-1} \\
+                    (\sigma^{\text{new}})^2 =   & \frac{1}{ND} \sum_n \|\vec x_n - \bar{\vec x}\|^2 - 2\E[\vec z_n]^T\left(\vec W^{\text{new}}\right)^T(\vec x_n - \bar{\vec x}) \\
+                                                & + \Tr\left(\E\left[\vec z_n \vec z_n^T\right] \left(\vec W^{\text{new}}\right)^T \vec W^{\text{new}} \right)
+                \end{split}
+                \end{equation}
+        \Until{convergence.}
+    \end{algorithmic}
+\end{algorithmbis}
 
 \subsubsection{Bayesian PCA}
