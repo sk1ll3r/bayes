@@ -13,7 +13,7 @@
                                                         &= q(\vec x_t \mid \vec x_{1:t - 1}, \vec y_{1:t}; \vec \theta) q(\vec x_{1:t-1} \mid \vec y_{1:t - 1}; \vec \theta) \\
                                                         &= q(\vec x_t \mid \vec x_{t - 1}, \vec y_t; \vec \theta)
     \end{align}
-    If we express the pdf of $p$ for $t = 1, \dotsc, T$ in the form of (for convenience, we drop the conditional dependency on $\vec \theta$):
+    If we express the pdf of $p$ for $t = 1, \dotsc, T$ in the form of (for convenience, we drop the conditional dependence on $\vec \theta$):
     \begin{align}
         p(\vec x_{1:t} \mid \vec y_{1:t})   &= \frac{p(\vec y_{1:t} \mid \vec x_{1:t}) p(\vec x_{1:t})}{p(\vec y_{1:t})} \\
                                             &= \frac{p(\vec y_t \mid \vec x_{1:t}, \vec y_{1:t - 1}) p(\vec y_{1:t - 1} \mid \vec x_{1:t}) p(\vec x_{1:t})}{p(\vec y_t \mid \vec y_{1:t - 1}) p(\vec y_{1:t - 1})} \\
@@ -56,7 +56,7 @@
         \begin{algorithmic}[1]
             \State Sample from proposal \Comment Initialisation
                 \begin{equation}
-                    \vec x_1^{(r)} \sim q\left(\cdot \mid \vec y_1^{(r)}, \vec \theta\right), r = 1, \dotsc, R
+                    \vec x_1^{(r)} \sim q\left(\cdot \mid \vec y_1^{(r)}; \vec \theta\right), r = 1, \dotsc, R
                 \end{equation}
             \State Compute weights
                 \begin{equation}
@@ -68,16 +68,20 @@
                 \end{equation}
             \State We can resample from 
                 \begin{equation}
-                    \hat p(\mathrm d \vec x_1 \mid \vec y_1, \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)
+                    \hat p(\mathrm d \vec x_1 \mid \vec y_1; \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)
                 \end{equation}
                 to estimate
                 \begin{equation}
-                    p(\vec x_1 \mid \vec y_1, \vec \theta)
+                    p(\vec x_1 \mid \vec y_1; \vec \theta)
                 \end{equation}
             \For{$t = 2, \dotsc, T$} \Comment Main loop
+                \State Sample from proposal
+                    \begin{equation}
+                        \vec x_t^{(r)} \sim q\left(\cdot \mid \vec x_{t - 1}^{(r)}, \vec y_t; \vec \theta \right), r = 1, \dotsc, R
+                    \end{equation}
                 \State Compute weights
                     \begin{equation}
-                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
+                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}; \vec \theta\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}; \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{(r)}, \vec y_t; \vec \theta \right)}, r = 1, \dotsc, R
                     \end{equation}
                 \State Normalise weights
                     \begin{equation}
@@ -85,11 +89,11 @@
                     \end{equation}
                 \State We can resample from
                     \begin{equation}
-                        \hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}, \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})
+                        \hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}; \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})
                     \end{equation}
                     to estimate
                     \begin{equation}
-                        p(\vec x_{1:t} \mid \vec y_{1:t}, \vec \theta)
+                        p(\vec x_{1:t} \mid \vec y_{1:t}; \vec \theta)
                     \end{equation}
             \EndFor
         \end{algorithmic}
@@ -107,16 +111,16 @@
     There are (among others) two solutions to this problem -- introduce the resampling step, and using a good proposal distribution.
 
 \subsection{The resampling step}
-    Whenever the effective sample size drops below some threshold, resample to get new $R$ samples from the approximation of the pdf. This step is also called \textbf{rejuvenation}. The full algorithm for a generic particle filter is shown in Algorithm~\ref{alg:part-fil} below in which we resample during every tie step.
+    Whenever the effective sample size drops below some threshold, resample to get new $R$ samples from the approximation of the pdf. This step is also called \textbf{rejuvenation}. The full algorithm for a generic particle filter is shown in Algorithm~\ref{alg:part-fil} below in which we resample during every step.
     \begin{algorithmbis}[Generic particle filter]\label{alg:part-fil}
         \begin{algorithmic}[1]
             \State Sample from proposal \Comment Initialisation
                 \begin{equation}
-                    \vec x_1^{(r)} \sim q\left(\cdot \mid \vec y_1^{(r)}, \vec \theta\right), r = 1, \dotsc, R
+                    \vec x_1^{(r)} \sim q\left(\cdot \mid \vec y_1^{(r)}; \vec \theta\right), r = 1, \dotsc, R
                 \end{equation}
             \State Compute weights
                 \begin{equation}
-                    w_1^{(r)} \propto \frac{p\left(\vec x_1^{(r)} \mid \vec y_1, \vec \theta\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1, \vec \theta \right)}, r = 1, \dotsc, R
+                    w_1^{(r)} \propto \frac{p\left(\vec x_1^{(r)} \mid \vec y_1; \vec \theta\right)}{q\left(\vec x_1^{(r)} \mid \vec y_1; \vec \theta \right)}, r = 1, \dotsc, R
                 \end{equation}
             \State Normalise weights
                 \begin{equation}
@@ -124,24 +128,24 @@
                 \end{equation}
             \State We can resample from 
                 \begin{equation}
-                    \hat p(\mathrm d \vec x_1 \mid \vec y_1, \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)
+                    \hat p(\mathrm d \vec x_1 \mid \vec y_1; \vec \theta) = \sum_r \hat w_1^{(r)} \delta_{\vec x_1^{(r)}}(\mathrm d\vec x_1)
                 \end{equation}
                 to estimate
                 \begin{equation}
-                    p(\vec x_1 \mid \vec y_1, \vec \theta)
+                    p(\vec x_1 \mid \vec y_1; \vec \theta)
                 \end{equation}
             \For{$t = 2, \dotsc, T$} \Comment Main loop
                 \State Sample parents' indices of $t^{\text{th}}$ generation
                     \begin{equation}
-                        A_{t - 1}^{(r)} \sim \Cat\left(\hat w_{t - 1}\right), r = 1, \dotsc, R
+                        A_{t - 1}^{(r)} \sim \Cat\left(\hat w_{t - 1}^{(1)}, \dotsc, \hat w_{t - 1}^{(R)}\right), r = 1, \dotsc, R
                     \end{equation}
                 \State Sample $t^{\text{th}}$ generation using corresponding parents
                     \begin{equation}
-                        \vec x_t^{(r)} \sim q\left(\cdot \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t, \vec \theta\right), r = 1, \dotsc, R
+                        \vec x_t^{(r)} \sim q\left(\cdot \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t; \vec \theta\right), r = 1, \dotsc, R
                     \end{equation}
                 \State Compute weights
                     \begin{equation}
-                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}, \vec \theta\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t, \vec \theta \right)}, r = 1, \dotsc, R
+                        w_t^{(r)} \propto w_{t - 1}^{(r)} \frac{g\left(\vec y_t \mid \vec x_t^{(r)}; \vec \theta\right) f\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}; \vec \theta \right)}{q\left(\vec x_t^{(r)} \mid \vec x_{t - 1}^{A_{t - 1}^{(r)}}, \vec y_t; \vec \theta \right)}, r = 1, \dotsc, R
                     \end{equation}
                 \State Normalise weights
                     \begin{equation}
@@ -149,11 +153,11 @@
                     \end{equation}
                 \State We can resample from
                     \begin{equation}
-                        \hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}, \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})
+                        \hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}; \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})
                     \end{equation}
                     to estimate
                     \begin{equation}
-                        p(\vec x_{1:t} \mid \vec y_{1:t}, \vec \theta)
+                        p(\vec x_{1:t} \mid \vec y_{1:t}; \vec \theta)
                     \end{equation}
             \EndFor
         \end{algorithmic}
