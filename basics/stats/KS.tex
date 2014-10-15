@@ -1,0 +1,21 @@
+\subsection{Kolmogorov-Smirnov test}
+\subsubsection{Kolmogorov-Smirnov statistic}
+Null hypothesis, often denoted by $H_0$ is a general statement or a default position saying there is no relationship between two measured phenomena. 
+
+The Kolmogorov (KS) test quantifies a distance between
+\begin{itemize}
+	\item The empirical distribution function (or the empirical cdf) and the cdf of the reference function ($H_0 = $ sample is drawn from the reference distribution), or
+	\item The empirical cdfs of two samples ($H_0 = $ samples are drawn from the same distribution).
+\end{itemize}
+
+The empirical cdf $F_N$ for $N$ iid observations $\{x_n\}$ is
+\begin{equation}
+	F_N(x) \triangleq \frac{1}{N} \sum_n I(x_n \leq x)
+\end{equation}
+basically $F_N(x) = \frac{1}{N} \text{number of samples less than or equal to } x$.
+
+The KS statistic for a given cdf $F(x)$ is
+\begin{equation}
+	D_N(x) \triangleq \sup_x \left|F_N(x) - F(x)\right|
+\end{equation}
+By Glivenko-Cantelli theorem, if $\{x_n\} \sim F$, then $D_N \to 0$ almost surely when $N \to \infty$.
