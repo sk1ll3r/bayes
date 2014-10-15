@@ -1,33 +1,27 @@
 \section{Beta-Bernoulli model}
-\subsection{Summary}
-\paragraph{The model}
-    \begin{align}
-        X_i         &\sim \Ber(\theta), \text{for } i \in \{1, \dotsc, N\} \\
-        \mathcal D  &= \{x_1, \dotsc, x_N\} \\
-        N_1         &= \sum_{i = 1}^N \mathbb I (x_i = 1) \\
-        N_0         &= \sum_{i = 1}^N \mathbb I (x_i = 0)
-    \end{align}
+$\mathcal D = \{x_n : x_n \sim \Ber(\theta)\}, \theta \sim \Beta(\alpha, \beta)$.
 
-\paragraph{Likelihood}
-    \begin{equation}
-        p(\mathcal D | \theta) = \theta^{N_1} (1 - \theta)^{N_0}
-    \end{equation}
+\paragraph{Likelihood.}
+\begin{align*}
+    p(\mathcal D \mid \theta)   &= \theta^{N_1} (1 - \theta)^{N_0}
+\end{align*}
+where $N_1 = \sum_n \I(x_n = 1)$ and $N_0 = \sum_n \I(x_n = 0)$.
 
-\paragraph{Prior}
-    \begin{equation}
-        p(\theta)   = \Beta(\theta | a, b)
-    \end{equation}
+\paragraph{Posterior.}
+\begin{align*}
+    p(\theta \mid \mathcal D)   &\propto p(\mathcal D \mid \theta) p(\theta) \\
+                                &\propto \theta^{N_1} (1 - \theta)^{N_0} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
+                                &= \theta^{\alpha + N_1 - 1} (1 - \theta)^{\beta + N_0 - 1} \\
+                                &\propto \Beta(\theta \mid \alpha + N_1, \beta + N_0)
+\end{align*}
 
-\paragraph{Posterior}
-    \begin{equation}
-        p(\theta | \mathcal D) = \Beta(\theta | a' = N_1 + a, b' = N_0 + b)
-    \end{equation}
-
-\paragraph{Posterior predictive}
-    \begin{equation}
-        p(\tilde x = 1 | \mathcal D) = \frac{a'}{a' + b'}
-    \end{equation}
-
-\paragraph{Evidence}
-
-\subsection{Derivations}
+\paragraph{Posterior predictive.}
+\begin{align*}
+    p(\tilde x = 1 \mid \mathcal D) &= \int_{\theta} p(\tilde x, \theta \mid \mathcal D) \,\mathrm d\theta \\
+                                    &= \int_{\theta} p(\tilde x \mid \theta, \mathcal D) p(\theta \mid \mathcal D) \,\mathrm d\theta \\
+                                    &= \int_{\theta} p(\tilde x \mid \theta) p(\theta \mid \mathcal D) \,\mathrm d\theta \\
+                                    &= \int_{\theta} \theta \Beta(\theta, \alpha', \beta') \,\mathrm d \theta \\
+                                    &= \E_{\theta \sim \Beta(\alpha', \beta')}[\theta] \\
+                                    &= \frac{\alpha'}{\alpha' + \beta'} \\
+    \implies \tilde x               &\sim \Ber\left(\frac{\alpha'}{\alpha' + \beta'}\right)
+\end{align*}

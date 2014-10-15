@@ -1,10 +1,10 @@
-\subsection{Gaussian distribution}
+\section{Gaussian distribution}
 The density of $\vec x \sim \Gauss\left(\vec \mu, \vec \Sigma\right), \vec x \in \mathbb R^D$ is
 \begin{align}
     p(\vec x)   &= \frac{1}{\sqrt{|2\pi\vec \Sigma|}} \exp{\left[-\frac{1}{2}(\vec x - \vec \mu)^T \vec \Sigma^{-1} (\vec x - \vec \mu)\right]} \\
                 &= (2\pi)^{-D / 2} |\vec \Sigma|^{-1 / 2} \exp{\left[-\frac{1}{2}(\vec x - \vec \mu)^T \vec \Sigma^{-1} (\vec x - \vec \mu)\right]}
 \end{align}
-\subsubsection{Linear Gaussian model}
+\subsection{Linear Gaussian model}
 \label{ssec:prob-gaussian-lingauss}
 Given the marginal and conditional distributions to be
 \begin{align}

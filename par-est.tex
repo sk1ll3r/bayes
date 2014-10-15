@@ -1,4 +1,23 @@
 \chapter{Bayesian parameter estimation}
+Given a set of data $\mathcal D = \{\vec x_n \}$, we impose a probability distribution $f$ with parameters $\vec \theta$, which we call the model parameters, on each data point, $\vec x_n \sim f(\vec \theta), n = 1, \dotsc, N$, so that the likelihood becomes $p(\mathcal D \mid \vec \theta) = \prod_n f(\vec x_n \mid \vec \theta)$. We also impose a distribution $g$ on $\vec \theta$ with parameters $\vec \alpha$ which we call the hyperparameters. We call this distribution, the prior distribution over $\vec \theta$. Bayesian parameter estimation evaluates the posterior distribution, $p(\vec \theta \mid \mathcal D)$, and the posterior predictive distribution, $p(\tilde{\vec x} \mid \mathcal D)$, where $\tilde{\vec x}$ is a new data point we want to predict.
+
+When the prior $g(\vec \theta \mid \vec \alpha)$ is a conjugate prior for a given likelihood distribution $f(\cdot \mid \vec \theta)$, the posterior has the same distribution as $g$, just with different parameters. We call these updated hyperparameters, and denote them by adding a dash, $\vec \alpha'$. In other words, the posterior becomes $g(\vec \theta \mid \vec \alpha')$. Table~\ref{table:par-est} summarises the quantities of interest for several conjugate pairs, followed by the derivations.
+
+\begin{sidewaystable}[htp!]
+\label{table:par-est}
+\begin{tabulary}{1\textheight}{cccccc}
+\toprule
+Likelihood 	& Model parameters				& Prior 	& Hyperparameters  				& Posterior Hyperparameters 												& Posterior predictive \\ \midrule
+Bernoulli	& $\theta$						& Beta 		& $\alpha, \beta$  				& $\alpha + \sum_n \I(x_n = 1), \beta + \sum_n \I(x_n = 0)$	& $\Ber\left(\tilde x \mid \frac{\alpha'}{\alpha' + \beta'}\right)$ \\
+Binomial	& $\theta$						& Beta 		& $\alpha, \beta$  				& $\alpha + \sum_n x_n, \beta + \sum_n (T_n - x_n)$							& $\BetaBin(\tilde x \mid \alpha', \beta')$ \\
+Poisson		& $\lambda$						& Gamma 	& $\alpha, \beta$  				& $\alpha + \sum_n x_n, \beta + N$											& $\NB\left(\tilde x \mid \alpha', \frac{1}{1 + \beta'}\right)$ \\
+Categorical	& $\vec \theta \in \mathbb R^K$	& Dirichlet	& $\vec \alpha \in \mathbb R^K$	& $\vec \alpha + (n_1, \dotsc, n_K)^T$										& $\Ber\left(\tilde x \mid \frac{{\alpha'}_{\tilde x}}{\sum_k \alpha'_k}\right)$ \\
+Multinomial	& $\vec \theta \in \mathbb R^K$	& Dirichlet	& $\vec \alpha \in \mathbb R^K$	& $\vec \alpha + \sum_n \vec x_n$											& $\DirMult(\tilde{\vec x} \mid \alpha')$ \\
+\bottomrule
+\end{tabulary}
+\caption{Summary of Bayesian parameter estimation for conjugate pairs} 
+\end{sidewaystable}
+
 \input{par-est/beta-ber}
 \input{par-est/beta-bin}
 \input{par-est/dir-cat}

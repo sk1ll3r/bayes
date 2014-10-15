@@ -1,36 +1,35 @@
 \section{Beta-binomial model}
-\subsection{Summary}
-\paragraph{The model}
-    \begin{align}
-        N_1                 &\sim \Bin(N, \theta) \\
-        \mathcal D          &= \{N_1, N\} \\
-        N_1                 &= \text{number of successes} \\
-        N                   &= \text{total number of trials} \\
-        \tilde{\mathcal D}  &= \{\tilde N_1, \tilde N\} \\
-        \tilde N_1          &= \text{number of successes in a new batch of data} \\
-        \tilde N            &= \text{total number of trials in a new batch of data}
-    \end{align}
+$\mathcal D = \{x_n : x_n \sim \Bin(T_n, \theta)\}$ for some fixed total counts $\{T_n\}$, $\theta \sim \Beta(\alpha, \beta)$.
 
-\paragraph{Likelihood}
-    \begin{equation}
-        p(\mathcal D | \theta) = \Bin(N_1 | N, \theta)
-    \end{equation}
+\paragraph{Likelihood.}
+    \begin{align*}
+        p(\mathcal D \mid \theta)   &= \prod_n \Bin(x_n \mid T_n, \theta) \\
+                                    &\propto \prod_n \theta^{x_n} (1 - \theta)^{T_n - x_n} \\
+                                    &= \theta^{\sum_n x_n} (1 - \theta)^{\sum_n T_n - x_n} \\
+                                    &= \theta^{x} (1 - \theta)^{T - x} \\
+                                    &\propto \Bin(x \mid T, \theta)
+    \end{align*}
+where $x = \sum_n x_n$ and $T = \sum_n T_n$.
 
-\paragraph{Prior}
-    \begin{equation}
-        p(\theta)   = \Beta(\theta | a, b)
-    \end{equation}
+\paragraph{Posterior.}
+    \begin{align*}
+        p(\theta \mid \mathcal D)   &\propto p(\mathcal D \mid \theta) p(\theta) \\
+                                    &= \Bin(x \mid T, \theta) \Beta(\theta \mid \alpha, \beta) \\
+                                    &\propto \theta^{x} (1 - \theta)^{T - x} \theta^{\alpha - 1} (1 - \theta)^{\beta - 1} \\
+                                    &= \theta^{\alpha + x - 1} (1 - \theta)^{\beta + T - x - 1} \\
+                                    &\propto \Beta(\theta \mid \alpha + x, \beta + T - x) \\
+                                    &= \Beta\left(\theta \mid \alpha + \sum_n x_n, \beta + \sum_n (T_n - x_n)\right)
+    \end{align*}
 
-\paragraph{Posterior}
-    \begin{equation}
-        p(\theta | \mathcal D) = \Beta(\theta | a' = N_1 + a, b' = N_0 + b)
-    \end{equation}
-
-\paragraph{Posterior predictive}
-    \begin{equation}
-        p(\tilde{\mathcal D} | \mathcal D) = \Bb(\tilde N_1; a', b', \tilde N)
-    \end{equation}
-
-\paragraph{Evidence}
-
-\subsection{Derivations}
+\paragraph{Posterior predictive.} (New data point $\tilde x$ for some fixed total count $\tilde T$).
+    \begin{align*}
+        p(\tilde x \mid \mathcal D, \tilde T)   &= \int_{\theta} p(\tilde x, \theta \mid \mathcal D, \tilde T) \,\mathrm d\theta \\
+                                                &= \int_{\theta} p(\tilde x \mid \theta, \mathcal D, \tilde T) p(\theta \mid \mathcal D, \tilde T) \,\mathrm d\theta \\
+                                                &= \int_{\theta} p(\tilde x \mid \theta, \tilde T) p(\theta \mid \mathcal D) \,\mathrm d\theta \\
+                                                &= \int_{\theta} \Bin(\tilde x \mid \tilde T, \theta) \Beta(\theta \mid \alpha', \beta') \,\mathrm d\theta \\
+                                                &= \int_{\theta} \left[\binom{\tilde T}{\tilde x} \theta^{\tilde x} (1 - \theta)^{\tilde T - \tilde x}\right] \left[\frac{1}{B(\alpha', \beta')} \theta^{\alpha' - 1} (1 - \theta)^{\beta' - 1}\right] \,\mathrm d\theta \\
+                                                &= \binom{\tilde T}{\tilde x} \frac{1}{B(\alpha', \beta')} \int_{\theta} \theta^{\tilde x + \alpha' - 1} (1 - \theta)^{\tilde T - \tilde x + \beta' - 1} \,\mathrm d\theta \\
+                                                &= \binom{\tilde T}{\tilde x} \frac{B(\alpha' + \tilde x, \beta' + \tilde T - \tilde x)}{B(\alpha', \beta')} \\
+                                                &= \BetaBin(\tilde x \mid \tilde T, \alpha', \beta')
+    \end{align*}
+where $B(\alpha, \beta)$ is the normalisation constant for a Beta distribution, $\Beta(\alpha, \beta)$, which is $\int_x x^{\alpha - 1} (1 - x)^{\beta - 1} \,\mathrm dx$ or $\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$.

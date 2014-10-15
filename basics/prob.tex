@@ -1,11 +1,17 @@
 \section{Probability distributions}
-\subsection{Uniform distribution}
-\subsection{Beta distribution}
-\subsection{Bernoulli distribution}
-\subsection{Binomial distribution}
-\subsection{Beta-binomial distribution}
-\subsection{Categorical distribution}
-\subsection{Dirichlet distribution}
-\subsection{Multinomial distribution}
-\subsection{Pareto distribution}
-\input{basics/prob/gaussian}
+Summarised in Table~\ref{table:prob-dist}
+
+\begin{sidewaystable}[htp!]
+\label{table:prob-dist}
+\begin{tabulary}{0.75\textheight}{cccccc}
+\toprule
+Distribution & Parameters & Support & PDF/PMF & Mean & Variance \\
+\midrule
+\input{basics/prob/bernoulli} \\
+\input{basics/prob/beta} \\
+\input{basics/prob/binomial} \\
+\input{basics/prob/beta-binomial} \\
+\bottomrule
+\end{tabulary}
+\caption{Summary of common probability distributions}\footnote{where $B(\alpha, \beta)$ is the normalisation constant for a Beta distribution, $\Beta(\alpha, \beta)$, which is $\int_x x^{\alpha - 1} (1 - x)^{\beta - 1} \,\mathrm d x$ or $\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$.}
+\end{sidewaystable}
