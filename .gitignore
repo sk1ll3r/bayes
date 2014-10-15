@@ -8,3 +8,4 @@
 *.out
 *.toc
 *.eps
+*.fdb_latexmk
