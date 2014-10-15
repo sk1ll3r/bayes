@@ -1,34 +1,31 @@
-\section{Poisson-gamma model}
-\subsection{Summary}
-\paragraph{The model}
-    \begin{align}
-        x           &\sim \Poi(\lambda) \\
-        \mathcal D  &= \{x_1, \dotsc, x_N\}
-    \end{align}
+\section{Poisson-Gamma model}
+$\mathcal D = \{x_n : x_n \sim \Poi(\lambda)$, $\lambda \sim \Gammadist(\alpha, \beta)$.
 
-\paragraph{Likelihood}
-    \begin{equation}
-        p(\mathcal D | \lambda) = \prod_{i = 1}^N \frac{\lambda^{x_i}}{x_i!} \exp(-\lambda)
-    \end{equation}
+\paragraph{Likelihood.}
+    \begin{align*}
+        p(\mathcal D \mid \lambda) &= \prod_n \Poi(x_n \mid \lambda)
+    \end{align*}
 
-\paragraph{Prior}
-    \begin{equation}
-        p(\lambda) = \Gammadist(\lambda; a, b)
-    \end{equation}
+\paragraph{Posterior.}
+    \begin{align*}
+        p(\lambda \mid \mathcal D)  &\propto p(\mathcal D \mid \lambda) p(\lambda) \\
+                                    &= \left(\prod_n \Poi(x_n \mid \lambda) \right) \Gammadist(\lambda \mid \alpha, \beta) \\
+                                    &\propto \left[\prod_n \frac{\lambda^{x_n}}{x_n!} \exp(-\lambda)\right] \left[\lambda^{\alpha - 1} \exp(-\lambda\beta)\right] \\
+                                    &\propto \lambda^{\alpha + \sum_n x_n - 1} \exp(-\lambda(\beta + N)) \\
+                                    &\propto \Gammadist\left(\lambda \mid \alpha + \sum_n x_n, \beta + N\right)
+    \end{align*}
 
-\paragraph{Posterior}
-    \begin{equation}
-        p(\lambda | \mathcal D) = \Gammadist\left(\lambda; a' = a + \sum_{i = 1}^N x_i, b' = b + N\right)
-    \end{equation}
-
-\paragraph{Posterior predictive}
-    \begin{align}
-        p(\tilde x | \mathcal D) = \NB\left(\tilde x | a', \frac{1}{1 + b'}\right)
-    \end{align}
-
-\paragraph{Evidence}
-    \begin{equation}
-        p(\mathcal D) = 
-    \end{equation}
-
-\subsection{Derivations}
+\paragraph{Posterior predictive.}
+    \begin{align*}
+        p(\tilde x \mid \mathcal D) &= \int_{\lambda} p(\tilde x, \lambda \mid \mathcal D) \,\mathrm d\lambda \\
+                                    &= \int_{\lambda} p(\tilde x \mid \lambda, \mathcal D) p(\lambda \mid \mathcal D) \,\mathrm d\lambda \\
+                                    &= \int_{\lambda} p(\tilde x \mid \lambda) p(\lambda \mid \mathcal D) \,\mathrm d\lambda \\
+                                    &= \int_{\lambda} \Poi(\tilde x \mid \lambda) \Gammadist(\lambda \mid \alpha', \beta') \,\mathrm d\lambda \\
+                                    &= \int_{\lambda} \frac{\lambda^{\tilde x}}{\tilde x!} \exp(-\lambda) \frac{1}{G(\alpha', \beta')} \lambda^{\alpha' - 1} \exp(-\beta' \lambda) \,\mathrm d\lambda \\
+                                    &= \frac{1}{\tilde x! G(\alpha', \beta')} \int_{\lambda} \lambda^{x + \alpha' - 1} \exp(-\lambda (\beta' + 1)) \,\mathrm d\lambda \\
+                                    &= \frac{G(\alpha' + x, \beta + 1)}{\tilde x! G(\alpha', \beta')} \\
+                                    &= \frac{\Gamma(\alpha' + \tilde x)}{\tilde x! \Gamma(\alpha')} \cdot \frac{\beta'^{\alpha'}}{(\beta' + 1)^{\alpha' + \tilde x}} \\
+                                    &= \frac{\Gamma(\alpha' + \tilde x)}{\tilde x! \Gamma(\alpha')} \left(1 - \frac{1}{1 + \beta'}\right)^{\alpha'} \left(\frac{1}{1 + \beta'}\right)^{\tilde x} \\
+                                    &= \NB\left(\tilde x \mid \alpha', \frac{1}{1 + \beta'}\right)
+    \end{align*}
+where $G(\alpha, \beta)$ is the normalisation constant for a Gamma distribution, $\Gammadist(\alpha, \beta)$, which is $\int_x x^{\alpha - 1} \exp(-\beta x) \,\mathrm dx$ or $\frac{\Gamma(\alpha)}{\beta^\alpha}$.
