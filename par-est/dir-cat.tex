@@ -1,34 +1,28 @@
 \section{Dirichlet-Categorical model}
-\subsection{Summary}
-\paragraph{The model}
-    \begin{align}
-        X_i         &\sim \Cat\left(\vec\theta = (\theta_1, \dotsc, \theta_K)^T\right), \text{for } i \in \{1, \dotsc, N\} \\
-        \mathcal D  &= \{x_1, \dotsc, x_N\} \\
-        n_k         &= \sum_{i = 1}^N \mathbb I (x_i = k)
-    \end{align}
+$\mathcal D = \{x_n : x_n \sim \Cat(\vec\theta), \vec\theta \in \mathbb R^K\}$, $\vec\theta \sim \Dir(\vec\alpha), \alpha \in \mathbb R^K$.
 
-\paragraph{Likelihood}
-    \begin{equation}
-        p(\mathcal D | \theta) = \prod_{k = 1}^K \theta_k^{n_k}
-    \end{equation}
+\paragraph{Likelihood.}
+    \begin{align*}
+        p(\mathcal D \mid \vec \theta) &= \prod_k \theta_k^{n_k}
+    \end{align*}
+    where $n_k = \sum_n \I(x_n = k)$.
 
-\paragraph{Prior}
-    \begin{equation}
-        p(\theta)   = \Dir(\vec\theta; \vec\alpha)
-    \end{equation}
+\paragraph{Posterior.}
+    \begin{align*}
+        p(\vec \theta \mid \mathcal D)  &\propto p(\mathcal D \mid \vec \theta) p(\vec \theta) \\
+                                        &= \prod_k \theta_k^{n_k} \Dir(\vec \theta \mid \vec \alpha) \\
+                                        &\propto \prod_k \theta_k^{n_k} \prod_k \theta_k^{\alpha_k - 1} \\
+                                        &= \prod_k \theta_k^{\alpha_k + n_k - 1} \\
+                                        &\propto \Dir\left(\vec \theta \mid \vec \alpha + (n_1, \dotsc, n_K)^T\right)
+    \end{align*}
 
-\paragraph{Posterior}
-    \begin{equation}
-        p(\theta | \mathcal D) = \Dir\left(\vec\theta; \vec\alpha' = \vec\alpha + (n_1, \dotsc, n_K)^T\right)
-    \end{equation}
-
-\paragraph{Posterior predictive}
-    \begin{align}
-        p(\tilde X = j | \mathcal D)   &= \frac{\alpha'_j}{\sum_{k = 1}^K \alpha'_i} \\
-                                &= \frac{\alpha_j + n_j}{\alpha_0 + N} \\
-        \text{where } \alpha_0  &= \sum_{k = 1}^K \alpha_k
-    \end{align}
-
-\paragraph{Evidence}
-
-\subsection{Derivations}
+\paragraph{Posterior predictive.}
+    \begin{align*}
+        p(\tilde x \mid \mathcal D)     &= \int_{\vec \theta} p(\tilde x, \vec \theta \mid \mathcal D) \,\mathrm d\vec\theta \\
+                                        &= \int_{\vec \theta} p(\tilde x \mid \vec \theta, \mathcal D) p(\vec \theta \mid \mathcal D) \,\mathrm d\vec\theta \\
+                                        &= \int_{\vec \theta} p(\tilde x \mid \vec \theta) p(\vec \theta \mid \mathcal D) \,\mathrm d\vec\theta \\
+                                        &= \int_{\vec \theta} \Cat(\tilde x \mid \vec \theta) \Dir(\vec \theta \mid \vec \alpha') \\
+                                        &= \int_{\vec \theta} \theta_{\tilde x} \Dir(\vec \theta \mid \vec \alpha') \,\mathrm d\vec\theta \\
+                                        &= \E_{\vec \theta \sim \Dir(\vec \alpha')}[\theta_{\tilde x}] \\
+                                        &= \frac{\alpha'_{\tilde x}}{\sum_k \alpha'_k}
+    \end{align*}

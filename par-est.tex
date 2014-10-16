@@ -5,14 +5,14 @@ When the prior $g(\vec \theta \mid \vec \alpha)$ is a conjugate prior for a give
 
 \begin{sidewaystable}[htp!]
 \label{table:par-est}
-\begin{tabulary}{1\textheight}{cccccc}
+\begin{tabulary}{1\textheight}{CCCCCC}
 \toprule
 Likelihood 	& Model parameters				& Prior 	& Hyperparameters  				& Posterior Hyperparameters 												& Posterior predictive \\ \midrule
 Bernoulli	& $\theta$						& Beta 		& $\alpha, \beta$  				& $\alpha + \sum_n \I(x_n = 1), \beta + \sum_n \I(x_n = 0)$	& $\Ber\left(\tilde x \mid \frac{\alpha'}{\alpha' + \beta'}\right)$ \\
 Binomial	& $\theta$						& Beta 		& $\alpha, \beta$  				& $\alpha + \sum_n x_n, \beta + \sum_n (T_n - x_n)$							& $\BetaBin(\tilde x \mid \alpha', \beta')$ \\
 Poisson		& $\lambda$						& Gamma 	& $\alpha, \beta$  				& $\alpha + \sum_n x_n, \beta + N$											& $\NB\left(\tilde x \mid \alpha', \frac{1}{1 + \beta'}\right)$ \\
 Categorical	& $\vec \theta \in \mathbb R^K$	& Dirichlet	& $\vec \alpha \in \mathbb R^K$	& $\vec \alpha + (n_1, \dotsc, n_K)^T$										& $\Ber\left(\tilde x \mid \frac{{\alpha'}_{\tilde x}}{\sum_k \alpha'_k}\right)$ \\
-Multinomial	& $\vec \theta \in \mathbb R^K$	& Dirichlet	& $\vec \alpha \in \mathbb R^K$	& $\vec \alpha + \sum_n \vec x_n$											& $\DirMult(\tilde{\vec x} \mid \alpha')$ \\
+Multinomial	& $\vec \theta \in \mathbb R^K$	& Dirichlet	& $\vec \alpha \in \mathbb R^K$	& $\vec \alpha + \sum_n \vec x_n$											& $\DirMult(\tilde{\vec x} \mid \alpha', \tilde T)$ \\
 \bottomrule
 \end{tabulary}
 \caption{Summary of Bayesian parameter estimation for conjugate pairs} 

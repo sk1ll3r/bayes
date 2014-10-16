@@ -1,38 +1,72 @@
 \section{Dirichlet-Multinomial model}
-\subsection{Summary}
-\paragraph{The model}
-    \begin{align}
-        \vec N      &\sim \Mult(N, \vec\theta) \in \mathbb R^K \\
-        \mathcal D  &= \{\vec n = \text{vector of counts of successes}\} \\
-        N           &= \sum_{i = 1}^K n_i \\
-        \tilde{\mathcal D} &= \{\tilde{\vec n} = \text{vector of counts of successes in a new batch of data}\} \\
-        \tilde N          &= \sum_{i = 1}^K \tilde n_i
-    \end{align}
+$\mathcal D = \left\{\vec x_n : \vec x_n \sim \Mult(T_n, \vec \theta), \vec x_n, \vec \theta \in \mathbb R^K \right\}$ for fixed total counts $\{T_n\}$; $\vec \theta \sim \Dir(\vec \alpha), \vec \alpha \in \mathbb R^K$.
 
-\paragraph{Likelihood}
-    \begin{equation}
-        p(\mathcal D | \theta) = \Mult(\vec n; N, \vec\theta)
-    \end{equation}
+\paragraph{Likelihood.}
+    \begin{align*}
+        p(\mathcal D \mid \vec \theta)  &= \prod_n \Mult(\vec x_n \mid T_n, \vec \theta) \\
+                                        &\propto \prod_n \left(\theta_1^{x_{n, 1}} \cdots \theta_K^{x_{n, K}}\right) \\
+                                        &= \theta_1^{n_1} \cdots \theta_K^{n_K} \\
+                                        &\propto \Mult(\vec x \mid T, \vec \theta)
+    \end{align*}
+    where $n_k = \sum_n x_{n, k}, k = 1, \dotsc, K$ are the total counts for the side $k$ of the die, $\vec x = \sum_n \vec x_n$, and $T = \sum_n T_n$.
 
-\paragraph{Prior}
-    \begin{equation}
-        p(\theta)   = \Dir(\vec\theta; \vec\alpha)
-    \end{equation}
+\paragraph{Posterior.}
+    \begin{align*}
+        p(\vec \theta \mid \mathcal D)  &\propto p(\mathcal D \mid \vec \theta) p(\vec \theta) \\
+                                        &= \Mult(\vec x \mid T, \vec \theta) \Dir(\vec \theta \mid \vec \alpha) \\
+                                        &\propto \left(\theta_1^{n_1} \cdots \theta_K^{n_K}\right) \left(\theta_1^{\alpha_1 - 1} \cdots \theta_K^{\alpha_K - 1}\right) \\
+                                        &= \theta_1^{n_1 + \alpha_1 - 1} \cdots \theta_K^{n_K + \alpha_K - 1} \\
+                                        &\propto \Dir\left(\vec \theta \mid \vec \alpha + \vec x\right)
+    \end{align*}
 
-\paragraph{Posterior}
-    \begin{equation}
-        p(\theta | \mathcal D) = \Dir\left(\vec\theta; \vec\alpha' = \vec\alpha + (n_1, \dotsc, n_K)^T\right)
-    \end{equation}
+\paragraph{Posterior predictive.} (New data point $\tilde{\vec x}$ for a given total count $\tilde T = \sum_k \tilde x_k$).
+    \begin{align*}
+        p(\tilde{\vec x} \mid \mathcal D)   &= \int_{\vec \theta} p(\tilde{\vec x}, \vec \theta \mid \mathcal D, \tilde T) \,\mathrm d\vec\theta \\
+                                            &= \int_{\vec \theta} p(\tilde{\vec x} \mid \vec \theta, \mathcal D, \tilde T) p(\vec \theta \mid \mathcal D, \tilde T) \,\mathrm d\vec\theta \\
+                                            &= \int_{\vec \theta} p(\tilde{\vec x} \mid \vec \theta, \tilde T) p(\vec \theta \mid \mathcal D) \,\mathrm d\vec\theta \\
+                                            &= \int_{\vec \theta} \Mult(\tilde{\vec x} \mid \tilde T, \vec \theta) \Dir(\vec \theta \mid \vec \alpha') \,\mathrm d\vec\theta \\
+                                            &= \int_{\vec \theta} \left[\frac{\tilde T!}{\prod_k \tilde x_k!} \prod_k \theta_k^{\tilde x_k}\right] \left[\frac{1}{D(\vec\alpha')} \prod_k \theta_k^{\alpha_k - 1}\right] \,\mathrm d\vec\theta \\
+                                            &= \frac{\tilde T!}{\prod_k \tilde x_k!} \cdot \frac{1}{D(\vec\alpha')} \int_{\vec \theta} \prod_k \theta_k^{\alpha_k + \tilde x_k - 1} \,\mathrm d\vec\theta \\
+                                            &= \frac{\tilde T!}{\prod_k \tilde x_k!} \cdot \frac{D(\vec\alpha' + \tilde{\vec x})}{D(\vec\alpha')} \\
+                                            &= \frac{\tilde T!}{\prod_k \tilde x_k!} \cdot \frac{\prod_k \Gamma(\alpha'_k + \tilde x_k)}{\Gamma(\sum_k \alpha'_k + \tilde x_k)} \cdot \frac{\Gamma(\sum_k \alpha'_k)}{\prod_k \Gamma(\alpha'_k)} \\
+                                            &= \frac{\Gamma(\tilde T + 1)}{\prod_k \Gamma(\tilde x_k + 1)} \cdot \frac{\Gamma\left(\sum_k \alpha'_k\right)}{\Gamma\left(\tilde T + \sum_k \alpha'_k\right)} \prod_k \frac{\Gamma(\alpha'_k + \tilde x_k)}{\Gamma(\alpha'_k)} \\
+                                            &= \DirMult(\tilde{\vec x} \mid \vec \alpha', \tilde T)
+    \end{align*}
+    where $D(\vec \alpha)$ is the normalisation constant for the Dirichlet distribution, $\Dir(\vec\alpha)$, which is $\int_{\vec x} \prod_k x_k^{\alpha_k - 1} \,\mathrm d\vec x$ or $\frac{\prod_k \Gamma(\alpha_k)}{\Gamma\left(\sum_k \alpha_k\right)}$.
+% \subsection{Summary}
+% \paragraph{The model}
+%     \begin{align}
+%         \vec N      &\sim \Mult(N, \vec\theta) \in \mathbb R^K \\
+%         \mathcal D  &= \{\vec n = \text{vector of counts of successes}\} \\
+%         N           &= \sum_{i = 1}^K n_i \\
+%         \tilde{\mathcal D} &= \{\tilde{\vec n} = \text{vector of counts of successes in a new batch of data}\} \\
+%         \tilde N          &= \sum_{i = 1}^K \tilde n_i
+%     \end{align}
 
-\paragraph{Posterior predictive}
-    \begin{align}
-        p(\tilde{\mathcal D} | \mathcal D) &= \frac{\Gamma(\alpha_0 + N)}{\Gamma(\alpha_0 + N + \tilde N)} \prod_{k = 1}^K \frac{\Gamma(\alpha_k + n_k + \tilde n_k)}{\Gamma(\alpha_k + n_k)} \\
-        \text{where } \alpha_0 &= \sum_{k = 1}^K \alpha_k
-    \end{align}
+% \paragraph{Likelihood}
+%     \begin{equation}
+%         p(\mathcal D | \theta) = \Mult(\vec n; N, \vec\theta)
+%     \end{equation}
 
-\paragraph{Evidence}
-    \begin{equation}
-        p(\mathcal D | \vec\alpha) = \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_0 + N)} \prod_{k = 1}^K \frac{\Gamma(\alpha_k + n_k)}{\Gamma(\alpha_k)}
-    \end{equation}
+% \paragraph{Prior}
+%     \begin{equation}
+%         p(\theta)   = \Dir(\vec\theta; \vec\alpha)
+%     \end{equation}
 
-\subsection{Derivations}
+% \paragraph{Posterior}
+%     \begin{equation}
+%         p(\theta | \mathcal D) = \Dir\left(\vec\theta; \vec\alpha' = \vec\alpha + (n_1, \dotsc, n_K)^T\right)
+%     \end{equation}
+
+% \paragraph{Posterior predictive}
+%     \begin{align}
+%         p(\tilde{\mathcal D} | \mathcal D) &= \frac{\Gamma(\alpha_0 + N)}{\Gamma(\alpha_0 + N + \tilde N)} \prod_{k = 1}^K \frac{\Gamma(\alpha_k + n_k + \tilde n_k)}{\Gamma(\alpha_k + n_k)} \\
+%         \text{where } \alpha_0 &= \sum_{k = 1}^K \alpha_k
+%     \end{align}
+
+% \paragraph{Evidence}
+%     \begin{equation}
+%         p(\mathcal D | \vec\alpha) = \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_0 + N)} \prod_{k = 1}^K \frac{\Gamma(\alpha_k + n_k)}{\Gamma(\alpha_k)}
+%     \end{equation}
+
+% \subsection{Derivations}
