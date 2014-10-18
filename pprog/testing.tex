@@ -1,0 +1,85 @@
+\section{Testing}
+\subsection{Unit and measure tests}
+Calculate KL divergences for discrete sample spaces and KS test statistics for continuous sample spaces.
+\subsection{Conditional measure tests}
+\subsubsection{ERPs}
+The purpose is to test whether the \verb!*-lnpdf! functions work. For some distributions $f$ and $g$, if we \verb!assume! $\vec\theta \sim f$, then \verb!observe! $\mathcal D = \{y_n : y_n \sim g(\dotsc, \vec \theta)\}$, and finally \verb!predict! $\vec\theta \mid \mathcal D$, the inference engine will evaluate the \verb!*-lnpdf! functions of $g$ in order to characterise $\tilde p(\vec x \mid \vec y) \propto \tilde p(\vec y, \vec x) = \prod_n p(y_n \mid \theta_{t_n}, \vec x_n) \tilde p(\vec x_n \mid \vec x_{n - 1})$. We can then test whether the \verb!predict!'s follow the true distribution of $\vec\theta \mid \mathcal D$. Using this fact and taking advantage of conjugate pairs described in Chapter~\ref{chapter:par-est} and on Wikipedia, we can test the ERPs in the system as follows.
+
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Bernoulli & \\
+\midrule
+$\theta \sim \Beta(\alpha, \beta)$								& \texttt{[assume theta (beta a b)]} \\
+$x \mid \theta \sim \Ber(\theta)$								& \texttt{[assume x (flip theta)]} \\
+$\mathcal D = \{x_n\}$											& \texttt{[observe x x1]} $\cdots$ \texttt{[observe x xN]} \\
+$\theta \mid \mathcal D \sim \Beta(\alpha + N_1, \beta + N_0)$	& \texttt{[predict theta]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Binomial & \\
+\midrule
+$\theta \sim \Beta(\alpha, \beta)$													& \texttt{[assume theta (beta a b)]} \\
+$x \mid \theta \sim \Bin(T, \theta)$												& \texttt{[assume x (binomial theta T)]} \\
+$\mathcal D = \{x_n\}$																& \texttt{[observe x x1]} $\cdots$ \texttt{[observe x xN]} \\
+$\theta \mid \mathcal D \sim \Beta(\alpha + \sum_n x_n, \beta + TN - \sum_n x_n)$	& \texttt{[predict theta]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Poisson & \\
+\midrule
+$\lambda \sim \Gammadist(\alpha, \beta)$											& \texttt{[assume l (gamma a b)]} \\
+$x \mid \theta \sim \Poi(\lambda)$													& \texttt{[assume x (poisson l)]} \\
+$\mathcal D = \{x_n\}$																& \texttt{[observe x x1]} $\cdots$ \texttt{[observe x xN]} \\
+$\lambda \mid \mathcal D \sim \Gammadist(\alpha + \sum_n x_n, \beta + N)$			& \texttt{[predict l]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Categorical & \\
+\midrule
+$\vec\theta \sim \Dir(\vec\alpha), \vec\theta,\vec\alpha \in \mathbb R^K$			& \texttt{[assume ...]} \\
+$x \mid \vec\theta \sim \Dir(\vec\theta)$											& \texttt{[assume x ...]} \\
+$\mathcal D = \{x_n\}$																& \texttt{[observe x x1]} $\cdots$ \texttt{[observe x xN]} \\
+$\vec\theta \mid \mathcal D \sim \Dir(\vec\alpha + (n_1, \dotsc, n_K)^T)$			& \texttt{[predict ...]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Univariate Normal with known variance & \\
+\midrule
+Fix $\sigma^2$																		& \texttt{[assume var \#var\#]} \\
+$\mu \sim \Gauss(\mu_0, \sigma_0^2)$												& \texttt{[assume mu (normal mu0 var0)]} \\
+$x \mid \vec\theta \sim \Gauss(\mu, \sigma^2)$										& \texttt{[assume x (normal mu var)]} \\
+$\mathcal D = \{x_n\}$																& \texttt{[observe x x1]} $\cdots$ \texttt{[observe x xN]} \\
+$\mu \mid \mathcal D \sim \Gauss\left(\frac{\frac{\mu_0}{\sigma_0^2} + \frac{\sum_n x_n}{\sigma^2}}{\frac{1}{\sigma_0^2} + \frac{N}{\sigma^2}}, \left(\frac{1}{\sigma_0^2} + \frac{N}{\sigma^2}\right)^{-1}\right)$		& \texttt{[predict mu]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% \begin{table}[h]
+% \begin{tabular}{ll}
+% \toprule
+% Uniform & \\
+% \midrule
+% $\theta \sim \Pareto(\mu_0, \sigma_0^2)$												& \texttt{[assume mu (normal mu0 var0)]} \\
+% $x \mid \vec\theta \sim \Gauss(\mu, \sigma^2)$										& \texttt{[assume x (normal mu var)]} \\
+% $\mathcal D = \{x_n\}$																& \texttt{[observe x x1]} $\cdots$ \texttt{[observe x xN]} \\
+% $\mu \mid \mathcal D \sim \Gauss\left(\frac{\frac{\mu_0}{\sigma_0^2} + \frac{\sum_n x_n}{\sigma^2}}{\frac{1}{\sigma_0^2} + \frac{N}{\sigma^2}}, \left(\frac{1}{\sigma_0^2} + \frac{N}{\sigma^2}\right)^{-1}\right)$		& \texttt{[predict mu]} \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
