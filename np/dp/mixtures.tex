@@ -1,0 +1,16 @@
+\subsection{Dirichlet process mixtures}
+The purpose is to cluster observations. We can't model continuous observations directly using a Dirichlet processes because the samples from them are almost surely discrete probability measures. Also, the posterior measure assigned to $x_i$ would never beinfluenced by observations $x_j \neq x_i$, regardless of their proximity.
+
+The Dirichlet process mixtures model is as follows:
+\begin{align*}
+	G 				&\sim \DP(\alpha, H) \\
+	\bar \theta_n	&\sim G 				& n = 1, \dotsc, N \\
+	x_n				&\sim F(\bar \theta_n)
+\end{align*}
+where $G$ is being sampled from $\DP(\alpha, H)$ via the stick-breaking construction:
+\begin{align*}
+	\vec \pi 	&\sim \GEM(\alpha)	& \vec \pi = (\pi_1, \pi_2, \dotsc)\\
+	\theta_k	&\sim H(\lambda)	& k = 1, 2, \dotsc \\
+	G(\theta)	&= \sum_{k = 1}^\infty \pi_k \delta(\theta, \theta_k)
+\end{align*}
+this solves the problem of inability of the $\DP$ to model the distribution of observations directly. Now two observations $x_i, x_j$ are considered to be from the same cluster of $\bar \theta_n$ if both are $\sim F(\bar \theta_n)$.

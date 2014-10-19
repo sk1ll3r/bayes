@@ -1,0 +1,47 @@
+\subsection{Posterior measure}
+\begin{proposition}[Posterior measure]
+	Let $G \sim \DP(\alpha, H)$ be a random measure distributed according to a Dirichlet process. Given $N$ independent observations $\mathcal D = \{x_n: x_n \sim G\}_{n = 1}^N$, the posterior measure also follows a Dirichlet process:
+	\begin{equation}
+		G \mid \mathcal D, \alpha, H \sim \DP\left(\alpha + N, \frac{1}{\alpha + N}\left(\alpha H + \sum_n \delta_{x_n}\right)\right) \label{eqn:np/dp/posterior/posterior}
+	\end{equation}
+\end{proposition}
+
+\begin{proof}
+	For any finite partition $(T_1, \dotsc, T_K)$ of the sample space $\Theta$, we have the following:
+	\begin{equation*}
+		(G(T_1), \dotsc, G(T_K)) \sim \Dir(\alpha H(T_1), \dotsc, \alpha H(T_K))
+	\end{equation*}
+	
+	We can represent the observations $\mathcal D$ as $\mathcal D'$, only caring about which partition $T_k$ it comes from, in the following manner:
+	\begin{equation*}
+		\mathcal D' = \left\{\vec x'_n : \vec x'_n = \left(\I(x_n \in T_1), \dotsc, \I(x_n \in T_K)\right) \sim \Mult\left(1, (G(T_1), \dotsc, G(T_K))\right)\right\}
+	\end{equation*}
+	The samples are indeed drawn from a given Multinomial distribution since $\Pr(x_n \in T_k) = G(T_k), k = 1, \dotsc, K$ by definition.
+
+	From conjugacy in \eqref{eqn:par-est/dir-mult/posterior}
+	\begin{align*}
+		(G(T_1), \dotsc, G(T_K)) \mid \mathcal D 	&\sim \Dir\left((\alpha H(T_1), \dotsc, \alpha H(T_K)) + \sum_n \vec x'_n\right) \\
+													&\equiv \Dir\left((\alpha H(T_1), \dotsc, \alpha H(T_K)) + \sum_n (\I(x_n \in T_1), \dotsc, \I(x_n \in T_K))\right) \\
+													&\equiv \Dir\left(\alpha H(T_1) + \sum_n \I(x_n \in T_1), \dotsc, \alpha H(T_K) + \sum_n \I(x_n \in T_K)\right) \\
+													&\equiv \Dir\left(\alpha H(T_1) + \sum_n \delta_{x_n} (T_1), \dotsc, \alpha H(T_K) + \sum_n \delta_{x_n} (T_K)\right) \\
+	\end{align*}
+
+	Since this is true for any finite partition $(T_1, \dotsc, T_K)$, it implies that
+	\begin{equation*}
+		G \mid \mathcal D \sim \DP\left(Z, \frac{1}{Z} \left(\alpha H + \sum_n \delta_{x_n}\right)\right)
+	\end{equation*}
+	for some normalisation constant of the new base measure. Suppose that we now partition the space into $\left(T_1 = \{x_1\}, \dotsc, T_N = \{x_N\}, T' = \Theta \setminus \{x_1, \dotsc, x_N\}\right)$, the normalisation constant $Z$ can be evaluated as
+	\begin{align*}
+		Z 	&= \left(\alpha H(T') + \sum_{n = 1}^N \delta_{x_n}(T')\right) + \sum_{m = 1}^N \left(\alpha H(T_m) + \sum_{n = 1}^N \delta_{x_n}(T_m)\right) \\
+			&= \alpha H(T') + \sum_{m = 1}^N \alpha H(T_m) + \sum_{m = 1}^N \sum_{n = 1}^N \delta_{x_n}(T_m) \\
+			&= \alpha \left(H(T') + \sum_{m = 1}^N H(T_m)\right) + N \\
+			&= \alpha + N
+	\end{align*}
+
+	We can write the final posterior as
+	\begin{equation*}
+		G \mid \mathcal D \sim \DP\left(\alpha + N, \frac{1}{\alpha + N} \left(\alpha H + \sum_n \delta_{x_n}\right)\right)
+	\end{equation*}
+\end{proof}
+
+Doksum and Fabius showed that for every measurable $T \subset \Theta$, and any $N$ observations $\mathcal D = \{x_n: x_n \sim G\}$, the posterior distribution $p(G \mid \mathcal D)$ depends only on the number of observations that fall within $T$ (and not their particular locations). I.e. observations provide information only about those cells which directly contain them.

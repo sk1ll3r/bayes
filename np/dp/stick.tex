@@ -1,0 +1,44 @@
+\subsection{Stick-breaking construction}
+Given $G \sim \DP(\alpha, H)$ and $\mathcal D = \{x_n: x_n \sim G\}$. From \eqref{eqn:np/dp/def/base} and \eqref{eqn:np/dp/posterior/posterior} we know that for any $T \subset \Theta$
+\begin{equation}
+	\E[G(T) \mid \mathcal D, \alpha, H] = \frac{1}{\alpha + N} \left(\alpha H + \sum_n \delta_{x_n}(T)\right)
+\end{equation}
+
+For finite $\alpha$
+\begin{align*}
+	\lim_{N \to \infty} \E[G(T) \mid \mathcal D, \alpha, H] &= \lim_{N \to \infty} \frac{1}{N} \sum_n \delta_{x_n}(T) \\
+															&= \sum_{k = 1}^\infty \pi_k \delta_{\bar x_k}(T)
+\end{align*}
+where $\{\bar x_k\}_{k = 1}^\infty$ are the unique values of $\{x_n\}_{n = 1}^\infty$ and $\pi_k = \lim_{N \to \infty} \frac{\sum_n \I(x_n = \bar x_k)}{N}$ is the limiting empirical frequency of $\bar x_k$.
+
+\begin{theorem}[Stick-breaking construction]
+	Let $\vec \pi = \{\pi_k\}_{k = 1}^\infty$ be an infinite sequence of mixture weights derived from the following stick-breaking process, with parameter $\alpha > 0$:
+	\begin{align}
+		\beta_k		&\sim \Beta(1, \alpha) \\
+		\pi_k		&= \beta_k \prod_{\ell = 1}^{k - 1} (1 - \beta_\ell) \\
+					&= \beta_k \left(1 - \sum_{\ell = 1}^{k - 1} \pi_\ell\right)
+	\end{align}
+	for $k = 1, 2, \dotsc$. Given a base measure $H$ on $\Theta$, consider the following discrete random measure:
+	\begin{align}
+		G(x) = \sum_{k = 1}^\infty \pi_k \delta(x, x_k)		&& x_k \sim H \label{eqn:np/dp/stick/g}
+	\end{align}
+	The construction guarantees $G \sim \DP(\alpha, H)$. Also, samples from a $\DP$ are discrete with probability $1$ and have a representation as in \eqref{eqn:np/dp/stick/g}.
+\end{theorem}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics{np/dp/stick}
+	\caption{Stick-breaking construction}
+\end{figure}
+
+We use $\vec \pi \sim \GEM(\alpha)$ to indicate a set of mixture weights sampled from this process. In short
+\begin{align*}
+	\vec \pi 	&\sim \GEM(\alpha)	& \vec \pi = (\pi_1, \pi_2, \dotsc)\\
+	x_k			&\sim H 			& k = 1, 2, \dotsc \\
+	G(x) 		&= \sum_{k = 1}^\infty \pi_k \delta(x, x_k) \\
+	\implies G 	&\sim \DP(\alpha, H)
+\end{align*}

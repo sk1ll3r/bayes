@@ -1,0 +1,38 @@
+\subsection{Definitions}
+\begin{definition}[Probability measure]
+	Probability measure is a real-valued function $P$ defined on a set of events in a probability space $(\Omega, \mathcal F, P)$ that satisfies
+	\begin{itemize}
+		\item $P$ must return results $\in [0, 1]$, returning 0 for $\emptyset$, 1 for the entire space, $\Omega$, and
+		\item countable additivity: $\forall$ countable collections $\{E_i\}$ of pairwise disjoint sets of $\Omega$,
+			$$P\left(\bigcup_{i \in I} E_i\right) = \sum_{i \in I} P(E_i)$$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Stochastic process]
+	Suppose that $(\Omega, \mathcal F, P)$ is a probability space, and that $T$ (``time'') is a totally ordered set. Suppose further that for each $t \in T$, there is a random variable $X_t: \Omega \to S$ defined on $(\Omega, \mathcal F, P)$. A stochastic process $X$ is a collection $\{X_t: t \in T\}$. $S$ is called the state space of the process.
+\end{definition}
+
+\begin{theorem}[Dirichlet process]
+	Let $H$ be a probability distribution on a measurable space $\Theta$, and $\alpha$ a positive scalar. Consider a finite partition $(T_1, \dotsc, T_K)$ of $\Theta$.
+
+	A random probability distribution $G$ on $\Theta$ is drawn from a Dirichlet process if its measure on every finite partition follows a Dirichlet distribution:
+	\begin{equation}
+		(G(T_1), \dotsc, G(T_K)) \sim \Dir(\alpha H(T_1), \dotsc, \alpha H(T_K)) \label{eqn:dp-dp}
+	\end{equation}
+
+	For any $\alpha, H$, there exists a unique stochastic process satisfying these conditions, which we denote $\DP(\alpha, H)$.
+\end{theorem}
+
+\begin{claim}
+	The base measure is the mean, i.e.
+	\begin{equation}
+		\forall T \subset \Theta, \E[G(T)] = H(T) \label{eqn:np/dp/def/base}
+	\end{equation}
+\end{claim}
+
+\begin{proof}
+	Let $T \equiv T_k$ for some finite partition $(T_1, \dotsc, T_k, \dotsc, T_K)$ of $\Theta$. Then since $\eqref{eqn:dp-dp}$ we have
+	\begin{equation}
+		\E[G(T_k)] = \frac{\alpha H(T_k)}{\sum_j \alpha H(T_j)} = \frac{H(T_k)}{\sum_j H(T_j)} = H(T_k)
+	\end{equation}
+\end{proof}

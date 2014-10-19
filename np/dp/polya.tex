@@ -1,0 +1,32 @@
+\subsection{Pólya urn construction}
+The purpose is to generate samples from the posterior predictive, $p(\tilde x \mid \mathcal D, \alpha, H)$ where $\mathcal D = \{x_n: x_n \sim G, G \sim DP(\alpha, H)\}$.
+
+\begin{theorem}
+	Let $G \sim \DP(\alpha, H)$. Let $h(x)$ be the density of the base measure $H$. Consider a set of $N$ observations $x_n \sim G$ taking $K \leq N$ distinct values $\{\bar x_k\}_{k = 1}^K$. The predictive distribution of the next observation is
+	\begin{equation}
+		p(\tilde x \mid x_1, \dotsc, x_N, \alpha, H) = \frac{1}{\alpha + N} \left(\alpha h(\tilde x) + \sum_k N_k \delta(\tilde x, \bar x_k)\right) \label{eqn:np/dp/polya/post-pred}
+	\end{equation}
+	where $N_k = \sum_n \delta(x_n, \bar x_k)$ is the count of observations that equal $\bar x_k$.
+\end{theorem}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+We can get a sample from this distribution via the generalised Pólya urn model:
+	\begin{algorithmbis}[Pólya urn construction]\label{alg:np/dp/polya/polya}
+        \begin{algorithmic}[1]
+            \State Assume we have a bag with $N$ identical balls of $K$ different colours (our observations) with the probability of drawing each of them being $\frac{1}{\alpha + N}$. We also have a special black ball which can be drawn with probability $\frac{\alpha}{\alpha + N}$.
+            \State Draw a ball.
+            \If{it's not black}
+            	\State Record colour.
+            	\State (Put back and add one more ball with the same colour.)
+            \Else
+            	\State Draw a ball from the bag of yet unseen colours, following $H$.
+            	\State Record new colour.
+            	\State (Put back both the black ball and the ball with a new colour.)
+            \EndIf
+            \State The recorded colour follows the posterior predictive in \eqref{eqn:np/dp/polya/post-pred}.
+        \end{algorithmic}
+    \end{algorithmbis}
+This follows \eqref{eqn:np/dp/polya/post-pred} exactly.

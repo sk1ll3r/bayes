@@ -11,13 +11,14 @@ $\mathcal D = \left\{\vec x_n : \vec x_n \sim \Mult(T_n, \vec \theta), \vec x_n,
     where $n_k = \sum_n x_{n, k}, k = 1, \dotsc, K$ are the total counts for the side $k$ of the die, $\vec x = \sum_n \vec x_n$, and $T = \sum_n T_n$.
 
 \paragraph{Posterior.}
-    \begin{align*}
-        p(\vec \theta \mid \mathcal D)  &\propto p(\mathcal D \mid \vec \theta) p(\vec \theta) \\
-                                        &= \Mult(\vec x \mid T, \vec \theta) \Dir(\vec \theta \mid \vec \alpha) \\
-                                        &\propto \left(\theta_1^{n_1} \cdots \theta_K^{n_K}\right) \left(\theta_1^{\alpha_1 - 1} \cdots \theta_K^{\alpha_K - 1}\right) \\
-                                        &= \theta_1^{n_1 + \alpha_1 - 1} \cdots \theta_K^{n_K + \alpha_K - 1} \\
-                                        &\propto \Dir\left(\vec \theta \mid \vec \alpha + \vec x\right)
-    \end{align*}
+    \begin{align}
+        p(\vec \theta \mid \mathcal D)  &\propto p(\mathcal D \mid \vec \theta) p(\vec \theta) \nonumber\\
+                                        &= \Mult(\vec x \mid T, \vec \theta) \Dir(\vec \theta \mid \vec \alpha) \nonumber\\
+                                        &\propto \left(\theta_1^{n_1} \cdots \theta_K^{n_K}\right) \left(\theta_1^{\alpha_1 - 1} \cdots \theta_K^{\alpha_K - 1}\right) \nonumber\\
+                                        &= \theta_1^{n_1 + \alpha_1 - 1} \cdots \theta_K^{n_K + \alpha_K - 1} \nonumber\\
+                                        &\propto \Dir\left(\vec \theta \mid \vec \alpha + \vec x\right) \nonumber\\
+                                        &= \Dir\left(\vec \theta \mid \vec \alpha + \sum_n \vec x_n\right) \label{eqn:par-est/dir-mult/posterior}
+    \end{align}
 
 \paragraph{Posterior predictive.} (New data point $\tilde{\vec x}$ for a given total count $\tilde T = \sum_k \tilde x_k$).
     \begin{align*}
