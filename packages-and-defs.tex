@@ -1,0 +1,88 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+% \usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+% \usepackage{algorithmicx}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{animate}
+\usepackage{booktabs}
+\usepackage{tabulary}
+\usepackage{rotating}
+
+\makeatletter
+\newcounter{algorithmbis}
+\setcounter{algorithmbis}{0}
+\renewcommand{\thealgorithmbis}{\arabic{algorithmbis}}
+\def\algorithmbis{\@ifnextchar[{\@algorithmbisa}{\@algorithmbisb}}
+\def\@algorithmbisa[#1]{%
+  \refstepcounter{algorithmbis}
+  \trivlist
+  \leftmargin\z@
+  \itemindent\z@
+  \labelsep\z@
+  \item[\parbox{\textwidth}{%
+    \hrule
+    \hrule
+    \noindent\strut\textbf{Algorithm \thealgorithmbis} #1
+    \hrule
+  }]\hfil\vskip0em%
+}
+% \newcommand*{\oldeqref}{}
+% \let\oldeqref\eqref
+% \renewcommand*{\eqref}[1]{%
+%   \begingroup
+%     \hypersetup{
+%       linkcolor=linkequation,
+%       linkbordercolor=linkequation,
+%     }%
+%     \oldeqref{#1}%
+%   \endgroup
+% }
+\def\@algorithmbisb{\@algorithmbisa[]}
+\def\endalgorithmbis{\hfil\vskip-1em\hrule\endtrivlist}
+\makeatother
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\Ber}{Ber}
+\DeclareMathOperator{\Beta}{Beta}
+\DeclareMathOperator{\BetaBin}{BetaBin}
+\DeclareMathOperator{\Cat}{Cat}
+\DeclareMathOperator{\Dir}{Dir}
+\DeclareMathOperator{\DirMult}{DirMult}
+\DeclareMathOperator{\Mult}{Mult}
+\DeclareMathOperator{\Poi}{Poi}
+\DeclareMathOperator{\Gammadist}{Gamma}
+\DeclareMathOperator{\NB}{NB}
+\DeclareMathOperator{\Unif}{Unif}
+\DeclareMathOperator{\Pareto}{Pareto}
+\DeclareMathOperator{\Gauss}{\mathcal N}
+\DeclareMathOperator{\E}{\mathrm{E}}
+\DeclareMathOperator{\var}{\mathrm{var}}
+\DeclareMathOperator{\cov}{\mathrm{cov}}
+\DeclareMathOperator{\grad}{\mathrm{grad}}
+\newcommand*\mean[1]{\bar{#1}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\KL}{KL}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\DP}{DP}
+\DeclareMathOperator{\GEM}{GEM}
+\DeclareMathOperator{\I}{\mathbb I}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{claim}{Claim}[section]
+
+% \colorlet{linkequation}{blue}
