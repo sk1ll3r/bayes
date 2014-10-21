@@ -3,7 +3,7 @@ In mixture models, we have discrete latent states $\vec Z = \left\{z_n, z_n \in 
 \begin{align}
     p(\vec x_n \mid \vec \theta)    &= \sum_{k = 1}^K p(\vec x_n, z_n = k; \vec \theta) \nonumber\\
                                     &= \sum_{k = 1}^K p(\vec x_n \mid z_n = k; \vec \theta) p(z_n = k \mid \vec \theta) \nonumber\\
-                                    &= \sum_{k = 1}^K \pi_k p_k(\vec x_n \mid \vec \theta) \label{eqn:models-mm-lik}
+                                    &= \sum_{k = 1}^K \pi_k p_k(\vec x_n \mid \vec \theta) \label{eqn:models/mm/lik}
 \end{align}
 
 We can also express the posterior probability that point $n$ belongs to cluster $k$, or the \emph{responsibility} $r_{nk}(\vec \theta)$ (often abbreviated as $r_{nk}$) of cluster $k$ for point $n$ to be:
@@ -56,7 +56,7 @@ or
 
 We can express $\ln p(\vec X \mid \vec \theta)$ as
 \begin{equation}
-    \ln p(\vec X \mid \vec \theta) = \mathcal L(q, \vec \theta) + \KL(q \parallel p) \label{eqn:models-mm-lik}
+    \ln p(\vec X \mid \vec \theta) = \mathcal L(q, \vec \theta) + \KL(q \parallel p) \label{eqn:models/mm/lik2}
 \end{equation}
 where
 \begin{align}
@@ -85,7 +85,7 @@ The actual algorithm is as follows
     \end{algorithmic}
 \end{algorithmbis}
 
-\paragraph{E step.} Hold $\vec \theta^{\text{old}}$, maximise $\mathcal L\left(q, \vec \theta^{\text{old}}\right)$ w.r.t. $q$. Since the quantity $\ln p(\vec X \mid \vec \theta)$ in \eqref{eqn:models-mm-lik} is constant w.r.t. $q$, we can maximise $\mathcal L\left(q, \vec \theta^{\text{old}}\right)$ by minimising $\KL(q \parallel p)$. This can be done by setting the $\KL$ to $0$ by setting $q(\vec Z) = p(\vec Z \mid \vec X; \vec \theta^{\text{old}})$.
+\paragraph{E step.} Hold $\vec \theta^{\text{old}}$, maximise $\mathcal L\left(q, \vec \theta^{\text{old}}\right)$ w.r.t. $q$. Since the quantity $\ln p(\vec X \mid \vec \theta)$ in \eqref{eqn:models/mm/lik2} is constant w.r.t. $q$, we can maximise $\mathcal L\left(q, \vec \theta^{\text{old}}\right)$ by minimising $\KL(q \parallel p)$. This can be done by setting the $\KL$ to $0$ by setting $q(\vec Z) = p(\vec Z \mid \vec X; \vec \theta^{\text{old}})$.
 
 \paragraph{M step.} Hold $q(\vec Z) = p(\vec Z \mid \vec X; \vec \theta^{\text{old}})$ fixed, maximise $\mathcal L\left(q, \vec \theta\right)$ w.r.t. $\vec \theta$ to get $\vec \theta^{\text{new}}$. We can rewrite $\mathcal L\left(q, \vec \theta\right)$ as
 \begin{align*}

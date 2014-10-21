@@ -5,7 +5,7 @@ Calculate KL divergences for discrete sample spaces and KS test statistics for c
 \subsubsection{ERPs}
 The purpose is to test whether the \verb!*-lnpdf! functions work. For some distributions $f$ and $g$, if we \verb!assume! $\vec\theta \sim f$, then \verb!observe! $\mathcal D = \{y_n : y_n \sim g(\dotsc, \vec \theta)\}_{n = 1}^N$, and finally \verb!predict! $\vec\theta \mid \mathcal D$, the inference engine will evaluate the \verb!*-lnpdf! functions of $g$ in order to characterise $\tilde p(\vec x \mid \vec y) \propto \tilde p(\vec y, \vec x) = \prod_n p(y_n \mid \theta_{t_n}, \vec x_n) \tilde p(\vec x_n \mid \vec x_{n - 1})$. We can then test whether the \verb!predict!'s follow the true distribution of $\vec\theta \mid \mathcal D$. Using this fact and taking advantage of conjugate pairs described in Chapter~\ref{chapter:par-est} and on Wikipedia, we can test the ERPs in the system as follows.
 
-\begin{table}[h]
+\begin{table}[ht!]
 \begin{tabular}{ll}
 \toprule
 Bernoulli & \\
@@ -18,7 +18,7 @@ $\theta \mid \mathcal D \sim \Beta(\alpha + N_1, \beta + N_0)$	& \texttt{[predic
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht!]
 \begin{tabular}{ll}
 \toprule
 Binomial & \\
@@ -31,7 +31,7 @@ $\theta \mid \mathcal D \sim \Beta(\alpha + \sum_n x_n, \beta + TN - \sum_n x_n)
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht!]
 \begin{tabular}{ll}
 \toprule
 Poisson & \\
@@ -44,7 +44,7 @@ $\lambda \mid \mathcal D \sim \Gammadist(\alpha + \sum_n x_n, \beta + N)$			& \t
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht!]
 \begin{tabular}{ll}
 \toprule
 Categorical & \\
@@ -57,7 +57,7 @@ $\vec\theta \mid \mathcal D \sim \Dir(\vec\alpha + (n_1, \dotsc, n_K)^T)$			& \t
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht!]
 \begin{tabular}{ll}
 \toprule
 Univariate Normal with known variance & \\
@@ -71,7 +71,7 @@ $\mu \mid \mathcal D \sim \Gauss\left(\frac{\frac{\mu_0}{\sigma_0^2} + \frac{\su
 \end{tabular}
 \end{table}
 
-% \begin{table}[h]
+% \begin{table}[ht!]
 % \begin{tabular}{ll}
 % \toprule
 % Uniform & \\
