@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipe SYSTEM "ipe.dtd">
+<ipe version="70005" creator="Ipe 7.1.4">
+<info created="D:20141023143913" modified="D:20141023151531"/>
+<ipestyle name="basic">
+<symbol name="arrow/arc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/farc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="mark/circle(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</symbol>
+<symbol name="mark/disk(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+</path>
+</symbol>
+<symbol name="mark/fdisk(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+0.5 0 0 0.5 0 0 e
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</group>
+</symbol>
+<symbol name="mark/box(sx)" transformations="translations">
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</symbol>
+<symbol name="mark/square(sx)" transformations="translations">
+<path fill="sym-stroke">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+</path>
+</symbol>
+<symbol name="mark/fsquare(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+-0.5 -0.5 m
+0.5 -0.5 l
+0.5 0.5 l
+-0.5 0.5 l
+h
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="mark/cross(sx)" transformations="translations">
+<group>
+<path fill="sym-stroke">
+-0.43 -0.57 m
+0.57 0.43 l
+0.43 0.57 l
+-0.57 -0.43 l
+h
+</path>
+<path fill="sym-stroke">
+-0.43 0.57 m
+0.57 -0.43 l
+0.43 -0.57 l
+-0.57 0.43 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="arrow/fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/linear(spx)">
+<path stroke="sym-stroke" pen="sym-pen">
+-1 0.333 m
+0 0 l
+-1 -0.333 l
+</path>
+</symbol>
+<symbol name="arrow/fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<pen name="heavier" value="0.8"/>
+<pen name="fat" value="1.2"/>
+<pen name="ultrafat" value="2"/>
+<symbolsize name="large" value="5"/>
+<symbolsize name="small" value="2"/>
+<symbolsize name="tiny" value="1.1"/>
+<arrowsize name="large" value="10"/>
+<arrowsize name="small" value="5"/>
+<arrowsize name="tiny" value="3"/>
+<color name="red" value="1 0 0"/>
+<color name="green" value="0 1 0"/>
+<color name="blue" value="0 0 1"/>
+<color name="yellow" value="1 1 0"/>
+<color name="orange" value="1 0.647 0"/>
+<color name="gold" value="1 0.843 0"/>
+<color name="purple" value="0.627 0.125 0.941"/>
+<color name="gray" value="0.745"/>
+<color name="brown" value="0.647 0.165 0.165"/>
+<color name="navy" value="0 0 0.502"/>
+<color name="pink" value="1 0.753 0.796"/>
+<color name="seagreen" value="0.18 0.545 0.341"/>
+<color name="turquoise" value="0.251 0.878 0.816"/>
+<color name="violet" value="0.933 0.51 0.933"/>
+<color name="darkblue" value="0 0 0.545"/>
+<color name="darkcyan" value="0 0.545 0.545"/>
+<color name="darkgray" value="0.663"/>
+<color name="darkgreen" value="0 0.392 0"/>
+<color name="darkmagenta" value="0.545 0 0.545"/>
+<color name="darkorange" value="1 0.549 0"/>
+<color name="darkred" value="0.545 0 0"/>
+<color name="lightblue" value="0.678 0.847 0.902"/>
+<color name="lightcyan" value="0.878 1 1"/>
+<color name="lightgray" value="0.827"/>
+<color name="lightgreen" value="0.565 0.933 0.565"/>
+<color name="lightyellow" value="1 1 0.878"/>
+<dashstyle name="dashed" value="[4] 0"/>
+<dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
+<dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
+<textsize name="large" value="\large"/>
+<textsize name="Large" value="\Large"/>
+<textsize name="LARGE" value="\LARGE"/>
+<textsize name="huge" value="\huge"/>
+<textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
+<textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
+<textstyle name="center" begin="\begin{center}" end="\end{center}"/>
+<textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
+<textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
+<gridsize name="4 pts" value="4"/>
+<gridsize name="8 pts (~3 mm)" value="8"/>
+<gridsize name="16 pts (~6 mm)" value="16"/>
+<gridsize name="32 pts (~12 mm)" value="32"/>
+<gridsize name="10 pts (~3.5 mm)" value="10"/>
+<gridsize name="20 pts (~7 mm)" value="20"/>
+<gridsize name="14 pts (~5 mm)" value="14"/>
+<gridsize name="28 pts (~10 mm)" value="28"/>
+<gridsize name="56 pts (~20 mm)" value="56"/>
+<anglesize name="90 deg" value="90"/>
+<anglesize name="60 deg" value="60"/>
+<anglesize name="45 deg" value="45"/>
+<anglesize name="30 deg" value="30"/>
+<anglesize name="22.5 deg" value="22.5"/>
+<tiling name="falling" angle="-60" step="4" width="1"/>
+<tiling name="rising" angle="30" step="4" width="1"/>
+</ipestyle>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
+<text layer="alpha" transformations="translations" pos="128 720" stroke="black" type="label" width="28.781" height="7.476" depth="1.49" halign="center" valign="center">$\mathbf{x}_0 = \emptyset$</text>
+<text transformations="translations" pos="144 704" stroke="black" type="label" width="16.501" height="4.29" depth="2.85" halign="center" valign="center">$x_{1, 1}$</text>
+<text transformations="translations" pos="144 688" stroke="black" type="label" width="16.501" height="4.29" depth="2.85" halign="center" valign="center">$x_{1, 2}$</text>
+<text transformations="translations" pos="144 672" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<text transformations="translations" pos="144 656" stroke="black" type="label" width="14.896" height="4.29" depth="2.85" halign="center" valign="center">$x_{1, \cdot}$</text>
+<text transformations="translations" pos="128 640" stroke="black" type="label" width="95.938" height="7.473" depth="2.49" halign="center" valign="center">\verb![observe! $(t_1\,\ \mathbf{\theta}_{t_1})\,\,y_1$\verb!]!</text>
+<text transformations="translations" pos="144 624" stroke="black" type="label" width="16.501" height="4.29" depth="2.85" halign="center" valign="center">$x_{2, 1}$</text>
+<text transformations="translations" pos="144 608" stroke="black" type="label" width="16.501" height="4.29" depth="2.85" halign="center" valign="center">$x_{2, 2}$</text>
+<text transformations="translations" pos="144 592" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<text transformations="translations" pos="144 576" stroke="black" type="label" width="14.896" height="4.29" depth="2.85" halign="center" valign="center">$x_{2, \cdot}$</text>
+<text transformations="translations" pos="128 560" stroke="black" type="label" width="95.938" height="7.473" depth="2.49" halign="center" valign="center">\verb![observe! $(t_2\,\ \mathbf{\theta}_{t_2})\,\,y_2$\verb!]!</text>
+<text transformations="translations" pos="128 544" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<text transformations="translations" pos="128 528" stroke="black" type="label" width="128.026" height="7.473" depth="3.32" halign="center" valign="center">\verb![observe! $(t_{n - 1}\,\ \mathbf{\theta}_{t_{n - 1}})\,\,y_{n - 1}$\verb!]!</text>
+<text transformations="translations" pos="144 512" stroke="black" type="label" width="17.454" height="4.29" depth="2.85" halign="center" valign="center">$x_{n, 1}$</text>
+<text transformations="translations" pos="144 496" stroke="black" type="label" width="17.454" height="4.29" depth="2.85" halign="center" valign="center">$x_{n, 2}$</text>
+<text transformations="translations" pos="144 480" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<text transformations="translations" pos="144 464" stroke="black" type="label" width="15.849" height="4.29" depth="2.85" halign="center" valign="center">$x_{n, \cdot}$</text>
+<text transformations="translations" pos="128 448" stroke="black" type="label" width="98.843" height="7.473" depth="2.49" halign="center" valign="center">\verb![observe! $(t_n\,\ \mathbf{\theta}_{t_n})\,\,y_n$\verb!]!</text>
+<text transformations="translations" pos="128 432" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<text transformations="translations" pos="128 416" stroke="black" type="label" width="133.806" height="7.468" depth="3.33" halign="center" valign="center">\verb![observe! $(t_{N - 1}\,\ \mathbf{\theta}_{t_{N - 1}})\,\,y_{N - 1}$\verb!]!</text>
+<text transformations="translations" pos="144 400" stroke="black" type="label" width="19.159" height="4.29" depth="2.85" halign="center" valign="center">$x_{N, 1}$</text>
+<text transformations="translations" pos="144 384" stroke="black" type="label" width="19.159" height="4.29" depth="2.85" halign="center" valign="center">$x_{N, 2}$</text>
+<text transformations="translations" pos="144 368" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<text transformations="translations" pos="144 352" stroke="black" type="label" width="17.554" height="4.29" depth="2.85" halign="center" valign="center">$x_{N, \cdot}$</text>
+<text transformations="translations" pos="128 336" stroke="black" type="label" width="104.624" height="7.478" depth="2.49" halign="center" valign="center">\verb![observe! $(t_N\,\ \mathbf{\theta}_{t_N})\,\,y_N$\verb!]!</text>
+<path stroke="black" arrow="normal/normal">
+128 712 m
+128 648 l
+</path>
+<path stroke="black" arrow="normal/normal">
+128 632 m
+128 568 l
+</path>
+<path stroke="black" arrow="normal/normal">
+128 520 m
+128 456 l
+</path>
+<path stroke="black" arrow="normal/normal">
+128 408 m
+128 344 l
+</path>
+<path stroke="black">
+160 708 m
+164 708
+164 680
+168 680 s
+</path>
+<path stroke="black">
+160 652 m
+164 652
+164 680
+168 680 s
+</path>
+<text transformations="translations" pos="172 680" stroke="black" type="label" width="109.425" height="7.472" depth="2.85" valign="center">$\mathbf{x_1} = \mathbf x_0 \cup \{x_{1, 1}, \cdots, x_{1, \cdot}\}$</text>
+<path matrix="1 0 0 1 0 -80" stroke="black">
+160 708 m
+164 708
+164 680
+168 680 s
+</path>
+<path matrix="1 0 0 1 0 -80" stroke="black">
+160 652 m
+164 652
+164 680
+168 680 s
+</path>
+<path matrix="1 0 0 1 0 -192" stroke="black">
+160 708 m
+164 708
+164 680
+168 680 s
+</path>
+<path matrix="1 0 0 1 0 -192" stroke="black">
+160 652 m
+164 652
+164 680
+168 680 s
+</path>
+<path matrix="1 0 0 1 0 -304" stroke="black">
+160 708 m
+164 708
+164 680
+168 680 s
+</path>
+<path matrix="1 0 0 1 0 -304" stroke="black">
+160 652 m
+164 652
+164 680
+168 680 s
+</path>
+<text matrix="1 0 0 1 0 -80" transformations="translations" pos="172 680" stroke="black" type="label" width="109.425" height="7.472" depth="2.85" valign="center">$\mathbf{x_2} = \mathbf x_1 \cup \{x_{2, 1}, \cdots, x_{2, \cdot}\}$</text>
+<text matrix="1 0 0 1 0 -192" transformations="translations" pos="172 680" stroke="black" type="label" width="122.895" height="7.472" depth="2.85" valign="center">$\mathbf{x}_n = \mathbf x_{n - 1} \cup \{x_{n, 1}, \cdots, x_{n, \cdot}\}$</text>
+<text matrix="1 0 0 1 0 -304" transformations="translations" pos="172 680" stroke="black" type="label" width="130.571" height="7.472" depth="2.85" valign="center">$\mathbf{x}_N = \mathbf x_{N - 1} \cup \{x_{N, 1}, \cdots, x_{N, \cdot}\}$</text>
+<text matrix="1 0 0 1 -44 16" transformations="translations" pos="256 544" stroke="black" type="label" width="221.037" height="6.919" depth="2.85" valign="center">$x_{n, k} = $ result of random procedure application $n, k$</text>
+<text matrix="1 0 0 1 -44 0" transformations="translations" pos="256 528" stroke="black" type="label" width="48.722" height="6.128" depth="2.85" valign="center">$t_{n, k} = $ type \\
+</text>
+<text matrix="1 0 0 1 -44 0" transformations="translations" pos="256 512" stroke="black" type="label" width="51.395" height="6.919" depth="3.52" valign="center">$\mathbf\theta_{t_{n, k}}$ = args</text>
+<text matrix="1 0 0 1 -44 0" transformations="translations" pos="256 544" stroke="black" type="label" width="25.488" height="6.918" depth="0" valign="center">where</text>
+<path matrix="1 0 0 1 -44 0" stroke="black">
+252 568 m
+252 504 l
+480 504 l
+480 568 l
+h
+</path>
+<path stroke="black" arrow="normal/tiny">
+148 480 m
+164 504
+196 504
+200 536
+208 536 s
+</path>
+</page>
+</ipe>

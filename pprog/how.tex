@@ -1,3 +1,34 @@
 \section{How it works}
 \subsection{Notation}
-\subsection{Sampling}
+The syntax is as follows
+\begin{verbatim}
+	[assume symbol <expr>]
+	[observe (<random proc> <arg> ... <arg>) <const>]
+	[predict <expr>]
+\end{verbatim}
+where \verb!assume!'s are either deterministic or random variables declarations, \verb!observe!'s condition the distribution of the \verb!assume!'d variables and \verb!predict!'s give samples from the posteriors of the corresponding \verb!<expr>!'s.
+
+Probability of an execution trace is
+\begin{align}
+	\tilde p(\vec y, \vec x) 				&= \prod_{n = 1}^N p(y_n \mid \vec \theta_{t_n}, \vec x_n) \tilde p(\vec x_n \mid \vec x_{n - 1}) \\
+	\tilde p(\vec x_n \mid \vec x_{n - 1}) 	&= \prod_{k = 1}^{\vec x_n \setminus \vec x_{n - 1}} p(x_{n, k} \mid \vec \theta_{t_{n, k}}, x_{n, 1:(k - 1)}, \vec x_{n - 1}) \\
+	p(y_n \mid \vec \theta_{t_n}, \vec x_n)	&= \text{likelihood of observed output } y_n \\
+	\text{tilde}							&= \text{distributions we can only sample from} \\
+	y_n										&= n^{\text{th}} \text{ }\mathtt{observe}\text{'d output} \\
+	t_n										&= \text{type of } n^{\text{th}} \text{ }\mathtt{observe}\text{'d main }\mathtt{random\ proc} \\
+	\vec \theta_{t_n}						&= \text{arguments of } t_n \\
+	\vec x_n								&= \text{set of all random procedure application results computed } \nonumber\\
+											&\text{before }p(y_n \mid \vec \theta_{t_n}, \vec x_n) \text{ is evaluated. I.e. before the } n^{\text{th}} \text{ observe.}
+\end{align}
+
+Whevever a \verb!predict! is called, we want to sample from $\tilde p(\vec x \mid \vec y) \propto \tilde p(\vec y, \vec x)$. A general overview of this can be seen in Figure~\ref{fig:pprog/how/general}.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=1]{pprog/how/figures/general/general}
+\caption{A general overview of Anglican interpretation.}
+\label{fig:pprog/how/general}
+\end{figure}
+
+\input{pprog/how/rdb}
+\input{pprog/how/smc}
+\input{pprog/how/pgibbs}
