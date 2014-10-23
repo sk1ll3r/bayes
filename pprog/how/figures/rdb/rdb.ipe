@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70005" creator="Ipe 7.1.4">
-<info created="D:20141023154055" modified="D:20141023154055"/>
+<info created="D:20141023154055" modified="D:20141023181154"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -345,7 +345,7 @@ h
 280 524
 272 524 s
 </path>
-<text transformations="translations" pos="292 600" stroke="black" type="label" width="64.877" height="7.487" depth="4.18" valign="center">$\mathbf x \cap \mathbf x&apos; \cap \{x&apos;_{n, k}\}$</text>
+<text transformations="translations" pos="292 600" stroke="black" type="label" width="74.84" height="7.487" depth="4.18" valign="center">$\{\mathbf x \cap \mathbf x&apos;\} \cup \{x&apos;_{n, k}\}$</text>
 <path stroke="black">
 272 532 m
 280 532
@@ -371,6 +371,6 @@ h
 232 380
 240 380 s
 </path>
-<text transformations="translations" pos="220 452" stroke="black" type="label" width="63.216" height="7.487" depth="4.18" halign="right" valign="center">$\mathbf x&apos; \setminus \{\mathbf x \cup x&apos;_{n, k}\}$</text>
+<text transformations="translations" pos="220 452" stroke="black" type="label" width="61.556" height="7.487" depth="4.18" halign="right" valign="center">$\{\mathbf x&apos; \setminus \mathbf x\} \setminus x&apos;_{n, k}$</text>
 </page>
 </ipe>
