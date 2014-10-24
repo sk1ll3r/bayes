@@ -112,7 +112,7 @@
 
 \subsection{The resampling step}
     Whenever the effective sample size drops below some threshold, resample to get new $R$ samples from the approximation of the pdf. This step is also called \textbf{rejuvenation}. The full algorithm for a generic particle filter is shown in Algorithm~\ref{alg:part-fil} below in which we resample during every step.
-    \begin{algorithmbis}[Generic particle filter]\label{alg:part-fil}
+    \begin{algorithmbis}[Generic particle filter]\label{alg:sampling/part-fil/part-fil}
         \begin{algorithmic}[1]
             \State Sample from proposal \Comment Initialisation
                 \begin{equation}

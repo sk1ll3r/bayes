@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipe SYSTEM "ipe.dtd">
+<ipe version="70005" creator="Ipe 7.1.4">
+<info created="D:20141024121715" modified="D:20141024121715"/>
+<ipestyle name="basic">
+<symbol name="arrow/arc(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/farc(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="mark/circle(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</symbol>
+<symbol name="mark/disk(sx)" transformations="translations">
+<path fill="sym-stroke">
+0.6 0 0 0.6 0 0 e
+</path>
+</symbol>
+<symbol name="mark/fdisk(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+0.5 0 0 0.5 0 0 e
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+0.6 0 0 0.6 0 0 e
+0.4 0 0 0.4 0 0 e
+</path>
+</group>
+</symbol>
+<symbol name="mark/box(sx)" transformations="translations">
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</symbol>
+<symbol name="mark/square(sx)" transformations="translations">
+<path fill="sym-stroke">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+</path>
+</symbol>
+<symbol name="mark/fsquare(sfx)" transformations="translations">
+<group>
+<path fill="sym-fill">
+-0.5 -0.5 m
+0.5 -0.5 l
+0.5 0.5 l
+-0.5 0.5 l
+h
+</path>
+<path fill="sym-stroke" fillrule="eofill">
+-0.6 -0.6 m
+0.6 -0.6 l
+0.6 0.6 l
+-0.6 0.6 l
+h
+-0.4 -0.4 m
+0.4 -0.4 l
+0.4 0.4 l
+-0.4 0.4 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="mark/cross(sx)" transformations="translations">
+<group>
+<path fill="sym-stroke">
+-0.43 -0.57 m
+0.57 0.43 l
+0.43 0.57 l
+-0.57 -0.43 l
+h
+</path>
+<path fill="sym-stroke">
+-0.43 0.57 m
+0.57 -0.43 l
+0.43 -0.57 l
+-0.57 0.43 l
+h
+</path>
+</group>
+</symbol>
+<symbol name="arrow/fnormal(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/pointed(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/fpointed(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-0.8 0 l
+-1 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/linear(spx)">
+<path stroke="sym-stroke" pen="sym-pen">
+-1 0.333 m
+0 0 l
+-1 -0.333 l
+</path>
+</symbol>
+<symbol name="arrow/fdouble(spx)">
+<path stroke="sym-stroke" fill="white" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<symbol name="arrow/double(spx)">
+<path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
+0 0 m
+-1 0.333 l
+-1 -0.333 l
+h
+-1 0 m
+-2 0.333 l
+-2 -0.333 l
+h
+</path>
+</symbol>
+<pen name="heavier" value="0.8"/>
+<pen name="fat" value="1.2"/>
+<pen name="ultrafat" value="2"/>
+<symbolsize name="large" value="5"/>
+<symbolsize name="small" value="2"/>
+<symbolsize name="tiny" value="1.1"/>
+<arrowsize name="large" value="10"/>
+<arrowsize name="small" value="5"/>
+<arrowsize name="tiny" value="3"/>
+<color name="red" value="1 0 0"/>
+<color name="green" value="0 1 0"/>
+<color name="blue" value="0 0 1"/>
+<color name="yellow" value="1 1 0"/>
+<color name="orange" value="1 0.647 0"/>
+<color name="gold" value="1 0.843 0"/>
+<color name="purple" value="0.627 0.125 0.941"/>
+<color name="gray" value="0.745"/>
+<color name="brown" value="0.647 0.165 0.165"/>
+<color name="navy" value="0 0 0.502"/>
+<color name="pink" value="1 0.753 0.796"/>
+<color name="seagreen" value="0.18 0.545 0.341"/>
+<color name="turquoise" value="0.251 0.878 0.816"/>
+<color name="violet" value="0.933 0.51 0.933"/>
+<color name="darkblue" value="0 0 0.545"/>
+<color name="darkcyan" value="0 0.545 0.545"/>
+<color name="darkgray" value="0.663"/>
+<color name="darkgreen" value="0 0.392 0"/>
+<color name="darkmagenta" value="0.545 0 0.545"/>
+<color name="darkorange" value="1 0.549 0"/>
+<color name="darkred" value="0.545 0 0"/>
+<color name="lightblue" value="0.678 0.847 0.902"/>
+<color name="lightcyan" value="0.878 1 1"/>
+<color name="lightgray" value="0.827"/>
+<color name="lightgreen" value="0.565 0.933 0.565"/>
+<color name="lightyellow" value="1 1 0.878"/>
+<dashstyle name="dashed" value="[4] 0"/>
+<dashstyle name="dotted" value="[1 3] 0"/>
+<dashstyle name="dash dotted" value="[4 2 1 2] 0"/>
+<dashstyle name="dash dot dotted" value="[4 2 1 2 1 2] 0"/>
+<textsize name="large" value="\large"/>
+<textsize name="Large" value="\Large"/>
+<textsize name="LARGE" value="\LARGE"/>
+<textsize name="huge" value="\huge"/>
+<textsize name="Huge" value="\Huge"/>
+<textsize name="small" value="\small"/>
+<textsize name="footnote" value="\footnotesize"/>
+<textsize name="tiny" value="\tiny"/>
+<textstyle name="center" begin="\begin{center}" end="\end{center}"/>
+<textstyle name="itemize" begin="\begin{itemize}" end="\end{itemize}"/>
+<textstyle name="item" begin="\begin{itemize}\item{}" end="\end{itemize}"/>
+<gridsize name="4 pts" value="4"/>
+<gridsize name="8 pts (~3 mm)" value="8"/>
+<gridsize name="16 pts (~6 mm)" value="16"/>
+<gridsize name="32 pts (~12 mm)" value="32"/>
+<gridsize name="10 pts (~3.5 mm)" value="10"/>
+<gridsize name="20 pts (~7 mm)" value="20"/>
+<gridsize name="14 pts (~5 mm)" value="14"/>
+<gridsize name="28 pts (~10 mm)" value="28"/>
+<gridsize name="56 pts (~20 mm)" value="56"/>
+<anglesize name="90 deg" value="90"/>
+<anglesize name="60 deg" value="60"/>
+<anglesize name="45 deg" value="45"/>
+<anglesize name="30 deg" value="30"/>
+<anglesize name="22.5 deg" value="22.5"/>
+<tiling name="falling" angle="-60" step="4" width="1"/>
+<tiling name="rising" angle="30" step="4" width="1"/>
+</ipestyle>
+<page>
+<layer name="alpha"/>
+<view layers="alpha" active="alpha"/>
+<text layer="alpha" matrix="1 0 0 1 112 96" transformations="translations" pos="64 704" stroke="black" type="label" width="285.571" height="7.473" depth="2.49" halign="center" valign="center">Iteration $n = 1$ of condtional SMC: Initialise $(L - 1)$ interpreters.</text>
+<text transformations="translations" pos="80 768" stroke="black" type="label" width="16.743" height="10.412" depth="2.65" halign="center" valign="center">$\mathbf x_0^{(1)}$</text>
+<text transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text transformations="translations" pos="144 768" stroke="black" type="label" width="16.106" height="10.412" depth="2.65" halign="center" valign="center">$\mathbf x_0^{(\ell)}$</text>
+<text transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<path stroke="black" fill="gray" tiling="rising">
+200 776 m
+200 760 l
+216 760 l
+216 776 l
+h
+</path>
+<text transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text transformations="translations" pos="272 768" stroke="black" type="label" width="18.237" height="10.412" depth="2.65" halign="center" valign="center">$\mathbf x_0^{(L)}$</text>
+<path matrix="1 0 0 1 4 0" stroke="black">
+64 780 m
+64 756 l
+280 756 l
+280 780 l
+h
+</path>
+<path stroke="black">
+48 736 m
+304 736 l
+</path>
+<text transformations="translations" pos="176 832" stroke="black" type="label" width="315.411" height="8.308" depth="2.95" halign="center" valign="center" size="large">Sweep $s$ with a retained particle $\mathbf x_N^\ast$ from the previous sweep.</text>
+<text transformations="translations" pos="176 720" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<path stroke="black">
+48 704 m
+304 704 l
+</path>
+<text matrix="1 0 0 1 112 0" transformations="translations" pos="64 688" stroke="black" type="label" width="157.276" height="6.918" depth="0" halign="center" valign="center">Iteration $n = n$ of conditional SMC.</text>
+<text matrix="1 0 0 1 0 -184" transformations="translations" pos="80 768" stroke="black" type="label" width="21.668" height="10.402" depth="3.49" halign="center" valign="center">$\mathbf{\bar x}_{n - 1}^{(1)}$</text>
+<text matrix="1 0 0 1 0 -184" transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -184" transformations="translations" pos="144 768" stroke="black" type="label" width="21.668" height="10.402" depth="3.49" halign="center" valign="center">$\mathbf{\bar x}_{n - 1}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -184" transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<path matrix="1 0 0 1 0 -184" stroke="black" fill="gray" tiling="rising">
+200 776 m
+200 760 l
+216 760 l
+216 776 l
+h
+</path>
+<text matrix="1 0 0 1 0 -184" transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -184" transformations="translations" pos="272 768" stroke="black" type="label" width="21.668" height="10.402" depth="3.49" halign="center" valign="center">$\mathbf{\bar x}_{n - 1}^{(L)}$</text>
+<path matrix="1 0 0 1 4 -184" stroke="black">
+64 780 m
+64 756 l
+280 756 l
+280 780 l
+h
+</path>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="176 632" stroke="black" type="label" width="229.196" height="7.473" depth="2.49" halign="center" valign="center">with weights being success probabilities; then fork().</text>
+<text matrix="1 0 0 1 0 -232" transformations="translations" pos="80 768" stroke="black" type="label" width="16.743" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{\bar x}_{n}^{(1)}$</text>
+<text matrix="1 0 0 1 0 -232" transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -232" transformations="translations" pos="144 768" stroke="black" type="label" width="16.106" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{\bar x}_{n}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -232" transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<path matrix="1 0 0 1 0 -232" stroke="black" fill="gray" tiling="rising">
+200 776 m
+200 760 l
+216 760 l
+216 776 l
+h
+</path>
+<text matrix="1 0 0 1 0 -232" transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -232" transformations="translations" pos="272 768" stroke="black" type="label" width="18.237" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{\bar x}_{n}^{(L)}$</text>
+<path matrix="1 0 0 1 4 -232" stroke="black">
+64 780 m
+64 756 l
+280 756 l
+280 780 l
+h
+</path>
+<path matrix="1 0 0 1 0 -24" stroke="black" arrow="normal/small">
+176 596 m
+176 572 l
+</path>
+<text matrix="1 0 0 1 -4 -24" transformations="translations" pos="180 584" stroke="black" type="label" width="271.925" height="6.926" depth="1.93" halign="center" valign="center">Propose by continuing the program, i.e. ``propose from prior&apos;&apos;.</text>
+<text matrix="1 0 0 1 0 -280" transformations="translations" pos="80 768" stroke="black" type="label" width="16.743" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{\bar x}_{n}^{(1)}$</text>
+<text matrix="1 0 0 1 0 -280" transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -280" transformations="translations" pos="144 768" stroke="black" type="label" width="16.106" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{\bar x}_{n}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -280" transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<path matrix="1 0 0 1 0 -280" stroke="black">
+200 776 m
+200 760 l
+216 760 l
+216 776 l
+h
+</path>
+<text matrix="1 0 0 1 0 -280" transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -280" transformations="translations" pos="272 768" stroke="black" type="label" width="18.237" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{\bar x}_{n}^{(L)}$</text>
+<path matrix="1 0 0 1 0 -24" stroke="black" arrow="normal/small">
+176 548 m
+176 524 l
+</path>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="176 536" stroke="black" type="label" width="269.545" height="6.926" depth="1.93" halign="center" valign="center">Insert retained particle; then calculate and normalise weights.</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="208 512" stroke="black" type="label" width="11.47" height="6.863" depth="2.46" halign="center" valign="center">$\mathbf x_n^\ast$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="80 496" stroke="black" type="label" width="18.097" height="10.41" depth="1.16" halign="center" valign="center">$\hat w_n^{(1)}$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="112 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="144 496" stroke="black" type="label" width="17.46" height="10.41" depth="1.16" halign="center" valign="center">$\hat w_n^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="176 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="208 496" stroke="black" type="label" width="12.555" height="6.921" depth="2.46" halign="center" valign="center">$\hat w_n^\ast$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="240 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -24" transformations="translations" pos="272 496" stroke="black" type="label" width="19.591" height="10.41" depth="1.16" halign="center" valign="center">$\hat w_n^{(L)}$</text>
+<path matrix="1 0 0 1 0 -24" stroke="black">
+68 524 m
+68 484 l
+284 484 l
+284 524 l
+h
+</path>
+<text matrix="1 0 0 1 0 -104" transformations="translations" pos="80 768" stroke="black" type="label" width="21.668" height="10.402" depth="3.49" halign="center" valign="center">$\mathbf{ x}_{n - 1}^{(1)}$</text>
+<text matrix="1 0 0 1 0 -104" transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -104" transformations="translations" pos="144 768" stroke="black" type="label" width="21.668" height="10.402" depth="3.49" halign="center" valign="center">$\mathbf{x}_{n - 1}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -104" transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -104" transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -104" transformations="translations" pos="272 768" stroke="black" type="label" width="21.668" height="10.402" depth="3.49" halign="center" valign="center">$\mathbf{ x}_{n - 1}^{(L)}$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="208 512" stroke="black" type="label" width="21.668" height="6.863" depth="3.3" halign="center" valign="center">$\mathbf x_{n - 1}^\ast$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="80 496" stroke="black" type="label" width="22.753" height="10.402" depth="3.49" halign="center" valign="center">$\hat w_{n - 1}^{(1)}$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="112 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="144 496" stroke="black" type="label" width="22.753" height="10.402" depth="3.49" halign="center" valign="center">$\hat w_{n - 1}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="176 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="208 496" stroke="black" type="label" width="22.753" height="6.922" depth="3.3" halign="center" valign="center">$\hat w_{n - 1}^\ast$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="240 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 152" transformations="translations" pos="272 496" stroke="black" type="label" width="22.753" height="10.402" depth="3.49" halign="center" valign="center">$\hat w_{n - 1}^{(L)}$</text>
+<path matrix="1 0 0 1 0 152" stroke="black">
+68 524 m
+68 484 l
+284 484 l
+284 524 l
+h
+</path>
+<path stroke="black">
+196 672 m
+196 656 l
+220 656 l
+220 672 l
+h
+</path>
+<text transformations="translations" pos="176 624" stroke="black" type="label" width="176.45" height="7.473" depth="2.49" halign="center" valign="center">Resample $(L - 1)$ particles categorically,</text>
+<path stroke="black" arrow="normal/small">
+176 636 m
+176 596 l
+</path>
+<text matrix="1 0 0 1 0 -328" transformations="translations" pos="80 768" stroke="black" type="label" width="16.743" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{x}_{n}^{(1)}$</text>
+<text matrix="1 0 0 1 0 -328" transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -328" transformations="translations" pos="144 768" stroke="black" type="label" width="16.106" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{ x}_{n}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -328" transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<path matrix="1 0 0 1 0 -328" stroke="black">
+200 776 m
+200 760 l
+216 760 l
+216 776 l
+h
+</path>
+<text matrix="1 0 0 1 0 -328" transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -328" transformations="translations" pos="272 768" stroke="black" type="label" width="18.237" height="10.41" depth="1.16" halign="center" valign="center">$\mathbf{ x}_{n}^{(L)}$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="208 512" stroke="black" type="label" width="11.47" height="6.863" depth="2.46" halign="center" valign="center">$\mathbf x_n^\ast$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="80 496" stroke="black" type="label" width="18.097" height="10.41" depth="1.16" halign="center" valign="center">$\hat w_n^{(1)}$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="112 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="144 496" stroke="black" type="label" width="17.46" height="10.41" depth="1.16" halign="center" valign="center">$\hat w_n^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="176 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="208 496" stroke="black" type="label" width="12.555" height="6.921" depth="2.46" halign="center" valign="center">$\hat w_n^\ast$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="240 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -72" transformations="translations" pos="272 496" stroke="black" type="label" width="19.591" height="10.41" depth="1.16" halign="center" valign="center">$\hat w_n^{(L)}$</text>
+<path matrix="1 0 0 1 0 -72" stroke="black">
+68 524 m
+68 484 l
+284 484 l
+284 524 l
+h
+</path>
+<path stroke="black">
+48 400 m
+304 400 l
+</path>
+<text transformations="translations" pos="176 384" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<path stroke="black">
+48 368 m
+304 368 l
+</path>
+<text transformations="translations" pos="176 352" stroke="black" type="label" width="160.387" height="6.918" depth="0" halign="center" valign="center">Iteration $n = N$ of conditional SMC.</text>
+<text transformations="translations" pos="176 336" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="center">$\vdots$</text>
+<path stroke="black" arrow="normal/small">
+176 460 m
+176 452 l
+</path>
+<text matrix="1 0 0 1 0 -456" transformations="translations" pos="80 768" stroke="black" type="label" width="16.743" height="10.403" depth="2.93" halign="center" valign="center">$\mathbf{x}_{N}^{(1)}$</text>
+<text matrix="1 0 0 1 0 -456" transformations="translations" pos="112 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -456" transformations="translations" pos="144 768" stroke="black" type="label" width="16.106" height="10.403" depth="2.93" halign="center" valign="center">$\mathbf{ x}_{N}^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -456" transformations="translations" pos="176 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<path matrix="1 0 0 1 0 -456" stroke="black">
+200 776 m
+200 760 l
+216 760 l
+216 776 l
+h
+</path>
+<text matrix="1 0 0 1 0 -456" transformations="translations" pos="240 768" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -456" transformations="translations" pos="272 768" stroke="black" type="label" width="18.237" height="10.403" depth="2.93" halign="center" valign="center">$\mathbf{ x}_{N}^{(L)}$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="208 512" stroke="black" type="label" width="13.603" height="6.864" depth="2.74" halign="center" valign="center">$\mathbf x_N^\ast$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="80 496" stroke="black" type="label" width="18.097" height="10.403" depth="2.93" halign="center" valign="center">$\hat w_N^{(1)}$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="112 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="144 496" stroke="black" type="label" width="17.46" height="10.403" depth="2.93" halign="center" valign="center">$\hat w_N^{(\ell)}$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="176 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="208 496" stroke="black" type="label" width="14.689" height="6.923" depth="2.74" halign="center" valign="center">$\hat w_N^\ast$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="240 496" stroke="black" type="label" width="11.623" height="4.428" depth="0" halign="center" valign="center">$\cdots$</text>
+<text matrix="1 0 0 1 0 -200" transformations="translations" pos="272 496" stroke="black" type="label" width="19.591" height="10.403" depth="2.93" halign="center" valign="center">$\hat w_N^{(L)}$</text>
+<path matrix="1 0 0 1 0 -200" stroke="black">
+68 524 m
+68 484 l
+284 484 l
+284 524 l
+h
+</path>
+<text transformations="translations" pos="176 272" stroke="black" type="label" width="250.644" height="6.926" depth="1.93" halign="center" valign="center">Choose a new retained particle by sampling categorically,</text>
+<text transformations="translations" pos="176 256" stroke="black" type="label" width="175.481" height="6.926" depth="1.93" halign="center" valign="center">with weights being success probabilities.</text>
+<path stroke="black" arrow="normal/small">
+176 284 m
+176 240 l
+</path>
+<text transformations="translations" pos="176 232" stroke="black" type="label" width="13.603" height="6.864" depth="2.74" halign="center" valign="center">$\mathbf x_N^\ast$</text>
+<path stroke="black">
+16 816 m
+16 224 l
+336 224 l
+336 816 l
+h
+</path>
+</page>
+</ipe>

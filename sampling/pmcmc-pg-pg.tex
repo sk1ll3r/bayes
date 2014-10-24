@@ -1,6 +1,6 @@
 \subsubsection{Particle Gibbs sampler}
 We want to sample from $p(\vec \theta, \vec x_{1:T} \mid \vec y_{1:T})$.
-    \begin{algorithmbis}[Particle Gibbs sampler]\label{alg:pg}
+    \begin{algorithmbis}[Particle Gibbs sampler]\label{alg:sampling/pmcmc-pg-pg/pg}
         \begin{algorithmic}[1]
             \State Set $\theta(0)$, $\vec x_{1:T}(0)$, $B_{1:T}(0)$ arbitrarily. \Comment Initialisation, $s = 0$
             \For{Sweep $s = 1, \dotsc, S$} \Comment Main loop

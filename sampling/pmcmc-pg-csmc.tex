@@ -24,7 +24,7 @@ We want to sample from $p(\vec x_{1:T} \mid \vec y_{1:T}; \vec \theta)$.
                 \State Compute weights
                     $$w_t^{(r)} = \frac{p\left(\vec x_{1:t}^{(r)}, \vec y_{1:t}; \vec \theta\right)}{p\left(\vec x_{1:t - 1}^{\left(A_{t - 1}^{(r)}\right)}, \vec y_{1:t-1}; \vec \theta\right) q\left(\vec x_n^{(r)} \mid \vec y_t, \vec x_{t - 1}^{\left(A_{t - 1}^{(r)}\right)}; \vec \theta\right)}$$
                 \State Normalise weights
-                    $$\hat w_t = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}$$
+                    $$\hat w_t^{(r)} = \frac{w_t^{(r)}}{\sum_{r'} w_t^{(r')}}$$
                 \State We can resample from
                     $$\hat p(\mathrm d \vec x_{1:t} \mid \vec y_{1:t}, \vec \theta) = \sum_r \hat w_t^{(r)} \delta_{\vec x_{1:t}^{(r)}}(\mathrm d \vec x_{1:t})$$
                     to estimate
