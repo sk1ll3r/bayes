@@ -11,7 +11,7 @@ where \verb!assume!'s are either deterministic or random variables declarations,
 Probability of an execution trace is
 \begin{align}
 	\tilde p(\vec y, \vec x) 				&= \prod_{n = 1}^N p(y_n \mid \vec \theta_{t_n}, \vec x_n) \tilde p(\vec x_n \mid \vec x_{n - 1}) \\
-	\tilde p(\vec x_n \mid \vec x_{n - 1}) 	&= \prod_{k = 1}^{\vec x_n \setminus \vec x_{n - 1}} p(x_{n, k} \mid \vec \theta_{t_{n, k}}, x_{n, 1:(k - 1)}, \vec x_{n - 1}) \\
+	\tilde p(\vec x_n \mid \vec x_{n - 1}) 	&= \prod_{k = 1}^{|\vec x_n \setminus \vec x_{n - 1}|} p(x_{n, k} \mid \vec \theta_{t_{n, k}}, x_{n, 1:(k - 1)}, \vec x_{n - 1}) \\
 	p(y_n \mid \vec \theta_{t_n}, \vec x_n)	&= \text{likelihood of observed output } y_n \\
 	\text{tilde}							&= \text{distributions we can only sample from} \\
 	y_n										&= n^{\text{th}} \text{ }\mathtt{observe}\text{'d output} \\
