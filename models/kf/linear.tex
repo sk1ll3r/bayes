@@ -1,0 +1,24 @@
+\subsection{Linear Kalman Filter}
+The model is, for $t = 1, \dotsc, T$:
+\begin{align}
+	\vec x_t 		&= \vec A_t \vec x_{t - 1} + \vec B_t \vec u_t + \vec\epsilon_t, & \vec x_t \in \mathbb R^n\\
+	\vec z_t		&= \vec C_t \vec x_t + \vec D_t \vec u_t + \vec\delta_t, & \vec z_t \in \mathbb R^m\\
+	\vec\epsilon_t	&\sim \Gauss(\vec 0, \vec Q_t) \\
+	\vec\delta_t	&\sim \Gauss(\vec 0, \vec R_t) \\
+	\vec\theta_t 	&= \{\vec A_t, \vec B_t, \vec C_t, \vec D_t, \vec Q_t, \vec R_t\}
+\end{align}
+
+The posteriors of interest are (we drop the conditional dependence on $\vec \theta_t$'s):
+\begin{align}
+	p(\vec x_t \mid \vec z_{1:t - 1}, \vec u_{1:t})	&= \Gauss\left(\vec x_t \mid \vec \mu_{t \mid t - 1}, \vec\Sigma_{t \mid t - 1}\right) \\
+	\vec \mu_{t \mid t - 1}							&= \vec A_t \vec\mu_{t - 1 \mid t - 1} + \vec B_t \vec u_t \\
+	\vec \Sigma_{t \mid t - 1}						&= \vec A_t \vec\Sigma_{t - 1 \mid t - 1} \vec A_t^T + \vec Q_t \\
+	p(\vec x_t \mid \vec z_{1:t}, \vec u_{1:t}) 	&= \Gauss\left(\vec x_t \mid \vec \mu_{t \mid t}, \vec\Sigma_{t \mid t}\right) \\
+	\vec \mu_{t \mid t}								&= \vec\mu_{t \mid t - 1} + \vec K_t \vec r_t \\
+	\vec \Sigma_{t \mid t}							&= (\vec I - \vec K_t \vec C_t) \vec\Sigma_{t \mid t - 1} \\
+	\vec r_t 										&= \vec z_t - (\vec C_t \vec \mu_{t \mid t - 1} + \vec D_t \vec u_t) \\
+	\vec K_t										&= \vec\Sigma_{t \mid t - 1} \vec C_t^T \vec S_t^{-1} \\
+	\vec S_t										&= \vec C_t \vec\Sigma_{t \mid t - 1}\vec C_t^T + \vec R_t
+\end{align}
+
+\subsubsection{Derivations}
