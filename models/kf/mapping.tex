@@ -1,4 +1,5 @@
 \subsection{Mapping}
+\label{sec:models/kf/mapping}
 In the mapping problem, we assume we don't have the knowledge of the map $\vec M$ (described in subsection \ref{subsec:models/kf/localisation}), but know the vehicle states $\vec x_1, \dotsc, \vec x_T$ exactly. We want to figure out $\vec M$. The graphical model is as follows
 \begin{figure}[!htb]
 \centering
@@ -22,5 +23,5 @@ The model can be described, for $t = 1, \dotsc, T$, by the following equations:
 	\vec x_t^\ast 	&= \vec g^\ast(\vec x_{t - 1}^\ast, \vec u_t) + \vec \epsilon_t^\ast \\
 	\vec z_t 		&= \vec h^\ast(\vec x_t^\ast, \vec u_t) + \vec \delta_t^\ast
 \end{align}
-if we characterise $\vec g^\ast(\vec x^\ast, \vec u)$, $\vec \epsilon_t^\ast$, $\vec h^\ast(\vec x^\ast, \vec u)$, and $\vec \delta_t^\ast$ we get the exact same model as in the Extended Kalman filter.
+We need to characterise $\vec g^\ast(\vec x^\ast, \vec u)$, $\vec \epsilon_t^\ast$, $\vec h^\ast(\vec x^\ast, \vec u)$, and $\vec \delta_t^\ast$ to describe the EKF algorithm fully.
 

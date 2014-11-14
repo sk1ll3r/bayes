@@ -1,10 +1,10 @@
 \subsection{Linear Kalman Filter}
 The model is, for $t = 1, \dotsc, T$:
 \begin{align}
-	\vec x_t 		&= \vec A_t \vec x_{t - 1} + \vec B_t \vec u_t + \vec\epsilon_t, & \vec x_t \in \mathbb R^n\\
-	\vec z_t		&= \vec C_t \vec x_t + \vec D_t \vec u_t + \vec\delta_t, & \vec z_t \in \mathbb R^m\\
-	\vec\epsilon_t	&\sim \Gauss(\vec 0, \vec Q_t) \\
-	\vec\delta_t	&\sim \Gauss(\vec 0, \vec R_t) \\
+	\vec x_t 		&= \vec A_t \vec x_{t - 1} + \vec B_t \vec u_t + \vec\epsilon_t 	&\in \mathbb R^n\\
+	\vec z_t		&= \vec C_t \vec x_t + \vec D_t \vec u_t + \vec\delta_t 			&\in \mathbb R^m\\
+	\vec\epsilon_t	&\sim \Gauss(\vec 0, \vec Q_t) 										&\in \mathbb R^n\\
+	\vec\delta_t	&\sim \Gauss(\vec 0, \vec R_t) 										&\in \mathbb R^m\\
 	\vec\theta_t 	&= \{\vec A_t, \vec B_t, \vec C_t, \vec D_t, \vec Q_t, \vec R_t\}
 \end{align}
 
