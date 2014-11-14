@@ -13,8 +13,8 @@ The posteriors of interest are (we drop the conditional dependence on $\vec \the
 	\vec \mu_{t \mid t - 1}							&\approx \vec g(\vec \mu_{t - 1 \mid t - 1}, \vec u_t) \\
 	\vec \Sigma_{t \mid t - 1}						&\approx \vec G_t \vec \Sigma_{t - 1 \mid t - 1} \vec G_t^T + \vec Q_t \\
 	p(\vec x_t \mid \vec z_{1:t}, \vec u_{1:t}) 	&\approx\ \Gauss\left(\vec x_t \mid \vec \mu_{t \mid t}, \vec\Sigma_{t \mid t}\right) \\
-	\vec \mu_{t \mid t}								&\approx \vec \mu_{t \mid t - 1} + \vec W \left(\vec z_t - \vec h(\vec \mu_{t \mid t - 1}, \vec u_t)\right) \\
-	\vec \Sigma_{t \mid t}							&\approx \vec \Sigma_{t \mid t - 1} - \vec W \vec S \vec W^T
+	\vec \mu_{t \mid t}								&\approx \vec \mu_{t \mid t - 1} + \vec W_t \left(\vec z_t - \vec h(\vec \mu_{t \mid t - 1}, \vec u_t)\right) \\
+	\vec \Sigma_{t \mid t}							&\approx \vec \Sigma_{t \mid t - 1} - \vec W_t \vec S_t \vec W_t^T
 \end{align}
 
 Note that we make two types of approximations: (1) we assume the posteriors are Gaussians (which they are not) and (2) we calculate the moments using linearised versions of random variables of interest. We define previously undefined variables below.
@@ -50,11 +50,16 @@ The derivation of the update equations is as follows:
 \begin{align}
 	\vec \mu_{t \mid t}	&= \E\left[\vec x_t \mid \vec z_{1:t}, \vec u_{1:t}\right] \\
 						&\,\,\,\vdots \\
-						&= \vec \mu_{t \mid t - 1} + \vec W \left(\vec z_t - \vec h(\vec \mu_{t \mid t - 1}, \vec u_t)\right) \\
+						&= \vec \mu_{t \mid t - 1} + \vec W_t \left(\vec z_t - \vec h(\vec \mu_{t \mid t - 1}, \vec u_t)\right) \\
 	\vec \Sigma_{t \mid t}	&= \var\left[\vec x_t \mid \vec z_{1:t}, \vec u_{1:t}\right] \\
 							&= \E\left[(\vec \mu_{t \mid t} - \vec x_t)^T (\vec \mu_{t \mid t} - \vec x_t) \mid \vec z_{1:t}, \vec u_{1:t}\right] \\
 							&\,\,\,\vdots \\
-							&= \vec \Sigma_{t \mid t - 1} - \vec W \vec S \vec W^T
+							&= \vec \Sigma_{t \mid t - 1} - \vec W_t \vec S_t \vec W_t^T
+\end{align}
+where
+\begin{align}
+	\vec W_t &= \vec \Sigma_{t | t - 1} \vec H_t \vec S_t \\
+	\vec S_t &= \vec H_t \vec \Sigma_{t | t - 1} \vec H_t + \vec R_t
 \end{align}
 
 We have linearised around $\vec \mu_{t \mid t - 1}$ where $\vec H_t$ is the Jacobian of $\vec h(\vec x, \vec u)$ w.r.t. $\vec x$ evaluated at $\vec \mu_{t \mid t - 1}$:
