@@ -60,7 +60,7 @@ The observation model is defined for the observation
 			\vec z_{t, L}
 		\end{bmatrix} \label{eqn:models/kf/localisation/obs}
 \end{align}
-which contains $L \leq K$ observations $\vec z_{t, 1}, \dotsc, \vec z_{t, L}$ corresponding to the $L$ landmarks observed (out of the total $K$ landmarks) at time $t$. In simplistic terms, $\vec z_{t, \ell} = (r_{t, \ell}, \phi_{t, \ell})^T$ contains the Euclidean and angular distance from the landmark. We assume that we know which one out of the $K$ it is by introducing the correspondence variables $\vec c_t$, where if $c_{t, \ell} = j \in \{1, \dotsc, K\}$ then the $i$-th feature observed at $t$, $\vec z_{t, \ell}$, corresponds to the $j$-th landmark, $\vec m_j$. We assume that a landmark $\vec m_j = (m_{j, x}, m_{j, y})^T$ just contains the position of the landmark in this simplistic case. Hence we can write, given that $c_{t, \ell} = j$,
+which contains $L \leq K$ observations $\vec z_{t, 1}, \dotsc, \vec z_{t, L}$ corresponding to the $L$ landmarks observed (out of the total $K$ landmarks) at time $t$. In the simplified case, $\vec z_{t, \ell} = (r_{t, \ell}, \phi_{t, \ell})^T$ contains the Euclidean and angular distance from the landmark. We assume that we know which one out of the $K$ it is by introducing the correspondence variables $\vec c_t$, where if $c_{t, \ell} = j \in \{1, \dotsc, K\}$ then the $i$-th feature observed at $t$, $\vec z_{t, \ell}$, corresponds to the $j$-th landmark, $\vec m_j$. We assume that a landmark $\vec m_j = (m_{j, x}, m_{j, y})^T$ just contains the position of the landmark in this simplified case. Hence we can write, given that $c_{t, \ell} = j$,
 \begin{align}
 	\vec z_{t, \ell} &= 
 						\begin{bmatrix}
