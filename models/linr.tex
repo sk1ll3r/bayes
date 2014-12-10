@@ -1,1 +1,57 @@
 \section{Linear regression}
+\label{sec:models/linr}
+We have training data $\left\{\vec x_n \in \mathbb R^{D_x}, y_n \in \mathbb R\right\}_{n = 1}^N$, a mapping to feature space $\vec\phi: \mathbb R^{D_x} \to \mathbb R^D$ which gives us the features $\vec \phi_n = \vec\phi(\vec x_n), n = 1, \dotsc, N$. We also group the variables into outputs $\vec y = [y_1, \dotsc, y_N]^T$, inputs $\vec X = [\vec x_1, \dotsc, \vec x_N]^T$ and features $\vec \Phi = [\vec \phi_1, \dotsc, \vec \phi_N]^T$. We also collectively notate data $\mathcal D = \{\vec X, \vec y\}$. The model is:
+\begin{align}
+	y_n 		&= \vec w^T \phi_n + \epsilon, n = 1, \dotsc, N\\
+	\epsilon 	&\sim \Gauss(0, \sigma^2)
+\end{align}
+i.e.
+\begin{align}
+	y_n 		&\sim \Gauss(\vec w^T \vec\phi_n, \sigma^2), n = 1, \dotsc, N
+\end{align}
+
+We can write the likelihood and prior as follows:
+\begin{align}
+	p(\mathcal D \given \vec w)	&= \prod_n \Gauss(y_n \given \vec w^T \vec \phi_n, \sigma^2) \nonumber\\
+								&= \Gauss(\vec y \given \vec\Phi \vec w, \sigma^2 \vec I) \\
+	p(\vec w)					&= \Gauss(\vec w \given \vec m_0, \vec S_0)
+\end{align}
+
+\subsection{Posterior}
+The posterior can be evaluated using the results from \ref{ssec:basics/gaussian/lin} with the following mappings: $\vec x \to \vec w, \vec y \to \vec y, \vec \mu \to \vec m_0, \vec \Lambda^{-1} \to \vec S_0, \vec A \to \vec \Phi, \vec b \to \vec 0, \vec L^{-1} \to \sigma^2 \vec I$ to get
+\begin{align}
+	p(\vec y \given \mathcal D)	&= \Gauss(\vec w \given \vec m_N, \vec S_N) \\
+	\vec m_N					&= \vec S_N \left(\vec S_0^{-1} \vec m_0 + \frac{1}{\sigma^2} \vec \Phi^T \vec y\right) \\
+	\vec S_N^{-1}				&= \vec S_0^{-1} + \frac{1}{\sigma^2} \vec \Phi^T \vec \Phi
+\end{align}
+
+\subsection{Posterior predictive}
+The posterior predictive for a new data point $\vec x^\ast$ ($\vec \phi^\ast = \vec \phi(\vec x)$ can be evaluated as
+\begin{align}
+	p(\vec y^\ast \given \mathcal D, \vec x^\ast)	&= \int p(y^\ast, \vec w \given \mathcal D, \vec x^\ast)\,\mathrm d\vec w \\
+													&= \int p(y^\ast \given \vec w, \mathcal D, \vec x^\ast) p(\vec w \given \mathcal D, \vec x^\ast)\,\mathrm d\vec w \\
+													&= \int p(y^\ast \given \vec w, \vec x^\ast) p(\vec w \given \mathcal D)\,\mathrm d\vec w \\
+													&= \int \Gauss(y^\ast \given \vec w^T \vec \phi^\ast, \sigma^2) \Gauss(\vec w \given \vec m_N, \vec S_N)
+\end{align}
+Using the results from \ref{ssec:basics/gaussian/lin} with the following mappings: $\vec x \to \vec w \given \mathcal D, \vec y \to y^\ast \given \mathcal D, \vec x^\ast, \vec \mu \to \vec m_N, \vec \Lambda^{-1} \to \vec S_N, \vec A \to {\vec \phi^\ast}^T, \vec b \to \vec 0, \vec L^{-1} \to \sigma^2$, we get
+\begin{align}
+	p(y^\ast \given \mathcal D, \vec x^\ast)	&= \Gauss\left(y^\ast \given {\vec\phi^\ast}^T \vec m_N, \sigma^2 + {\vec\phi^\ast}^T \vec S_N \vec\phi^\ast\right)
+\end{align}
+
+\subsection{Sequential learning}
+We can learn the posterior of $\vec w$ sequentially, i.e. by considering yesterday's posterior to be today's prior, equivalently to learning in batch. We need to prove that we get the same posterior for $\vec w$ in both cases for $N \in \mathbb N_0, K \in \mathbb N$ where we introduce the notation $\mathcal D_{i:j} = \left\{(\vec x_i, y_i), \dotsc, (\vec x_j, y_j)\right\}, 0 \leq i \leq j \leq N$. Learning sequentially means treating $p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w\right)$ as the likelihood, $p\left(\vec w \given \mathcal D_{1:N}\right)$ as the prior, $p\left(\vec w \given \mathcal D_{(N + 1):(N + K)}\right)$ as the posterior and $p\left(\mathcal D_{(N + 1):(N + K)}\right)$ as the evidence. The posterior of $\vec w$ when learning in batch can be expressed as
+\begin{align*}
+	p\left(\vec w \given \mathcal D_{1:(N + K)}\right) 	&= \frac{p\left(\vec w, \mathcal D_{1:(N + K)}\right)}{p\left(\mathcal D_{1:(N + K)}\right)} \\
+														&= \frac{p\left(\vec w \given \mathcal D_{1:N}\right) p\left(\mathcal D_{1:N}\right) p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w, \mathcal D_{1:N}\right)}{p\left(\mathcal D_{1:(N + K)}\right)} \\
+														&= \frac{p\left(\vec w \given \mathcal D_{1:N}\right) p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w, \mathcal D_{1:N}\right)}{p\left(\mathcal D_{(N + 1):(N + K)} \given \mathcal D_{1:N}\right)} \\
+														&= \frac{p\left(\vec w \given \mathcal D_{1:N}\right) p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w\right)}{p\left(\mathcal D_{(N + 1):(N + K)}\right)}
+\end{align*}
+which is in the same form as if $\vec w$ was learnt sequentially, i.e. $\vec w \given \mathcal D_{(N + 1):(N + K)}$ was evaluated with the aforementioned modifications to the likelihood, prior and evidence.
+
+\subsection{Relationship to ML, MAP and least-squares estimation}
+Assume $\vec m_0 = \vec 0, \vec S_0 = \alpha^{-1} \vec I$. Then the log of the posterior becomes
+\begin{align*}
+	\ln p(\vec w \given \mathcal D) 	&= \ln p(\mathcal D \given \vec w) + \ln p(\vec w) + \text{const.} \\
+										&= -\frac{1}{2\sigma^2} \sum_n (y_n - \vec w^T \vec \phi_n)^2 - \frac{\alpha}{2} \vec w^T \vec w + \text{const.}
+\end{align*}
+Therefore MAP estimation is equivalent to least-squares estimation with squared regularisation term $\frac{\alpha}{2}\|\vec w\|^2$. MLE arises when the prior is flat, i.e. $\alpha \to 0$, in which case it is equivalent to least-squares estimation without regularisation.

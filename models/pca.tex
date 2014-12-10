@@ -59,7 +59,7 @@ Following the mixture model, where $\vec Z = \left\{\vec z_n, \vec z_n \in \math
     p(\vec z)               &= \Gauss(\vec z; \vec 0, \vec I) \\
     p(\vec x \mid \vec z)   &= \Gauss(\vec x; \vec W \vec z + \vec \mu, \sigma^2 \vec I)
 \end{align*}
-where $\vec 0, \vec I, \vec W, \vec \mu, \vec I$ all have the appropriate dimensions. Note that the model is parameterised by $\vec \theta = \left(\vec W, \vec \mu, \sigma^2\right)$. Following Subsection~\ref{ssec:prob-gaussian-lingauss}, we can express the remaining marginal and conditional as
+where $\vec 0, \vec I, \vec W, \vec \mu, \vec I$ all have the appropriate dimensions. Note that the model is parameterised by $\vec \theta = \left(\vec W, \vec \mu, \sigma^2\right)$. Following Subsection~\ref{ssec:basics/gaussian/lin}, we can express the remaining marginal and conditional as
 \begin{align*}
     p(\vec x)               &= \Gauss(\vec x; \vec \mu, \vec C) \\
     p(\vec z \mid \vec x)   &= \Gauss(\vec z; \vec M^{-1} \vec W^T (\vec x - \vec \mu), \sigma^2 \vec M^{-1})
