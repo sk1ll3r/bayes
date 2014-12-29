@@ -1,1 +1,76 @@
-\section{Gaussian process}
+\section{Gaussian processes}
+Gaussian Process is a collection of random variables, any finite number of which have a joint Gaussian distribution.
+
+Let $f: \mathcal X \to \mathbb R$ be a function and
+\begin{align*}
+	m(\vec x) 			&= \E[f(\vec x)] \\
+	K(\vec x, \vec x')	&= \E[(f(\vec x) - m(\vec x))(f(\vec x') - m(\vec x'))]
+\end{align*}
+be the mean function and covariance functions mapping from the input space $\mathcal X$ to $\mathbb R$.
+
+Then we write
+\begin{equation*}
+	f \sim \GP(m, K)
+\end{equation*}
+if for any $N$ points from the input space $\vec x_1, \dotsc, \vec x_N \in \mathcal X$
+\begin{equation*}
+	\vec f 	\sim \Gauss(\vec \mu, \vec K)
+\end{equation*}
+where
+\begin{align*}
+	\vec f 		&= [f(\vec x_1), \dotsc, f(\vec x_N)]^T \\
+	\vec \mu 	&= [m(\vec x_1), \dotsc, m(\vec x_N)]^T \\
+	\vec K 		&=
+		\begin{bmatrix}
+			K(\vec x_1, \vec x_1) 	& \cdots & K(\vec x_1, \vec x_N) \\
+			\vdots 					& \ddots & \vdots \\
+			K(\vec x_N, \vec x_1) 	& \cdots & K(\vec x_N, \vec x_N)
+		\end{bmatrix}
+\end{align*}
+
+\subsection{Predictions}
+Consider data points $\vec X = [\vec x_1, \dotsc, \vec x_N]^T, \vec f = [f_1, \dotsc, f_N]^T$ and input points $\vec X^\ast = [\vec x_1^\ast, \dotsc, \vec x_{N^\ast}^\ast]^T$ for which we want to predict $\vec f^\ast = [f(\vec x_1^\ast), \dotsc, f(\vec x_{N^\ast}^\ast)]^T$. Then we can write
+\begin{equation*}
+	\begin{bmatrix}
+		\vec f \\
+		\vec f^\ast
+	\end{bmatrix}
+	\sim
+	\Gauss\left(
+		\begin{bmatrix}
+			\vec \mu \\
+			\vec \mu^\ast
+		\end{bmatrix},
+		\begin{bmatrix}
+			\vec K(\vec X, \vec X) 			& \vec K(\vec X, \vec X^\ast) \\
+			\vec K(\vec X^\ast, \vec X) 	& \vec K(\vec X^\ast, \vec X^\ast)
+		\end{bmatrix}
+	\right)
+\end{equation*}
+where
+\begin{align*}
+	\vec \mu^\ast 					&= [m(\vec x_1^\ast), \dotsc, m(\vec x_{N^\ast}^\ast)]^T \\
+	\vec K(\vec X, \vec X) 			&=
+		\begin{bmatrix}
+			K(\vec x_1, \vec x_1) 	& \cdots & K(\vec x_1, \vec x_N) \\
+			\vdots 					& \ddots & \vdots \\
+			K(\vec x_N, \vec x_1) 	& \cdots & K(\vec x_N, \vec x_N)
+		\end{bmatrix} \\
+	\vec K(\vec X, \vec X^\ast) 	&=
+		\begin{bmatrix}
+			K(\vec x_1, \vec x_1^\ast) 	& \cdots & K(\vec x_1, \vec x_{N^\ast}^\ast) \\
+			\vdots 						& \ddots & \vdots \\
+			K(\vec x_N, \vec x_1^\ast) 	& \cdots & K(\vec x_N, \vec x_{N^\ast}^\ast)
+		\end{bmatrix} \\
+	\vec K(\vec X^\ast, \vec X) 	&= \vec K(\vec X, \vec X^\ast)^T
+\end{align*}
+
+Hence, according to Subsection~\ref{ssec:basics/gaussian/joint}, the predictions can be made as follows
+\begin{equation*}
+	\vec f^\ast \given \vec X^\ast, \vec X, \vec f \sim \Gauss(\vec \mu^{\ast \given \mathcal D}, \vec K^{\ast \given \mathcal D})
+\end{equation*}
+where
+\begin{align*}
+	\vec \mu^{\ast \given \mathcal D} 	&= \vec \mu^\ast + \vec K(\vec X^\ast, \vec X) \vec K(\vec X, \vec X)^{-1} (\vec f - \vec \mu) \\
+	\vec K^{\ast \given \mathcal D}		&= \vec K(\vec X^\ast, \vec X^\ast) - \vec K(\vec X^\ast, \vec X) K(\vec X, \vec X)^{-1} \vec K(\vec X, \vec X^\ast)
+\end{align*}
