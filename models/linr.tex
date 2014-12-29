@@ -20,13 +20,13 @@ We can write the likelihood and prior as follows:
 \subsection{Posterior}
 The posterior can be evaluated using the results from \ref{ssec:basics/gaussian/lin} with the following mappings: $\vec x \to \vec w, \vec y \to \vec y, \vec \mu \to \vec m_0, \vec \Lambda^{-1} \to \vec S_0, \vec A \to \vec \Phi, \vec b \to \vec 0, \vec L^{-1} \to \sigma^2 \vec I$ to get
 \begin{align}
-	p(\vec y \given \mathcal D)	&= \Gauss(\vec w \given \vec m_N, \vec S_N) \\
+	p(\vec w \given \mathcal D)	&= \Gauss(\vec w \given \vec m_N, \vec S_N) \\
 	\vec m_N					&= \vec S_N \left(\vec S_0^{-1} \vec m_0 + \frac{1}{\sigma^2} \vec \Phi^T \vec y\right) \\
 	\vec S_N^{-1}				&= \vec S_0^{-1} + \frac{1}{\sigma^2} \vec \Phi^T \vec \Phi
 \end{align}
 
 \subsection{Posterior predictive}
-The posterior predictive for a new data point $\vec x^\ast$ ($\vec \phi^\ast = \vec \phi(\vec x)$ can be evaluated as
+The posterior predictive for a new data point $\vec x^\ast$ ($\vec \phi^\ast = \vec \phi(\vec x)$) can be evaluated as
 \begin{align}
 	p(\vec y^\ast \given \mathcal D, \vec x^\ast)	&= \int p(y^\ast, \vec w \given \mathcal D, \vec x^\ast)\,\mathrm d\vec w \\
 													&= \int p(y^\ast \given \vec w, \mathcal D, \vec x^\ast) p(\vec w \given \mathcal D, \vec x^\ast)\,\mathrm d\vec w \\
@@ -39,7 +39,7 @@ Using the results from \ref{ssec:basics/gaussian/lin} with the following mapping
 \end{align}
 
 \subsection{Sequential learning}
-We can learn the posterior of $\vec w$ sequentially, i.e. by considering yesterday's posterior to be today's prior, equivalently to learning in batch. We need to prove that we get the same posterior for $\vec w$ in both cases for $N \in \mathbb N_0, K \in \mathbb N$ where we introduce the notation $\mathcal D_{i:j} = \left\{(\vec x_i, y_i), \dotsc, (\vec x_j, y_j)\right\}, 0 \leq i \leq j \leq N$. Learning sequentially means treating $p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w\right)$ as the likelihood, $p\left(\vec w \given \mathcal D_{1:N}\right)$ as the prior, $p\left(\vec w \given \mathcal D_{(N + 1):(N + K)}\right)$ as the posterior and $p\left(\mathcal D_{(N + 1):(N + K)}\right)$ as the evidence. The posterior of $\vec w$ when learning in batch can be expressed as
+We can learn the posterior of $\vec w$ sequentially, i.e. by considering yesterday's posterior to be today's prior, which turns out to be equivalent to learning in batch. We need to prove that we get the same posterior for $\vec w$ in both cases for any number of old data points $N \in \mathbb N_0$ and any number of new data points to predict $K \in \mathbb N$. We introduce the notation $\mathcal D_{i:j} = \left\{(\vec x_i, y_i), \dotsc, (\vec x_j, y_j)\right\}, 0 \leq i \leq j \leq N$. Learning sequentially means treating $p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w\right)$ as the likelihood, $p\left(\vec w \given \mathcal D_{1:N}\right)$ as the prior, $p\left(\vec w \given \mathcal D_{(N + 1):(N + K)}\right)$ as the posterior and $p\left(\mathcal D_{(N + 1):(N + K)}\right)$ as the evidence. The posterior of $\vec w$ when learning in batch can be expressed as
 \begin{align*}
 	p\left(\vec w \given \mathcal D_{1:(N + K)}\right) 	&= \frac{p\left(\vec w, \mathcal D_{1:(N + K)}\right)}{p\left(\mathcal D_{1:(N + K)}\right)} \\
 														&= \frac{p\left(\vec w \given \mathcal D_{1:N}\right) p\left(\mathcal D_{1:N}\right) p\left(\mathcal D_{(N + 1):(N + K)} \given \vec w, \mathcal D_{1:N}\right)}{p\left(\mathcal D_{1:(N + K)}\right)} \\
