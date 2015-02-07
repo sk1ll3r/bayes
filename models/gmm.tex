@@ -1,0 +1,26 @@
+\section{Gaussian mixture model}
+Gaussian mixture model, a.k.a. GMM, or mixture of Gaussians is a mixture model where
+\begin{align}
+    \vec \alpha                             &\in (0, \infty)^K \\
+    \vec \pi \given \alpha                  &\sim \Dir(\vec \alpha) \\
+    \vec \mu_k \given \vec m_0, \vec V_0    &\sim \Gauss(\vec m_0, \vec V_0), k = 1, \dotsc, K \\
+    \vec \Sigma_k \given \vec S_0, \nu_0    &\sim \IW(\vec S_0, \nu_0), k = 1, \dotsc, K \\
+    \vec x_n \given z_n, \vec \theta        &\sim \Gauss\left(\vec \mu_{z_n}, \vec \Sigma_{z_n}\right), n = 1, \dotsc, N
+\end{align}
+We adopt the following grouping of random variables:
+\begin{align}
+    \mathcal G_0                            &\coloneqq \left(\vec m_0, \vec V_0, \vec S_0, \nu_0\right) \\
+    \vec \theta_k                           &\coloneqq \left(\vec \mu_k, \vec \Sigma_k\right), k = 1, \dotsc, K \\
+    \vec \theta                             &\coloneqq (\vec \theta_1, \dotsc, \vec \theta_K).
+\end{align}
+The graphical model can be seen in Figure~\ref{fig:models/gmm/figures/gmm} below.
+\begin{figure}[h!]
+    \centering
+        \includegraphics{models/gmm/figures/gmm}
+    \label{fig:models/gmm/figures/gmm}
+    \caption{Graphical model for the Gaussian mixture model.}
+\end{figure}
+
+\input{models/gmm/gibbs}
+\input{models/gmm/collapsed-gibbs}
+\input{models/gmm/em}
