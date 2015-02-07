@@ -64,7 +64,7 @@ Univariate Normal with known variance & \\
 \midrule
 Fix $\sigma^2$																		& \texttt{[assume var \#var\#]} \\
 $\mu \sim \Gauss(\mu_0, \sigma_0^2)$												& \texttt{[assume mu (normal mu0 var0)]} \\
-$x \mid \vec\theta \sim \Gauss(\mu, \sigma^2)$										& \texttt{[observe (normal mu var) x1] $\cdots$} \\
+$x \mid \mu \sim \Gauss(\mu, \sigma^2)$										& \texttt{[observe (normal mu var) x1] $\cdots$} \\
 $\mathcal D = \{x_n\}$																& \texttt{[observe (normal mu var) xN]} \\
 $\mu \mid \mathcal D \sim \Gauss\left(\frac{\frac{\mu_0}{\sigma_0^2} + \frac{\sum_n x_n}{\sigma^2}}{\frac{1}{\sigma_0^2} + \frac{N}{\sigma^2}}, \left(\frac{1}{\sigma_0^2} + \frac{N}{\sigma^2}\right)^{-1}\right)$		& \texttt{[predict mu]} \\
 \bottomrule
