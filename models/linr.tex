@@ -2,7 +2,7 @@
 \label{sec:models/linr}
 We have training data $\left\{\vec x_n \in \mathbb R^{D_x}, y_n \in \mathbb R\right\}_{n = 1}^N$, a mapping to feature space $\vec\phi: \mathbb R^{D_x} \to \mathbb R^D$ which gives us the features $\vec \phi_n = \vec\phi(\vec x_n), n = 1, \dotsc, N$. We also group the variables into outputs $\vec y = [y_1, \dotsc, y_N]^T$, inputs $\vec X = [\vec x_1, \dotsc, \vec x_N]^T$ and features $\vec \Phi = [\vec \phi_1, \dotsc, \vec \phi_N]^T$. We also collectively notate data $\mathcal D = \{\vec X, \vec y\}$. The model is:
 \begin{align}
-	y_n 		&= \vec w^T \phi_n + \epsilon, n = 1, \dotsc, N\\
+	y_n 		&= \vec w^T \vec\phi_n + \epsilon, n = 1, \dotsc, N\\
 	\epsilon 	&\sim \Gauss(0, \sigma^2)
 \end{align}
 i.e.
