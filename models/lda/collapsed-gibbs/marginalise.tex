@@ -1,0 +1,72 @@
+\subsubsection{Marginalising out $\{\vec \beta_t\}, \{\vec \pi_d\}$}
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    p\left(\{z_{n, d}\}, \{w_{n, d}\} \given \vec \alpha, \vec \gamma\right) \nonumber\\
+    &= \int_{\{\vec \pi_d\}} \int_{\{\vec \beta_t\}}
+        \left(
+            \prod_d \Dir(\vec \pi_d \given \vec \alpha)
+        \right)
+        \left(
+            \prod_n \prod_d \Cat(z_{n, d} \given \vec \pi_d) \Cat(w_{n, d} \given \vec \beta_{z_{n, d}})
+        \right) \nonumber\\
+    &
+        \left(
+            \prod_t \Dir(\vec \beta_t \given \vec \gamma)
+        \right)
+    \,\mathrm d\{\vec \beta_t\}\mathrm d\{\vec \pi_d\}\nonumber\\
+    &=
+    \int_{\{\vec \pi_d\}}
+        \left(
+            \prod_d \Dir(\vec \pi_d \given \vec \alpha)
+        \right)
+        \left(
+            \prod_n \prod_d \Cat(z_{n, d} \given \vec \pi_d)
+        \right) \nonumber\\
+    &
+        \int_{\{\vec \beta_t\}}
+            \left(
+                \prod_t \Dir(\vec \beta_t \given \vec \gamma)
+            \right)
+            \left(
+                \prod_n \prod_d \Cat(w_{n, d} \given \vec \beta_{z_{n, d}})
+            \right)
+            \,\mathrm d\{\vec \beta_t\} \nonumber\\
+    &
+    \mathrm d\{\vec \pi_d\} \nonumber\\
+    &=
+        \left(
+            \frac
+            {
+                \Gamma(W \gamma)
+            }
+            {
+                \Gamma(\gamma)^W
+            }
+        \right)^T
+        \prod_t
+            \frac
+            {
+                \prod_w \Gamma\left(\gamma + \zeta_{w, t}\right)
+            }
+            {
+                \Gamma\left(C_t + W\gamma\right)
+            } \nonumber\\
+    &
+        \left(
+            \frac
+            {
+                \Gamma(T \alpha)
+            }
+            {
+                \Gamma(\alpha)^T
+            }
+        \right)^D
+        \prod_d
+            \frac
+            {
+                \prod_t \Gamma\left(\alpha + \xi_{d, t}\right)
+            }
+            {
+                \Gamma\left(N_d + T \alpha\right)
+            } &&\text{(see next two subsections)}
+\end{align}

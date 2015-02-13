@@ -28,9 +28,9 @@ $\mathcal D = \{x_n : x_n \sim \Cat(\vec\theta), \vec\theta \in \mathbb R^K\}$, 
     \end{align*}
 
 \paragraph{Evidence.}
-    \begin{align*}
-        p(\mathcal D)   &= \frac{p(\mathcal D \given \vec\theta)p(\vec\theta)}{p(\vec \theta \given \mathcal D)} \\
-                        &= \frac{\left(\prod_k \theta_k^{n_k}\right)\left(\Dir(\vec\theta \given \alpha\right))}{\Dir\left(\vec \theta \given \alpha + (n_1, \dotsc, n_K)^T\right)} \\
+    \begin{align}
+        p(\mathcal D)   &= \frac{p(\mathcal D \given \vec\theta)p(\vec\theta)}{p(\vec \theta \given \mathcal D)} \nonumber\\
+                        &= \frac{\left(\prod_k \theta_k^{n_k}\right)\left(\Dir(\vec\theta \given \alpha\right))}{\Dir\left(\vec \theta \given \alpha + (n_1, \dotsc, n_K)^T\right)} \nonumber\\
                         &= \frac
                             {
                                 \left(\prod_k \theta_k^{n_k}\right)
@@ -44,7 +44,7 @@ $\mathcal D = \{x_n : x_n \sim \Cat(\vec\theta), \vec\theta \in \mathbb R^K\}$, 
                                     {\Gamma\left(N + \sum_k \alpha_k\right)}
                                     {\prod_k \Gamma(\alpha_k + n_k)}
                                 \left(\prod_k \theta_k^{\alpha_k + n_k - 1}\right)
-                            } \\
+                            } \nonumber\\
                         &= \frac
                             {
                                 \Gamma\left(\sum_k \alpha_k\right)
@@ -53,5 +53,5 @@ $\mathcal D = \{x_n : x_n \sim \Cat(\vec\theta), \vec\theta \in \mathbb R^K\}$, 
                             {
                                 \Gamma\left(N + \sum_k \alpha_k\right)
                                 \prod_k \Gamma(\alpha_k)
-                            }
-    \end{align*}
+                            } \label{eqn:bayes/par-est/dir-cat/evidence}
+    \end{align}

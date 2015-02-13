@@ -22,5 +22,13 @@ The graphical model can be seen in Figure~\ref{fig:models/lda/figures/lda} below
     \caption{Graphical model for Latent Dirichlet allocation.}
 \end{figure}
 
+The joint probability is
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    p\left(\{\vec \pi_d\}, \{z_{n, d}\}, \{w_{n, d}\}, \{\beta_t\} \given \alpha, \gamma\right) \\
+    &= \left(\prod_d p(\vec \pi_d \given \alpha)\right) \left(\prod_n \prod_d p(z_{n,d} \given \vec \pi_d)\right) \left(\prod_n \prod_d p(w_{n, d} \given z_{n, d}, \{\beta_t\})\right) \left(\prod_t p(\beta_t \given \gamma)\right) \\
+    &= \left(\prod_d \Dir(\vec \pi_d \given \vec \alpha)\right) \left(\prod_n \prod_d \Cat(z_{n, d} \given \vec \pi_d) \Cat(w_{n, d} \given \vec \beta_{z_{n, d}})\right) \left(\prod_t \Dir(\vec \beta_t \given \vec \gamma)\right)
+\end{align}
+
 \input{models/lda/gibbs}
 \input{models/lda/collapsed-gibbs}

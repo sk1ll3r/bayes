@@ -1,0 +1,71 @@
+\subsubsection{The $\{\vec \pi_d\}$ integral}
+\label{sec:models/lda/collapsed-gibbs/pi-integral}
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    \int_{\{\vec \pi_d\}}
+        \left(
+            \prod_d \Dir(\vec \pi_d \given \vec \alpha)
+        \right)
+        \left(
+            \prod_n \prod_d \Cat(z_{n, d} \given \vec \pi_d)
+        \right)
+    \mathrm d\{\vec \pi_d\} \nonumber\\
+    &= \int_{\{\vec \pi_d\}}
+        \prod_d \left(
+            \left(
+                \Dir(\vec \pi_d \given \vec \alpha)
+            \right)
+            \left(
+                \prod_n \Cat(z_{n, d} \given \vec \pi_d)
+            \right)
+        \right)
+    \mathrm d\{\vec \pi_d\} &&\text{(integrals separable)}\nonumber\\
+    &= \prod_d
+        \int_{\vec \pi_d}
+            \Dir(\vec \pi_d \given \vec \alpha)
+            \prod_n \Cat(z_{n, d} \given \vec \pi_d)
+        \mathrm d\vec \pi_d && \text{(integrand is prior multiplied by likelihood)}\nonumber\\
+    &= \prod_d
+        \frac
+        {
+            \Gamma\left(\sum_t \alpha_t\right) \prod_t \Gamma\left(\alpha_t + \xi_{d, t}\right)
+        }
+        {
+            \Gamma\left(N_d + \sum_t \alpha_t\right) \prod_t \Gamma\left(\alpha_t\right)
+        } && \text{(hence the integral is the evidence (see \eqref{eqn:bayes/par-est/dir-cat/evidence}))} \nonumber\\
+    &= \prod_d
+        \frac
+        {
+            \Gamma\left(T\alpha\right) \prod_w \Gamma\left(\alpha + \xi_{d, t}\right)
+        }
+        {
+            \Gamma\left(N_d + T \alpha\right) \Gamma\left(\alpha\right)^T
+        } && \text{(assume $\vec \alpha = \alpha \vec 1$)} \nonumber\\
+    &=
+        \left(
+            \frac
+            {
+                \Gamma(T \alpha)
+            }
+            {
+                \Gamma(\alpha)^T
+            }
+        \right)^D
+        \prod_d
+            \frac
+            {
+                \prod_t \Gamma\left(\alpha + \xi_{d, t}\right)
+            }
+            {
+                \Gamma\left(N_d + T \alpha\right)
+            }
+\end{align}
+where
+\begin{align}
+    \xi_{d, t}       &= \sum_\eta \I(z_{\eta, d} = t) \\
+                    &= \text{number of words of topic $t$ in document $d$} && \text{(same as in \eqref{eqn:models/lda/gibbs/xi})}\nonumber
+\end{align}
+and
+\begin{align}
+    N_d     &= \text{number of words in document $d$} && \text{(from the model (Fig.~\ref{fig:models/lda/figures/lda}))}
+\end{align}

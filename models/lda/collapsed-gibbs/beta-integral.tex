@@ -1,0 +1,63 @@
+\subsubsection{The $\{\vec \beta_t\}$ integral}
+\label{sec:models/lda/collapsed-gibbs/beta-integral}
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    \int_{\{\vec \beta_t\}}
+        \left(
+            \prod_t \Dir(\vec \beta_t \given \vec \gamma)
+        \right)
+        \left(
+            \prod_n \prod_d \Cat(w_{n, d} \given \vec \beta_{z_{n, d}})
+        \right)
+        \,\mathrm d\{\vec \beta_t\} &&\text{(integrals separable)}\nonumber\\
+    &= \prod_t
+        \int_{\vec \beta_t}
+            \Dir(\vec \beta_t \given \vec \gamma)
+            \prod_{\substack{n, d \\ z_{n, d} = t}} \Cat(w_{n, d} \given \vec \beta_{z_{n, d}})
+        \mathrm d\vec \beta_t && \text{(integrand is prior multiplied by likelihood)}\nonumber\\
+    &= \prod_t
+        \frac
+        {
+            \Gamma\left(\sum_w \gamma_w\right) \prod_w \Gamma\left(\gamma_w + \zeta_{w, t}\right)
+        }
+        {
+            \Gamma\left(C_t + \sum_w \gamma_w\right) \prod_w \Gamma\left(\gamma_w\right)
+        } && \text{(hence the integral is the evidence (see \eqref{eqn:bayes/par-est/dir-cat/evidence}))} \nonumber\\
+    &= \prod_t
+        \frac
+        {
+            \Gamma\left(W\gamma\right) \prod_w \Gamma\left(\gamma + \zeta_{w, t}\right)
+        }
+        {
+            \Gamma\left(C_t + W\gamma\right) \Gamma\left(\gamma\right)^W
+        } && \text{(assume $\vec \gamma = \gamma \vec 1$)} \nonumber\\
+    &=
+        \left(
+            \frac
+            {
+                \Gamma(W \gamma)
+            }
+            {
+                \Gamma(\gamma)^W
+            }
+        \right)^T
+        \prod_t
+            \frac
+            {
+                \prod_w \Gamma\left(\gamma + \zeta_{w, t}\right)
+            }
+            {
+                \Gamma\left(C_t + W\gamma\right)
+            }
+\end{align}
+where
+\begin{align}
+    \zeta_{w, t}    &= \sum_{\substack{\eta, \delta \\ z_{\eta, \delta} = t}} \I(w_{\eta, \delta} = w) \nonumber\\
+                    &= \sum_{\eta, \delta} \I(w_{\eta, \delta} = w, z_{\eta, \delta} = t) \\
+                    &= \text{number words $w$ that are assigned to topic $t$} \nonumber && \text{(same as in \eqref{eqn:models/lda/gibbs/zeta})}
+\end{align}
+and
+\begin{align}
+    C_t     &= \sum_{n, d} \I(z_{n, d} = t) \\
+            &= \text{number of words that are assigned the topic $t$.} \nonumber
+\end{align}

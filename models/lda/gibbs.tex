@@ -1,1 +1,65 @@
 \subsection{Gibbs sampling for LDA}
+Although we might only be interested in the quantity $\{z_{n, d}\} \given \{w_{\eta, \delta}\}; \vec \alpha, \vec \gamma$, the vanilla Gibbs sampler will give us samples from the extended state $\{z_{n, d}\}, \{\vec \pi_d\}, \{\vec \beta_t\} \given \{w_{\eta, \delta}\}; \vec \alpha, \vec \gamma$ from which if we discard $\{\vec \pi_d\}$ and $\{\vec \beta_t\}$, we get the samples we are interested in.
+
+\subsubsection{Word topics $z_{n, d}$}
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    p\left(z_{n, d} = t \given \{\vec \pi_\delta\}, \{w_{\eta, \delta}\}, \{\vec \beta_t\}, \{z_{\eta, \delta}\} \setminus z_{\eta, \delta}; \vec \alpha, \vec \gamma\right) \nonumber\\
+    &\propto \prod_\eta \prod_\delta \Cat\left(z_{\eta, \delta} \given \vec \pi_\delta\right) \Cat\left(w_{\eta, \delta} \given \beta_{z_{\eta, \delta}}\right) && \text{(proportional to the joint)}\nonumber\\
+    &\propto \Cat\left(z_{n, d} \given \vec \pi_d\right) \Cat\left(w_{n, d} \given \vec \beta_{z_{n, d}}\right) && \text{(discard terms which don't contain $z_{n, d}$)}\nonumber\\
+    &\propto \Cat\left(t \given \vec \pi_d\right) \Cat\left(w_{n, d} \given \vec \beta_t\right) \nonumber\\
+    &\propto \pi_{d, t} \beta_{t, w_{n, d}}
+\end{align}
+
+\subsubsection{Document specific parameters $\vec \pi_d$}
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    p\left(\vec \pi_d \given \{\vec \pi_\delta\} \setminus \vec \pi_d, \{z_{\eta, \delta}\}, \{w_{\eta, \delta}\}, \{\vec \beta_t\}; \vec \alpha, \gamma\right) \nonumber\\
+    &\propto \left(\prod_\delta \Dir(\vec \pi_\delta \given \vec \alpha)\right)\left(\prod_\eta \prod_\delta \Cat\left(z_{\eta, \delta \given \vec \pi_\delta}\right)\right) \nonumber\\
+    &\propto \Dir(\vec \pi_d \given \vec \alpha) \prod_\eta \Cat\left(z_{\eta, d} \given \vec \pi_d\right) \nonumber\\
+    &\propto \Dir\left(\vec \pi_d \given \vec \alpha + (\xi_{d, 1}, \dotsc, \xi_{d, T})^T\right)
+\end{align}
+where
+\begin{align}
+    \xi_{d, t}       &= \sum_\eta \I(z_{\eta, d} = t) \label{eqn:models/lda/gibbs/xi} \\
+                    &= \text{number of words of topic $t$ in document $d$} \nonumber
+\end{align}
+
+\subsubsection{Topic specific parameters $\vec \beta_t$}
+\begin{align}
+    \hspace{2em}&\hspace{-2em}
+    p\left(
+        \vec \beta_t \given
+        \{\vec \pi_d\},
+        \{z_{n, d}\},
+        \{w_{n, d}\},
+        \{\vec \beta_\tau\} \setminus \vec \beta_t;
+        \vec \alpha, \vec \gamma
+    \right) \nonumber\\
+    &\propto 
+        \left(
+            \prod_\eta \prod_\delta
+                \Cat
+                \left(
+                    w_{\eta, \delta} \given \vec \beta_{z_{\eta, \delta}}
+                \right)
+        \right)
+        \left(
+            \prod_\tau
+                \Dir(\vec \beta_\tau \given \vec \gamma)
+        \right)
+        \nonumber\\
+    &\propto
+        \Dir(\vec \beta_t \given \vec \gamma)
+        \prod_{\substack{\eta, \delta \\ z_{\eta, \delta} = t}}
+            \Cat(w_{\eta, \delta} \given \vec \beta_t)
+        \nonumber \\
+    &\propto
+        \Dir\left(\vec \beta_t \given \vec \gamma + (\zeta_{1, t}, \dotsc, \zeta_{W, t})^T\right)
+\end{align}
+where
+\begin{align}
+    \zeta_{w, t}    &= \sum_{\substack{\eta, \delta \\ z_{\eta, \delta} = t}} \I(w_{\eta, \delta} = w) \nonumber\\
+                    &= \sum_{\eta, \delta} \I(w_{\eta, \delta} = w, z_{\eta, \delta} = t) \label{eqn:models/lda/gibbs/zeta}\\
+                    &= \text{number words $w$ that are assigned to topic $t$} \nonumber
+\end{align}

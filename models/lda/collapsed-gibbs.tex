@@ -1,1 +1,8 @@
 \subsection{Collapsed Gibbs sampling for LDA}
+In the Collapsed Gibbs sampler for LDA, we sample directly from $\{z_{n, d}\} \given \{w_{\eta, \delta}\}; \vec \alpha, \vec \gamma$. We need to marginalise out $\{\vec \beta_t\}, \{\vec \pi_d\}$ from the original joint distribution.
+
+\input{models/lda/collapsed-gibbs/marginalise}
+\input{models/lda/collapsed-gibbs/beta-integral}
+\input{models/lda/collapsed-gibbs/pi-integral}
+
+\subsubsection{Gibbs updates}
