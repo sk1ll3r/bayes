@@ -35,12 +35,12 @@ We can group the weights further, $\vec \Theta^{(\ell)} = (\vec \theta_1^{(\ell)
 \end{align}
 Note the slight inaccuracy of notation in \eqref{eqn:nnets/feedforward/x}: we are overloading $g$ (for multivariable inputs and outputs) and also the left hand side should be $(x_1^{(\ell)}, \dotsc, x_{n_\ell}^{(\ell)})^T$ (it should not include the intercept term). We can finally group $\vec \Theta := (\vec \Theta^{(1)}, \dotsc, \vec \Theta^{(L)})$.
 
-We define the mapping from input to output to be $\vec h$. The error on the example $(\vec x, \vec y)$ is $E(\vec \Theta)$ which is usually an analytic function of $\vec y$ and $\vec x^{(L)}$ (something like norm of the difference squared).
+We define the mapping from input to output to be $\vec h$. The error on the example $(\vec x, \vec y)$ is $e(\vec \Theta)$ which is usually an analytic function of $\vec y$ and $\vec x^{(L)}$ (something like norm of the difference squared). Note that we subscript it with $n$ if the error refers to the $n$-th example. The total error is $E(\vec \Theta) = \sum_n e_n(\vec \Theta)$.
 
 \subsection{Backpropagation algorithm}
-We need to find $\grad_{\vec \Theta} E(\vec \Theta)$, which is finding $\frac{\partial E(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}}$ for all $i, j, \ell$ (evaluated at the current values of neurons; we sometimes omit this for clarity). Since
+We need to find $\grad_{\vec \Theta} e(\vec \Theta)$, which is finding $\frac{\partial e(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}}$ for all $i, j, \ell$ (evaluated at the current values of neurons; we sometimes omit this for clarity). Since
 \begin{align}
-    \frac{\partial E(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} = \frac{\partial E(\vec \Theta)}{\partial s_j^{(\ell)}} \frac{\partial s_j^{(\ell)}}{\partial \theta_{ij}^{(\ell)}} \label{eqn:nnets/feedforward/backprop}
+    \frac{\partial e(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} = \frac{\partial e(\vec \Theta)}{\partial s_j^{(\ell)}} \frac{\partial s_j^{(\ell)}}{\partial \theta_{ij}^{(\ell)}} \label{eqn:nnets/feedforward/backprop}
 \end{align}
 and
 \begin{align}
@@ -49,23 +49,23 @@ and
 \end{align}
 we only need
 \begin{align}
-    \delta_j^{(\ell)} := \frac{\partial E(\vec \Theta)}{\partial s_j^{(\ell)}}
+    \delta_j^{(\ell)} := \frac{\partial e(\vec \Theta)}{\partial s_j^{(\ell)}}
 \end{align}
 to evaluate \eqref{eqn:nnets/feedforward/backprop}.
 
 \paragraph{For the final layer.} We can find
 \begin{align}
-    \delta_j^{(L)}  &= \frac{\partial E(\vec \Theta)}{\partial s_j^{(L)}} \\
-                    &= \frac{\partial E(\vec \Theta)}{\partial x_j^{(L)}} \frac{\partial x_j^{(L)}}{\partial s_j^{(L)}} \\
-                    &= \frac{\partial E(\vec \Theta)}{\partial x_j^{(L)}} g'\left(s_j^{(L)}\right) \label{eqn:nnets/feedforward/delta-last}
+    \delta_j^{(L)}  &= \frac{\partial e(\vec \Theta)}{\partial s_j^{(L)}} \\
+                    &= \frac{\partial e(\vec \Theta)}{\partial x_j^{(L)}} \frac{\partial x_j^{(L)}}{\partial s_j^{(L)}} \\
+                    &= \frac{\partial e(\vec \Theta)}{\partial x_j^{(L)}} g'\left(s_j^{(L)}\right) \label{eqn:nnets/feedforward/delta-last}
 \end{align}
 analytically for $j = 1, \dotsc, n_L$.
 
 \paragraph{For the layers before.} We can find
 \begin{align}
-    \delta_i^{(\ell - 1)}   &= \frac{\partial E(\vec \Theta)}{\partial s_i^{(\ell - 1)}}\at{x_i^{(\ell - 1)}} \\
-                            &= \sum_{j = 1}^{n_\ell} \frac{\partial E(\vec \Theta)}{\partial s_j^{(\ell)}} \frac{\partial s_j^{(\ell)}}{\partial s_i^{(\ell - 1)}} \\
-                            &= \sum_{j = 1}^{n_\ell} \frac{\partial E(\vec \Theta)}{\partial s_j^{(\ell)}} \frac{\partial s_j^{(\ell)}}{\partial x_i^{(\ell - 1)}} \frac{\partial x_i^{(\ell - 1)}}{\partial s_i^{(\ell - 1)}} \\
+    \delta_i^{(\ell - 1)}   &= \frac{\partial e(\vec \Theta)}{\partial s_i^{(\ell - 1)}}\at{x_i^{(\ell - 1)}} \\
+                            &= \sum_{j = 1}^{n_\ell} \frac{\partial e(\vec \Theta)}{\partial s_j^{(\ell)}} \frac{\partial s_j^{(\ell)}}{\partial s_i^{(\ell - 1)}} \\
+                            &= \sum_{j = 1}^{n_\ell} \frac{\partial e(\vec \Theta)}{\partial s_j^{(\ell)}} \frac{\partial s_j^{(\ell)}}{\partial x_i^{(\ell - 1)}} \frac{\partial x_i^{(\ell - 1)}}{\partial s_i^{(\ell - 1)}} \\
                             &= \sum_{j = 1}^{n_\ell} \delta_j^{(\ell)} \cdot \theta_{ij}^{(\ell)} \cdot g'\left(s_i^{(\ell - 1)}\right) \label{eqn:nnets/feedforward/delta-before}
 \end{align}
 recursively for $i = 1, \dotsc, n_{\ell - 1}$.
@@ -80,7 +80,7 @@ The algorithm becomes
             \State Backward pass: compute all $\delta_j^{(\ell)}$'s using \eqref{eqn:nnets/feedforward/delta-last} and \eqref{eqn:nnets/feedforward/delta-before}.
             \State Update all $\theta_{ij}^{(\ell)}$'s:
                 \begin{align}
-                    \theta_{ij}^{(\ell)}    &\leftarrow \theta_{ij}^{(\ell)} - \eta\frac{\partial E(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} \\
+                    \theta_{ij}^{(\ell)}    &\leftarrow \theta_{ij}^{(\ell)} - \eta\frac{\partial e(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} \\
                                             &= \theta_{ij}^{(\ell)} - \eta x_i^{(\ell - 1)} \delta_j^{(\ell)}
                 \end{align}
         \Until{it is time to stop.}
@@ -89,7 +89,7 @@ The algorithm becomes
 \end{algorithmbis}
 
 \subsection{Full specifications}
-In order to fully specify the network and the backpropagation algorithm, we need to specify \emph{activation functions} $g$, their derivatives $g'$, the error $E$ and its derivatives $\frac{\partial E(\vec \Theta)}{\partial x_j^{(L)}}$. Then we can arbitrarily mix and match activation functions and error functions to give us the required output, etc.
+In order to fully specify the network and the backpropagation algorithm, we need to specify \emph{activation functions} $g$, their derivatives $g'$, the error of one example $e$ and its derivatives $\frac{\partial e(\vec \Theta)}{\partial x_j^{(L)}}$. Then we can arbitrarily mix and match activation functions and error functions to give us the required output, etc.
 
 \subsubsection{Sigmoid activation}
 For $[0, 1]$ output:
@@ -165,9 +165,9 @@ where $\eta$ is our neural network and $F$ is some generative model with some de
 \end{align}
 we can find the MLE estimate of $\psi$. This is equivalent to setting the error function of the neural network $\eta$ to be the negative log-likelihood of one data point:
 \begin{align}
-    E_n(\vec \Theta)    &= -\log f(y_n \given x_n, \psi)
+    e_n(\vec \Theta)    &= -\log f(y_n \given x_n, \psi)
 \end{align}
-where $\vec \Theta$ are the weights of the neural network. If we can design a generative model $F$ in such a way that we can calculate the derivatives $\frac{\partial E_n(\vec \Theta)}{\partial x_j^{(L)}}$, then we are done (SGD will minimise $\sum_n E_n$ which is total negative log-likelihood). We need to mix and match the activation functions for the last layer to match the support of $\psi$.
+where $\vec \Theta$ are the weights of the neural network. If we can design a generative model $F$ in such a way that we can calculate the derivatives $\frac{\partial e_n(\vec \Theta)}{\partial x_j^{(L)}}$, then we are done (SGD will minimise $\sum_n e_n$ which is total negative log-likelihood). We need to mix and match the activation functions for the last layer to match the support of $\psi$.
 
 \subsubsection{Example}
 Let the generative model be
@@ -194,8 +194,8 @@ Our negative log-likelihood for one data point a.k.a. error function is
 \end{align}
 and the derivatives are
 \begin{align}
-    \frac{\partial E}{\partial x_1^{(2)}}  &= 2\left(x_1^{(2)} - y\right) \\
-    \frac{\partial E}{\partial x_2^{(2)}}  &= \frac{1}{x_2^{(2)}} - \left(x_1^{(2)} - y\right)^2\left(x_2^{(2)}\right)^{-3} \\
+    \frac{\partial e}{\partial x_1^{(2)}}  &= \frac{\left(x_1^{(2)} - y\right)}{\left(x_2^{(2)}\right)^2} \\
+    \frac{\partial e}{\partial x_2^{(2)}}  &= \frac{1}{x_2^{(2)}} - \left(x_1^{(2)} - y\right)^2\left(x_2^{(2)}\right)^{-3} \\
                                     &= \frac{1}{x_2^{(2)}}\left(1 - \frac{(x_1^{(2)} - y)^2}{\left(x_2^{(2)}\right)^2}\right).
 \end{align}
 We choose the identity and exponential activation functions for $m$ and $\sigma$ respectively.
