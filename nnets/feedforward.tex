@@ -80,7 +80,7 @@ The algorithm becomes
             \State Backward pass: compute all $\delta_j^{(\ell)}$'s using \eqref{eqn:nnets/feedforward/delta-last} and \eqref{eqn:nnets/feedforward/delta-before}.
             \State Update all $\theta_{ij}^{(\ell)}$'s:
                 \begin{align}
-                    \theta_{ij}^{(\ell)}    &\leftarrow \theta_{ij}^{(\ell)} - \eta\frac{\partial e(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} \\
+                    \theta_{ij}^{(\ell)}    &\leftarrow \theta_{ij}^{(\ell)} - \eta\frac{\partial e_n(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} \\
                                             &= \theta_{ij}^{(\ell)} - \eta x_i^{(\ell - 1)} \delta_j^{(\ell)}
                 \end{align}
         \Until{it is time to stop.}
@@ -142,9 +142,9 @@ Use whatever for $g'(0)$.
 
 \subsubsection{Squared norm error}
 \begin{align}
-    E(\vec \Theta)  &= \frac{1}{2}\left\|\vec x^{(L)} - \vec y \right\|^2 \\
+    e(\vec \Theta)  &= \frac{1}{2}\left\|\vec x^{(L)} - \vec y \right\|^2 \\
                     &= \frac{1}{2}\left(\vec x^{(L)} - \vec y\right)^T \left(\vec x^{(L)} - \vec y\right) \\
-    \grad_{\vec x^{(L)}} E(\vec \Theta) &= \left(\vec x^{(L)} - \vec y\right)
+    \grad_{\vec x^{(L)}} e(\vec \Theta) &= \left(\vec x^{(L)} - \vec y\right)
 \end{align}
 
 \subsection{Feedforward neural networks for conditional density estimation}
@@ -186,7 +186,7 @@ Let the input to the a 2 layer (1 input layer, 1 hidden layer, 1 output layer) n
     \item $x_2^{(2)} \in \mathbb R^+$ which is approximating $\sigma$.
 \end{itemize}
 
-Our negative log-likelihood for one data point a.k.a. error function is
+Our negative log-likelihood for one data point a.k.a. loss function is
 \begin{align}
     e(\vec \Theta)  &= -\log\Gauss\left(y \given x_1^{(2)}, \left(x_2^{(2)}\right)^2\right) \\
                     &= -\log \frac{1}{x_2^{(2)} \sqrt{2\pi}} \exp{-\frac{(x_1^{(2)} - y)^2}{2\left(x_2^{(2)}\right)^2}} \\
