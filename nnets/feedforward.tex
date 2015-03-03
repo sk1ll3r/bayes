@@ -188,7 +188,7 @@ Let the input to the a 2 layer (1 input layer, 1 hidden layer, 1 output layer) n
 
 Our negative log-likelihood for one data point a.k.a. error function is
 \begin{align}
-    E(\vec \Theta)  &= -\log\Gauss\left(y \given x_1^{(2)}, \left(x_2^{(2)}\right)^2\right) \\
+    e(\vec \Theta)  &= -\log\Gauss\left(y \given x_1^{(2)}, \left(x_2^{(2)}\right)^2\right) \\
                     &= -\log \frac{1}{x_2^{(2)} \sqrt{2\pi}} \exp{-\frac{(x_1^{(2)} - y)^2}{2\left(x_2^{(2)}\right)^2}} \\
                     &= \log(\sqrt{2\pi}) + \log(x_2^{(2)}) + \frac{(x_1^{(2)} - y)^2}{2\left(x_2^{(2)}\right)^2}
 \end{align}
