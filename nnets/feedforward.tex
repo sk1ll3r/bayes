@@ -29,9 +29,9 @@ where
     \item $\vec x^{(L)} := (x_1^{(L)}, \dotsc, x_{n_L}^{(L)})^T \in \mathbb R^{n_L}$ is the predicted output.
     \item $s_j^{(\ell)}$ is the \emph{signal} for the $j$-th neuron in the $\ell$-th layer. This gets fed into the \emph{activation function} to get the $(j, \ell)$-th neuron.
 \end{itemize}
-We can group the weights further, $\vec \Theta^{(\ell)} = (\vec \theta_1^{(\ell)}, \dotsc, \vec \theta_{n_\ell}^{(\ell)})^T \in \mathbb R^{n_\ell \times n_{\ell - 1}}$, so that
+We can group the weights further, $\vec \Theta^{(\ell)} = (\vec \theta_1^{(\ell)}, \dotsc, \vec \theta_{n_\ell}^{(\ell)}) \in \mathbb R^{(n_{\ell - 1} + 1) \times n_\ell}$, so that
 \begin{align}
-    \vec x^{(\ell)} = g\left(\vec \Theta^{(\ell)} \vec x^{(\ell - 1)}\right) \label{eqn:nnets/feedforward/x}
+    \vec x^{(\ell)} = g\left({\vec \Theta^{(\ell)}}^T \vec x^{(\ell - 1)}\right) \label{eqn:nnets/feedforward/x}
 \end{align}
 Note the slight inaccuracy of notation in \eqref{eqn:nnets/feedforward/x}: we are overloading $g$ (for multivariable inputs and outputs) and also the left hand side should be $(x_1^{(\ell)}, \dotsc, x_{n_\ell}^{(\ell)})^T$ (it should not include the intercept term). We can finally group $\vec \Theta := (\vec \Theta^{(1)}, \dotsc, \vec \Theta^{(L)})$.
 
@@ -44,7 +44,7 @@ We need to find $\grad_{\vec \Theta} e(\vec \Theta)$, which is finding $\frac{\p
 \end{align}
 and
 \begin{align}
-                s_i^{(\ell)}                                                &= \sum_{i = 0}^{n_{\ell - 1}} \theta_{ij}^{(\ell)} x_i^{(\ell - 1)} \\
+                s_j^{(\ell)}                                                &= \sum_{i = 0}^{n_{\ell - 1}} \theta_{ij}^{(\ell)} x_i^{(\ell - 1)} \\
     \implies    \frac{\partial s_j^{(\ell)}}{\partial \theta_{ij}^{(\ell)}} &= x_i^{(\ell - 1)}
 \end{align}
 we only need
@@ -78,7 +78,7 @@ The algorithm becomes
             \State Pick example $n \in \{1, \dotsc, N\}$ at random.
             \State Forward pass: compute all $x_j^{(\ell)}$'s using \eqref{eqn:nnets/feedforward/x-small}.
             \State Backward pass: compute all $\delta_j^{(\ell)}$'s using \eqref{eqn:nnets/feedforward/delta-last} and \eqref{eqn:nnets/feedforward/delta-before}.
-            \State Update all $\theta_{ij}^{(\ell)}$'s:
+            \State Update all $\theta_{ij}^{(\ell)}$'s ($i = 0, \dotsc, n_{\ell - 1}$ and $j = 1, \dotsc, n_\ell$):
                 \begin{align}
                     \theta_{ij}^{(\ell)}    &\leftarrow \theta_{ij}^{(\ell)} - \eta\frac{\partial e_n(\vec \Theta)}{\partial \theta_{ij}^{(\ell)}} \\
                                             &= \theta_{ij}^{(\ell)} - \eta x_i^{(\ell - 1)} \delta_j^{(\ell)}
