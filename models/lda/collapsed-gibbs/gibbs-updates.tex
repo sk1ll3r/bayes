@@ -1,0 +1,311 @@
+\subsubsection{Gibbs updates: word topics $z_{n, d}$}
+We know that the posterior density $p\left(\{z_{n, d}\} \given \{w_{n, d}\}; \vec \alpha, \vec \gamma\right)$ is proportional to the joint $p\left(\{z_{n, d}\}, \{w_{n, d}\} \given \vec \alpha, \vec \gamma\right)$. Hence we can write
+\begin{align}
+    p\left(\{z_{n, d}\} \given \{w_{n, d}\}; \vec \alpha, \vec \gamma\right)
+    &\propto
+        \left[
+            \left(
+                \frac
+                {
+                    \Gamma(W \gamma)
+                }
+                {
+                    \Gamma(\gamma)^W
+                }
+            \right)^T
+            \prod_t
+                \frac
+                {
+                    \prod_w \Gamma\left(\gamma + \zeta_{w, t}\right)
+                }
+                {
+                    \Gamma\left(C_t + W\gamma\right)
+                }
+        \right]
+        \left[
+            \left(
+                \frac
+                {
+                    \Gamma(T \alpha)
+                }
+                {
+                    \Gamma(\alpha)^T
+                }
+            \right)^D
+            \prod_d
+                \frac
+                {
+                    \prod_t \Gamma\left(\alpha + \xi_{d, t}\right)
+                }
+                {
+                    \Gamma\left(N_d + T \alpha\right)
+                }
+        \right].
+\end{align}
+
+Piggybacking on this result, we express $p\left(\{z_{\eta, \delta}\} \setminus z_{n, d} \given \{w_{n, d}\}; \vec \alpha, \vec \gamma\right)$. We pretend that $\{z_{\eta, \delta}\} \setminus z_{n, d}$ is $\{z_{n, d}\}$:
+\begin{align}
+    &p\left(\{z_{\eta, \delta}\} \setminus z_{n, d} \given \{w_{n, d}\}; \vec \alpha, \vec \gamma\right) \nonumber\\
+    &\propto
+        \left[
+            \left(
+                \frac
+                {
+                    \Gamma({W^-} \gamma)
+                }
+                {
+                    \Gamma(\gamma)^{W^-}
+                }
+            \right)^{T^-}
+            \prod_t
+                \frac
+                {
+                    \prod_w \Gamma\left(\gamma + \zeta_{w, t}^-\right)
+                }
+                {
+                    \Gamma\left(C_t^- + {W^-}\gamma\right)
+                }
+        \right]
+        \left[
+            \left(
+                \frac
+                {
+                    \Gamma({T^-} \alpha)
+                }
+                {
+                    \Gamma(\alpha)^{T^-}
+                }
+            \right)^{D^-}
+            \prod_d
+                \frac
+                {
+                    \prod_t \Gamma\left(\alpha + \xi_{d, t}^-\right)
+                }
+                {
+                    \Gamma\left(N_d^- + {T^-} \alpha\right)
+                }
+        \right],
+\end{align}
+where
+\begin{align}
+    W^-             &= W \\
+    T^-             &= T \\
+    D^-             &= D \\
+    \zeta_{w, t}^-  &= \sum_{\substack{\eta, \delta \\ z_{\eta, \delta} = t \\ (\eta, \delta) \neq (n, d)}} \I(w_{\eta, \delta} = w) \\
+                    &=
+                        \begin{cases}
+                            \zeta_{w, t} - 1    & \text{ if $(w_{n, d}, z_{n, d}) = (w, t)$,} \\
+                            \zeta_{w, t}        & \text{ otherwise}.
+                        \end{cases} \\
+    C_t^-           &= \sum_{\substack{\eta, \delta \\ (\eta, \delta) \neq (n, d)}} \I(z_{\eta, \delta} = t) \\ 
+                    &=
+                        \begin{cases}
+                            N - 1   & \text{ if $z_{n, d} = t$} \\
+                            N       & \text{ otherwise}.
+                        \end{cases} \\
+    \xi_{d,t}^-     &= \sum_{\substack{\eta \\ (\eta, \delta) \neq (n, d)}} \I(z_{\eta, \delta} = t) \\
+                    &= 
+                        \begin{cases}
+                            \xi_{\delta, t} - 1     & \text{ if $z_{n, d} = t$} \\
+                            \xi_{\delta, t}         & \text{ otherwise.}
+                        \end{cases} \\
+    N_{\delta}^-    &=
+                        \begin{cases}
+                            N_{\delta} - 1      & \text{ if $\delta = d$} \\
+                            N_{\delta}          & \text{ otherwise.}
+                        \end{cases}
+\end{align}
+
+Hence, if $\omega := w_{n, d}$,
+\begin{align}
+    &p\left(z_{n, d} = \tau \given \{z_{\eta, \delta}\} \setminus z_{n, d}, \{w_{\eta, \delta}\}; \vec \alpha, \vec \gamma\right) \\
+    &\propto \frac{p\left(\{z_{n, d}\} \given \{w_{\eta, \delta}\}; \vec \alpha, \vec \gamma\right)}{p\left(\{z_{\eta, \delta}\} \setminus z_{n, d} \given \{w_{\eta, \delta}\}; \vec \alpha, \vec \gamma\right)} \\
+    &=
+        \frac{
+            \left[
+                \left(
+                    \frac
+                    {
+                        \Gamma(W \gamma)
+                    }
+                    {
+                        \Gamma(\gamma)^W
+                    }
+                \right)^T
+                \prod_t
+                    \frac
+                    {
+                        \prod_w \Gamma\left(\gamma + \zeta_{w, t}\right)
+                    }
+                    {
+                        \Gamma\left(C_t + W\gamma\right)
+                    }
+            \right]
+            \left[
+                \left(
+                    \frac
+                    {
+                        \Gamma(T \alpha)
+                    }
+                    {
+                        \Gamma(\alpha)^T
+                    }
+                \right)^D
+                \prod_d
+                    \frac
+                    {
+                        \prod_t \Gamma\left(\alpha + \xi_{d, t}\right)
+                    }
+                    {
+                        \Gamma\left(N_d + T \alpha\right)
+                    }
+            \right]
+        }{
+            \left[
+                \left(
+                    \frac
+                    {
+                        \Gamma({W^-} \gamma)
+                    }
+                    {
+                        \Gamma(\gamma)^{W^-}
+                    }
+                \right)^{T^-}
+                \prod_t
+                    \frac
+                    {
+                        \prod_w \Gamma\left(\gamma + \zeta_{w, t}^-\right)
+                    }
+                    {
+                        \Gamma\left(C_t^- + {W^-}\gamma\right)
+                    }
+            \right]
+            \left[
+                \left(
+                    \frac
+                    {
+                        \Gamma({T^-} \alpha)
+                    }
+                    {
+                        \Gamma(\alpha)^{T^-}
+                    }
+                \right)^{D^-}
+                \prod_d
+                    \frac
+                    {
+                        \prod_t \Gamma\left(\alpha + \xi_{d, t}^-\right)
+                    }
+                    {
+                        \Gamma\left(N_d^- + {T^-} \alpha\right)
+                    }
+            \right]
+        } \\
+    &=
+        \frac{
+            \left[
+                \prod_t
+                    \frac
+                    {
+                        \prod_w \Gamma\left(\gamma + \zeta_{w, t}\right)
+                    }
+                    {
+                        \Gamma\left(C_t + W\gamma\right)
+                    }
+            \right]
+            \left[
+                \prod_d
+                    \frac
+                    {
+                        \prod_t \Gamma\left(\alpha + \xi_{d, t}\right)
+                    }
+                    {
+                        \Gamma\left(N_d + T \alpha\right)
+                    }
+            \right]
+        }{
+            \left[
+                \prod_t
+                    \frac
+                    {
+                        \prod_w \Gamma\left(\gamma + \zeta_{w, t}^-\right)
+                    }
+                    {
+                        \Gamma\left(C_t^- + {W^-}\gamma\right)
+                    }
+            \right]
+            \left[
+                \prod_d
+                    \frac
+                    {
+                        \prod_t \Gamma\left(\alpha + \xi_{d, t}^-\right)
+                    }
+                    {
+                        \Gamma\left(N_d^- + {T^-} \alpha\right)
+                    }
+            \right]
+        } \\
+    &=
+        \frac{
+            \left[
+                \prod_t \prod w \frac{
+                    \Gamma(\gamma + \zeta_{w, t})
+                }{
+                    \Gamma(\gamma + \zeta_{w, t}^-)
+                }
+            \right]
+            \left[
+                \prod_d \prod_t \frac{
+                    \Gamma(\alpha + \xi_{d, t})
+                }{
+                    \Gamma(\alpha + \xi_{d, t}^-)
+                }
+            \right]
+        }{
+            \left[
+                \prod_t \frac{
+                    \Gamma(C_t + W \gamma)
+                }{
+                    \Gamma(C_t^- + W \gamma)
+                }
+            \right]
+            \left[
+                \prod_d \frac{
+                    \Gamma(N_d + T \alpha)
+                }{
+                    \Gamma(N_d^- + T \alpha)
+                }
+            \right]
+        } \\
+    &=
+        \frac{
+            \frac{
+                \Gamma(\gamma + \zeta_{\tau, \omega})
+            }{
+                \Gamma(\gamma + \zeta_{\tau, \omega} - 1)
+            }
+            \cdot
+            \frac{
+                \Gamma(\alpha + \xi_{d, \tau})
+            }{
+                \Gamma(\alpha + \xi_{d, \tau} - 1)
+            }
+        }{
+            \frac{
+                \Gamma(C_{\tau} + W \gamma)
+            }{
+                \Gamma(C_{\tau} - 1 + W \gamma)
+            }
+            \cdot
+            \frac{
+                \Gamma(N_d + T \alpha)
+            }{
+                \Gamma(N_d - 1 + T \alpha)
+            }
+        } \\
+    &=
+        \frac{
+            (\gamma + \zeta_{\tau, \omega} - 1)(\alpha + \xi_{d, \tau} - 1)
+        }{
+            (W \gamma + C_{\tau} - 1)(N_d - 1 + T \alpha)
+        }.
+\end{align}
